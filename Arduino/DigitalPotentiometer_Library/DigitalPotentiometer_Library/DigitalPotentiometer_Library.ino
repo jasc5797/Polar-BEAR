@@ -8,10 +8,11 @@
 #include "DigitalPotentiometer.h"
 
 #define BAUD 115200
+#define DELAY 100
 
-const int pinUD = 45;
-const int pinINC = 50;
-const int pinCS = 40;
+const int pinUD = 29;
+const int pinINC = 25;
+const int pinCS = 27;
 const int pinRW = A15;
 
 //DigitalPotentiometer* digitalPot;
@@ -22,41 +23,8 @@ void setup() {
 	Serial.begin(115200);
 	digPot = new X9C104(pinCS, pinUD, pinINC, pinRW);
 
-	Serial.println("Testing Decrement");
+	runTest();
 
-	for (int i = 0; i < 100; i++)
-	{
-		int currentStep = digPot->getStep();
-		float currentVoltage = digPot->getVoltage();
-		Serial.print("Current Step: ");
-		Serial.println(currentStep);
-
-		Serial.print("Current Voltage: ");
-		Serial.println(currentVoltage);
-
-		Serial.println("Decrementing");
-		digPot->decrementStep();
-		Serial.println("------");
-		delay(100);
-	}
-
-	Serial.println("Testing Increment");
-
-	for (int i = 0; i < 100; i++)
-	{
-		int currentStep = digPot->getStep();
-		float currentVoltage = digPot->getVoltage();
-		Serial.print("Current Step: ");
-		Serial.println(currentStep);
-
-		Serial.print("Current Voltage: ");
-		Serial.println(currentVoltage);
-
-		Serial.println("Incrementing");
-		digPot->incrementStep();
-		Serial.println("------");
-		delay(100);
-	}
 	
 	//currentStep = digPot->getStep();
 	//Serial.println(currentStep);
@@ -84,6 +52,11 @@ void setup() {
 
 // the loop function runs over and over again until power down or reset
 void loop() {
+	if (Serial.available())
+	{
+		Serial.read();
+		runTest();
+	}
 	/*
 	if (!digitalPot->getIsIncreasing())
 	{
@@ -121,4 +94,43 @@ void loop() {
 	}
 	*/
 
+}
+
+void runTest()
+{
+	Serial.println("Testing Decrement");
+
+	for (int i = 0; i < 100; i++)
+	{
+		int currentStep = digPot->getStep();
+		float currentVoltage = digPot->getVoltage();
+		Serial.print("Current Step: ");
+		Serial.println(currentStep);
+
+		Serial.print("Current Voltage: ");
+		Serial.println(currentVoltage);
+
+		Serial.println("Decrementing");
+		digPot->decrementStep();
+		Serial.println("------");
+		delay(DELAY);
+	}
+
+	Serial.println("Testing Increment");
+
+	for (int i = 0; i < 100; i++)
+	{
+		int currentStep = digPot->getStep();
+		float currentVoltage = digPot->getVoltage();
+		Serial.print("Current Step: ");
+		Serial.println(currentStep);
+
+		Serial.print("Current Voltage: ");
+		Serial.println(currentVoltage);
+
+		Serial.println("Incrementing");
+		digPot->incrementStep();
+		Serial.println("------");
+		delay(DELAY);
+	}
 }
