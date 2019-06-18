@@ -10,10 +10,17 @@
 #endif
 
 #define TOTAL_STEPS 300
+#define BATCH_STEPS 100
 
 class StepperMotor
 {
 public:
+
+	enum Mode
+	{
+		CONTINUOUS, 
+		BATCH
+	};
 
 	StepperMotor(int stepPin, int directionPin);
 	~StepperMotor();
@@ -22,7 +29,16 @@ public:
 
 private:
 
+	Mode mode = CONTINUOUS;
+
 	int stepPin, directionPin;
+
+	void setDirection(int degrees);
+
+	void stepContinuous(int degrees);
+	void stepBatch(int degrees);
+
+	int degreesToMicroSeconds(int degrees);
 };
 
 #endif

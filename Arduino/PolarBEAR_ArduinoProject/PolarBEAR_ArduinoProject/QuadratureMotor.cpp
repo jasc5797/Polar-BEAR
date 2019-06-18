@@ -48,6 +48,16 @@ int32_t QuadratureMotor::read()
 	return encoder->read();
 }
 
+bool QuadratureMotor::getIsLimit1Pressed()
+{
+	return isLimit1Pressed;
+}
+
+bool QuadratureMotor::getIsLimit2Pressed()
+{
+	return isLimit2Pressed;
+}
+
 void QuadratureMotor::limit1Interrupt()
 {
 

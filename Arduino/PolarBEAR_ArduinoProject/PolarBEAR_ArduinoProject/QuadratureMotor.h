@@ -34,6 +34,9 @@ public:
 	void write(int32_t newPosition);
 	int32_t read();
 
+	bool getIsLimit1Pressed();
+	bool getIsLimit2Pressed();
+
 private:
 
 	CytronMD* motor;
@@ -43,8 +46,11 @@ private:
 
 	LimitMode limitMode;
 
+	bool isLimit1Pressed = false, isLimit2Pressed = false;
+
 	static void limit1Interrupt();
 	static void limit2Interrupt();
+
 
 };
 
