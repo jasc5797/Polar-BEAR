@@ -19,8 +19,8 @@ C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\H
  C:\Users\stinsoncerraj\Documents\Arduino\libraries\Cytron_Motor_Drivers_Library/CytronMotorDriver.h \
  C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\LimitSwitch.h \
  C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\QuadratureMotor.h \
- C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\Component.h \
+ C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\Motor.h \
  C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\StepperMotor.h \
  C:\Users\stinsoncerraj\Desktop\Github\Polar-BEAR\Arduino\HomingLibrary\HomingLibrary/LimitSwitch.h \
- C:\Users\stinsoncerraj\Desktop\Github\Polar-BEAR\Arduino\HomingLibrary\HomingLibrary/Component.h \
+ C:\Users\stinsoncerraj\Desktop\Github\Polar-BEAR\Arduino\HomingLibrary\HomingLibrary/Motor.h \
  c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\enterprise\common7\ide\extensions\e1d25j4i.jmc\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h

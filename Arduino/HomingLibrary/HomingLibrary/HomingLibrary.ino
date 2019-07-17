@@ -7,6 +7,7 @@
 // *** Include Statements ***
 
 // Third-Party Libraries
+#include "Component.h"
 #include <Encoder.h> // Allows reading from and writing to the Encoders on Quadrature Motors
 #include <Bounce2.h> // Debounces signal from Limit Switches
 #include <CytronMotorDriver.h> // Controls Quadrature Motors using MD20A
@@ -15,7 +16,7 @@
 #include "LimitSwitch.h"
 #include "QuadratureMotor.h"
 #include "StepperMotor.h"
-#include "Component.h"
+#include "Motor.h"
 
 // *** Macro Definitions ***
 

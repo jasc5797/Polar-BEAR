@@ -22,7 +22,7 @@ QuadratureMotor::QuadratureMotor(int pwmPin, int dirPin, int encoderPinA, int en
 
 void QuadratureMotor::setState(STATE state)
 {
-	Component::setState(state);
+	Motor::setState(state);
 	switch (state)
 	{
 		case HOME:
@@ -250,6 +250,7 @@ void QuadratureMotor::moveManual(char* name, char forward, char backward, int st
 
 		if (isPressed)
 		{
+
 			bool isReleased;
 			do
 			{

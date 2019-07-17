@@ -1,7 +1,7 @@
 // StepperMotor.h
 
-#ifndef _NEWSTEPPERMOTOR_h
-#define _NEWSTEPPERMOTOR_h
+#ifndef _STEPPERMOTOR_h
+#define _STEPPERMOTOR_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "arduino.h"
@@ -10,7 +10,7 @@
 #endif
 
 #include <LimitSwitch.h>
-#include <Component.h>
+#include <Motor.h>
 
 #define STEPPER_STEPS_PER_REVOLUTION 200
 
@@ -24,7 +24,7 @@
 #define MANUAL_STEPS 100
 
 
-class StepperMotor : public Component
+class StepperMotor : public Motor
 {
 
 public:

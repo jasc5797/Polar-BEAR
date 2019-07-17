@@ -1,7 +1,7 @@
 // QuadratureMotor.h
 
-#ifndef _NEWQUADRATUREMOTOR_h
-#define _NEWQUADRATUREMOTOR_h
+#ifndef _QUADRATUREMOTOR_h
+#define _QUADRATUREMOTOR_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "arduino.h"
@@ -13,7 +13,7 @@
 #include <Encoder.h>
 
 #include "LimitSwitch.h"
-#include "Component.h"
+#include "Motor.h"
 
 #define DISCONNECTED -1
 
@@ -35,7 +35,7 @@ Average Degrees: -339.27
 #define MOTOR_BACKWARD -1
 
 
-class QuadratureMotor : public Component
+class QuadratureMotor : public Motor
 {
 	
 public:
