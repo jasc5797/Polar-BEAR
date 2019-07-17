@@ -5,162 +5,29 @@
 #include "StepperMotor.h"
 
 
-StepperMotor::StepperMotor(int stepPin, int directionPin, int limitPin)
+StepperMotor::StepperMotor(int stepPin, int directionPin, int limitPin, int sleepPin, int resetPin)
 {
 	this->stepPin = stepPin;
 	this->directionPin = directionPin;
+	this->sleepPin = sleepPin;
+	this->resetPin = resetPin;
 
 	pinMode(stepPin, OUTPUT);
 	pinMode(directionPin, OUTPUT);
+	pinMode(sleepPin, OUTPUT);
+	pinMode(resetPin, OUTPUT);
 
 	digitalWrite(stepPin, LOW);
 	digitalWrite(directionPin, LOW);
+	digitalWrite(sleepPin, LOW);
+	digitalWrite(resetPin, HIGH);
 
 	limitSwitch = new LimitSwitch(limitPin);
-	
-	position = 0;
+
+	targetPosition = 0;
 }
 
-
-
-void StepperMotor::step(int direction)
-{
-	digitalWrite(directionPin, direction);
-	for (int i = 0; i < 1; i++) 
-	{
-		digitalWrite(stepPin, HIGH);
-		delayMicroseconds(FUCKED_PULSE_DELAY);
-		digitalWrite(stepPin, LOW);
-		delayMicroseconds(FUCKED_PULSE_DELAY);
-		if (direction == HIGH)
-		{
-			position++;
-		}
-		else
-		{
-			position--;
-		}
-	}
-
-}
-
-void StepperMotor::home()
-{
-	Serial.println("Homing Stepper");
-	Serial.println("Moving Forward");
-
-	Serial.println("Waiting on press");
-	bool isPressed;
-	do
-	{
-		step(FUCKED_FORWARD);
-		limitSwitch->update();
-		isPressed = limitSwitch->pressed();
-	} while (!isPressed);
-	Serial.println("Pressed");
-	delay(FUCKED_STOP_DELAY);
-	Serial.println("Moving Backward");
-
-	Serial.println("Waiting on release");
-	bool isReleased;
-	do
-	{
-		step(FUCKED_BACKWARD);
-		limitSwitch->update();
-		isReleased = limitSwitch->released();
-	} while (!isReleased);
-	Serial.println("Released");
-	Serial.println("Stopping");
-	position = 0;
-	
-}
-
-void StepperMotor::testLimitSwitch()
-{
-	limitSwitch->test("Test");
-}
-
-void StepperMotor::test()
-{
-	digitalWrite(directionPin, HIGH);
-	for (int x = 0; x < 200; x++) {
-		digitalWrite(stepPin, HIGH);
-		delayMicroseconds(1000);
-		digitalWrite(stepPin, LOW);
-		delayMicroseconds(1000);
-	}
-	delay(200);
-	digitalWrite(directionPin, LOW);
-	for (int x = 0; x < 200; x++) {
-		digitalWrite(stepPin, HIGH);
-		delayMicroseconds(1000);
-		digitalWrite(stepPin, LOW);
-		delayMicroseconds(1000);
-	}
-	delay(200);
-}
-
-void StepperMotor::testTravelDistance(int count, int steps)
-{
-	int* distances = new int[count];
-	for (int i = 0; i < count; i++)
-	{
-		Serial.print("Test ");
-		Serial.print(i + 1);
-		Serial.print(" of ");
-		Serial.println(count);
-		distances[i] = getTravelDistance(steps);
-	}
-
-	float sum;
-	for (int i = 0; i < count; i++)
-	{
-		Serial.print("Test #");
-		Serial.print(i + 1);
-		Serial.print(": ");
-		Serial.println(distances[i]);
-		sum += distances[i];
-	}
-
-	float average = sum / count;
-	Serial.print("Average: ");
-	Serial.println(average);
-}
-
-int StepperMotor::getTravelDistance(int steps)
-{
-	bool isPressed;
-	do
-	{
-		step(FUCKED_FORWARD);
-		limitSwitch->update();
-		isPressed = limitSwitch->pressed();
-	} while (!isPressed);
-	delay(FUCKED_STOP_DELAY);
-	bool isReleased;
-	do
-	{
-		step(FUCKED_BACKWARD);
-		limitSwitch->update();
-		isReleased = limitSwitch->released();
-	} while (!isReleased);
-	position = 0;
-	do
-	{
-		step(FUCKED_BACKWARD);
-	} while (abs(position) < steps);
-	delay(FUCKED_STOP_DELAY);
-	do
-	{
-		step(FUCKED_FORWARD);
-		limitSwitch->update();
-		isPressed = limitSwitch->pressed();
-	} while (!isPressed);
-	return steps - abs(position);
-
-}
-
-void StepperMotor::testIncremental(int steps)
+void StepperMotor::moveManual()
 {
 	if (Serial.available())
 	{
@@ -174,20 +41,96 @@ void StepperMotor::testIncremental(int steps)
 			Serial.println("Moving Backward");
 		}
 
-		for (int i = 0; i <= steps; i++)
+		for (int i = 0; i <= MANUAL_STEPS; i++)
 		{
 			if (input == 'f')
 			{
-				step(HIGH);
+				step(STEPPER_FORWARD);
 			}
 			else if (input == 'b')
 			{
-				step(LOW);
+				step(STEPPER_BACKWARD);
 			}
-			
+
 		}
 		delay(500);
 		Serial.println("Done");
 	}
 }
 
+// Do not use
+void StepperMotor::moveIncremental()
+{
+	digitalWrite(directionPin, HIGH);
+	digitalWrite(sleepPin, HIGH);
+	delay(WAKE_DELAY);
+	for (int x = 0; x < 200; x++) {
+		noInterrupts();
+		digitalWrite(stepPin, HIGH);
+		delayMicroseconds(1000);
+		digitalWrite(stepPin, LOW);
+		delayMicroseconds(1000);
+		interrupts();
+	}
+	digitalWrite(sleepPin, LOW);
+	delay(5000);
+	digitalWrite(directionPin, LOW);
+	digitalWrite(sleepPin, HIGH);
+	delay(WAKE_DELAY);
+	for (int x = 0; x < 200; x++) {
+		noInterrupts();
+		digitalWrite(stepPin, HIGH);
+		delayMicroseconds(1000);
+		digitalWrite(stepPin, LOW);
+		delayMicroseconds(1000);
+		interrupts();
+	}
+	digitalWrite(sleepPin, LOW);
+	delay(5000);
+}
+
+void StepperMotor::home()
+{
+	setState(STOP);
+}
+
+void StepperMotor::move()
+{
+	if (targetPosition == currentPosition)
+	{
+		setState(STOP);
+	}
+	else
+	{
+		int direction = targetPosition > currentPosition ? STEPPER_FORWARD : STEPPER_BACKWARD;
+		step(direction);
+	}
+
+}
+
+void StepperMotor::step(int direction)
+{
+
+	noInterrupts();
+	digitalWrite(sleepPin, HIGH);
+	delay(WAKE_DELAY);
+
+	digitalWrite(directionPin, direction);
+
+	digitalWrite(stepPin, HIGH);
+	delayMicroseconds(PULSE_DELAY);
+	digitalWrite(stepPin, LOW);
+	delayMicroseconds(PULSE_DELAY);
+	digitalWrite(sleepPin, LOW);
+
+	interrupts();
+
+	if (direction == HIGH)
+	{
+		currentPosition++;
+	}
+	else
+	{
+		currentPosition--;
+	}
+}

@@ -1,7 +1,7 @@
 // StepperMotor.h
 
-#ifndef _STEPPERMOTOR_h
-#define _STEPPERMOTOR_h
+#ifndef _NEWSTEPPERMOTOR_h
+#define _NEWSTEPPERMOTOR_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "arduino.h"
@@ -12,46 +12,44 @@
 #include <LimitSwitch.h>
 #include <Component.h>
 
-#define FUCKED_STEPS_PER_REVOLUTION 200
+#define STEPPER_STEPS_PER_REVOLUTION 200
 
-#define FUCKED_FORWARD HIGH
-#define FUCKED_BACKWARD LOW
+#define STEPPER_FORWARD HIGH
+#define STEPPER_BACKWARD LOW
 
-#define FUCKED_PULSE_DELAY 3000
-#define FUCKED_STOP_DELAY 500
+#define PULSE_DELAY 1000
+#define STOP_DELAY 500
+#define WAKE_DELAY 10
+
+#define MANUAL_STEPS 100
 
 
-class StepperMotor //: public Component
+class StepperMotor : public Component
 {
 
 public:
-	StepperMotor(int stepPin, int directionPin, int limitPin);
+	StepperMotor(int stepPin, int directionPin, int limitPin, int sleepPin, int resetPin);
 
-	//virtual void update();
 
-	void home();
+	void moveManual();
 
-	void testLimitSwitch();
+	void moveIncremental();
 
-	void test();
-
-	void step(int direction);
-
-	void testTravelDistance(int count = 10, int steps = 100);
-
-	void testIncremental(int steps = 100);
-
-	int getTravelDistance(int steps);
 
 private:
-	
+
 	int stepPin, directionPin;
 
-	int position;
+	int sleepPin, resetPin;
+
+	int currentPosition;
 
 	LimitSwitch* limitSwitch;
 
+	void home();
+	void move();
 
+	void step(int direction);
 
 
 };
