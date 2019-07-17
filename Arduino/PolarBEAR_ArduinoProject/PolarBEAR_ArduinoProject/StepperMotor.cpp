@@ -10,11 +10,20 @@ StepperMotor::StepperMotor(int stepPin, int directionPin)
 	this->directionPin;
 	pinMode(stepPin, OUTPUT);
 	pinMode(directionPin, OUTPUT);
+	currentDegree = 0;
 }
 
 void StepperMotor::step(int degrees)
 {
 	setDirection(degrees);
+	for (int i = 0; i < abs(degrees); i++)
+	{
+		digitalWrite(stepPin, HIGH);
+		delayMicroseconds(DELAY);
+		digitalWrite(stepPin, LOW);
+	}
+	currentDegree += degrees;
+	/*
 	int microSeconds = degreesToMicroSeconds(degrees);
 	// Could add something that breaks up the stepper movement into multiple chunks
 	// This way interrupts can be disabled during critical sections but can still have time to handle interrupts for other things
@@ -24,6 +33,7 @@ void StepperMotor::step(int degrees)
 	delayMicroseconds(microSeconds);
 	digitalWrite(stepPin, LOW);
 	//interrupts();
+	*/
 }
 
 void StepperMotor::setDirection(int degrees)
@@ -48,7 +58,12 @@ void StepperMotor::stepBatch(int degrees)
 
 }
 
-int StepperMotor::degreesToMicroSeconds(int degrees)
+int StepperMotor::getClosestDegree(int degrees)
 {
 	return (degrees / 360.0) * TOTAL_STEPS;
+}
+
+int StepperMotor::getCurrentDegree()
+{
+	return currentDegree;
 }

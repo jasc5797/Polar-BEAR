@@ -9,8 +9,12 @@
 	#include "WProgram.h"
 #endif
 
-#define TOTAL_STEPS 300
+#define TOTAL_STEPS 200
+#define DELAY 200
+
+
 #define BATCH_STEPS 100
+
 
 class StepperMotor
 {
@@ -27,18 +31,22 @@ public:
 
 	void step(int degrees);
 
+	int getClosestDegree(int degrees);
+	int getCurrentDegree();
+
 private:
 
 	Mode mode = CONTINUOUS;
 
 	int stepPin, directionPin;
+	int currentDegree;
 
 	void setDirection(int degrees);
 
 	void stepContinuous(int degrees);
 	void stepBatch(int degrees);
 
-	int degreesToMicroSeconds(int degrees);
+	
 };
 
 #endif
