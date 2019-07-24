@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Management;
+using PolarBearGUI_WPF.Models;
 
 namespace PolarBearGUI_WPF
 {
-    public class COMPortInfo : Models.Model
+    public class COMPortInfoModel : Model
     {
         // Keys for use with ManagementObject to get hardware information
         private const string KeyFullName = "Name";
@@ -17,33 +15,73 @@ namespace PolarBearGUI_WPF
         private const string Query = "SELECT * FROM Win32_SerialPort";
 
         // Properties
-        public string FullName { get; set; } // Device Name (COM port) - Combination of Device Name and COM Port
-        public string DeviceName { get; set; } // Device Name Only
-        public string COMPort { get; set; } // COM Port Only
+        private string fullName;
+        private string deviceName;
+        private string comPort;
 
-        public COMPortInfo(ManagementObject managementObject)
+        // Device Name (COM port) - Combination of Device Name and COM Port
+        public string FullName
+        {
+            get
+            {
+                return fullName;
+            }
+            private set
+            {
+                fullName = value;
+                NotifyPropertyChanged("FullName");
+            }
+        }
+        // Device Name Only
+        public string DeviceName
+        {
+            get
+            {
+                return deviceName;
+            }
+            private set
+            {
+                deviceName = value;
+                NotifyPropertyChanged("DeviceName");
+            }
+        }
+
+        // COM Port Only
+        public string COMPort
+        {
+            get
+            {
+                return comPort;
+            }
+            private set
+            {
+                comPort = value; NotifyPropertyChanged("COMPort");
+            }
+        }
+
+        public COMPortInfoModel(ManagementObject managementObject)
         {
             FullName = managementObject[KeyFullName].ToString();
             DeviceName = managementObject[KeyDeviceName].ToString();
             COMPort = managementObject[KeyCOMPort].ToString();
         }
 
-        public COMPortInfo(string fullName, string deviceName, string COMPort)
+        public COMPortInfoModel(string fullName, string deviceName, string COMPort)
         {
             FullName = fullName;
             DeviceName = deviceName;
             this.COMPort = COMPort;
         }
 
-        public static List<COMPortInfo> GetCOMPortInfoList()
+        public static List<COMPortInfoModel> GetCOMPortInfoList()
         {
-            List<COMPortInfo> comPortInfoList = new List<COMPortInfo>();
+            List<COMPortInfoModel> comPortInfoList = new List<COMPortInfoModel>();
 
             ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher(Query);
             ManagementObjectCollection managementObjectCollection = managementObjectSearcher.Get();
             foreach (ManagementObject managementObject in managementObjectCollection)
             {
-                COMPortInfo portInfo = new COMPortInfo(managementObject);
+                COMPortInfoModel portInfo = new COMPortInfoModel(managementObject);
                 comPortInfoList.Add(portInfo);
             }
             return comPortInfoList;
@@ -52,10 +90,10 @@ namespace PolarBearGUI_WPF
        
         public override bool Equals(object obj)
         {
-            return obj is COMPortInfo && Equals(obj as COMPortInfo);
+            return obj is COMPortInfoModel && Equals(obj as COMPortInfoModel);
         }
 
-        public bool Equals(COMPortInfo comPortInfo)
+        public bool Equals(COMPortInfoModel comPortInfo)
         {
             return FullName == comPortInfo.FullName &&
                 DeviceName == comPortInfo.DeviceName &&
@@ -71,9 +109,9 @@ namespace PolarBearGUI_WPF
         }
     }
 
-    class COMPortInfoComparer : IEqualityComparer<COMPortInfo>
+    class COMPortInfoComparer : IEqualityComparer<COMPortInfoModel>
     {
-        public bool Equals(COMPortInfo x, COMPortInfo y)
+        public bool Equals(COMPortInfoModel x, COMPortInfoModel y)
         {
             if (Object.ReferenceEquals(x, y))
                 return true;
@@ -82,7 +120,7 @@ namespace PolarBearGUI_WPF
             return x.Equals(y);
         }
 
-        public int GetHashCode(COMPortInfo comPortInfo)
+        public int GetHashCode(COMPortInfoModel comPortInfo)
         {
             if (Object.ReferenceEquals(comPortInfo, null))
                 return 0;

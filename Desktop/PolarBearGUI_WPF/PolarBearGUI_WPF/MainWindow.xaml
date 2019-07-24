@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PolarBearGUI_WPF"
+        xmlns:views="clr-namespace:PolarBearGUI_WPF.Views"
         mc:Ignorable="d"
         Title="Polar BEAR" Height="600" Width="800" Topmost="False" WindowState="Normal"
         Icon="./Resources/PolarBearShadow.ico">
@@ -101,17 +102,9 @@
                     <Image Source="./Resources/Redo.png"></Image>
                 </Button>
                 <Separator/>
-                <Label Content="Port:"></Label>
-                <ComboBox x:Name="PortComboBox" Width="200"
-                          SelectionChanged="PortComboBox_SelectionChanged" 
-                          DropDownClosed="PortComboBox_DropDownClosed"
-                          ItemsSource="{Binding COMPortInfoList}" ToolTip="Arduino COM Port">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding FullName}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>  
-                </ComboBox>
+                <views:COMPortInfoListView>
+                    
+                </views:COMPortInfoListView>
                 <Separator/>
                 <Button x:Name="RunToolBarButton" ToolTip="Run (F5)" Click="RunToolBarButton_Click" IsEnabled="False"
                         ToolTipService.ShowOnDisabled="True" IsEnabledChanged="RunToolBarButton_IsEnabledChanged">
@@ -136,9 +129,9 @@
 
             </local:PathEditorView>
 
-            <local:SerialMonitorView Grid.Row="1" Grid.ColumnSpan="2" Height="200">
+            <views:SerialMonitorView Grid.Row="1" Grid.ColumnSpan="2" Height="200">
                 
-            </local:SerialMonitorView>
+            </views:SerialMonitorView>
         </Grid>
     </Grid>
 </Window>

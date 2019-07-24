@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
+using PolarBearGUI_WPF.Models;
 
 namespace PolarBearGUI_WPF
 {
-    public class COMPortInfoModel : Models.Model
+    public class COMPortInfoList : Model
     {
-        private List<COMPortInfo> comPortInfoList;
+        private List<COMPortInfoModel> comPortInfoList;
 
-        public List<COMPortInfo> COMPortInfoList
+        public List<COMPortInfoModel> COMPortInfos
         {
             get
             {
@@ -21,16 +19,16 @@ namespace PolarBearGUI_WPF
             private set
             {
                 comPortInfoList = value;
-                NotifyPropertyChanged("COMPortInfoList");
+                NotifyPropertyChanged("COMPortInfos");
             }
         }
 
         private DispatcherTimer dispatcherTimer;
 
 
-        public COMPortInfoModel()
+        public COMPortInfoList()
         {
-            comPortInfoList = new List<COMPortInfo>();
+            comPortInfoList = new List<COMPortInfoModel>();
             
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
@@ -40,10 +38,10 @@ namespace PolarBearGUI_WPF
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            List<COMPortInfo> newCOMPortInfoList = COMPortInfo.GetCOMPortInfoList();
-            if (newCOMPortInfoList.Count != COMPortInfoList.Count || newCOMPortInfoList.Except(COMPortInfoList).Any())
+            List<COMPortInfoModel> newCOMPortInfoList = COMPortInfoModel.GetCOMPortInfoList();
+            if (newCOMPortInfoList.Count != COMPortInfos.Count || newCOMPortInfoList.Except(COMPortInfos).Any())
             {
-                COMPortInfoList = newCOMPortInfoList;
+                COMPortInfos = newCOMPortInfoList;
             }
         }
     }
