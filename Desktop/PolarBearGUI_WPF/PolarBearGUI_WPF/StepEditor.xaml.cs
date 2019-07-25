@@ -1,5 +1,4 @@
-﻿using PolarBearGUI_WPF.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PolarBearGUI_WPF.Views
+namespace PolarBearGUI_WPF
 {
     /// <summary>
-    /// Interaction logic for StepView.xaml
+    /// Interaction logic for StepEditor.xaml
     /// </summary>
-    public partial class StepView : UserControl
+    public partial class StepEditor : Window
     {
-        public StepView()
+        public StepEditor()
         {
             InitializeComponent();
-            DataContext = new TiltViewModel();
         }
     }
 }

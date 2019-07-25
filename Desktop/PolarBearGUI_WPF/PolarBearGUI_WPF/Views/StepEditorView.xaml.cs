@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace PolarBearGUI_WPF.Views
 {
     /// <summary>
-    /// Interaction logic for StepView.xaml
+    /// Interaction logic for StepEditorView.xaml
     /// </summary>
-    public partial class StepView : UserControl
+    public partial class StepEditorView : UserControl
     {
-        public StepView()
+        public StepEditorView()
         {
             InitializeComponent();
-            DataContext = new TiltViewModel();
+            DataContext = new StepEditorViewModel();
         }
     }
 }

@@ -1,16 +1,14 @@
-﻿using System;
+﻿using PolarBearGUI_WPF.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
-using PolarBearGUI_WPF.Models;
 
 namespace PolarBearGUI_WPF.ViewModels
 {
-    public abstract class StepViewModel : NotifyPropertyChangedObject
+    public class StepEditorViewModel : NotifyPropertyChangedObject 
     {
-
         private Step step;
 
         public Step Step
@@ -24,6 +22,11 @@ namespace PolarBearGUI_WPF.ViewModels
                 step = value;
                 NotifyPropertyChanged("Step");
             }
+        }
+
+        public StepEditorViewModel()
+        {
+
         }
     }
 }

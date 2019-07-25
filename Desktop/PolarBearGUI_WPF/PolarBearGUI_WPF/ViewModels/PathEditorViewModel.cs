@@ -26,9 +26,9 @@ namespace PolarBearGUI_WPF.ViewModels
         public PathEditorViewModel()
         {
             stepViewModelList = new List<StepViewModel>();
-            stepViewModelList.Add(new StepViewModel());
-            stepViewModelList.Add(new StepViewModel());
-            stepViewModelList.Add(new StepViewModel());
+            stepViewModelList.Add(new DelayViewModel());
+            stepViewModelList.Add(new TiltViewModel());
+            stepViewModelList.Add(new TiltViewModel());
         }
     }
 }

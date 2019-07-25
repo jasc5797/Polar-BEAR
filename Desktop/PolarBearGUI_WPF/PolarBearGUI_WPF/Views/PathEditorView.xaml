@@ -21,16 +21,23 @@
             </Button>
             <Canvas DockPanel.Dock="Right"></Canvas>
         </DockPanel>
+
         <ListView Grid.Row="1" ItemsSource="{Binding StepViewModelList}" 
                  ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
+            <ListView.Resources>
+                <DataTemplate DataType="{x:Type views:DelayView}">
                     <StackPanel Orientation="Vertical">
-                        <views:StepView></views:StepView>
+                        <views:DelayView></views:DelayView>
                         <Separator></Separator>
                     </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type views:TiltView}">
+                    <StackPanel Orientation="Vertical">
+                        <views:TiltView></views:TiltView>
+                        <Separator></Separator>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.Resources>
         </ListView>
     </Grid>
 </UserControl>

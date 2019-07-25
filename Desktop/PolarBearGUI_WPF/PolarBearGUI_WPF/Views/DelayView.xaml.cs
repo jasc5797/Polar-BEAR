@@ -1,5 +1,4 @@
-﻿using PolarBearGUI_WPF.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,13 @@ using System.Windows.Shapes;
 namespace PolarBearGUI_WPF.Views
 {
     /// <summary>
-    /// Interaction logic for StepView.xaml
+    /// Interaction logic for DelayView.xaml
     /// </summary>
-    public partial class StepView : UserControl
+    public partial class DelayView : UserControl
     {
-        public StepView()
+        public DelayView()
         {
             InitializeComponent();
-            DataContext = new TiltViewModel();
         }
     }
 }
