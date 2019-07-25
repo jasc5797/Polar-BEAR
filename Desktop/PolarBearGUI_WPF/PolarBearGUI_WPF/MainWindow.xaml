@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:PolarBearGUI_WPF.Views"
         mc:Ignorable="d"
         Title="Polar BEAR" Height="600" Width="800" Topmost="False" WindowState="Normal"
-        Icon="./Resources/PolarBearShadow.ico">
+        Icon="./Resources/PolarBearShadow.ico" Background="LightGray">
     <Window.Resources>
         
         <Style TargetType="Button">
@@ -83,8 +83,8 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <ToolBarTray Grid.Row="1">
-            <ToolBar ToolBarTray.IsLocked="True">
+        <ToolBarTray Grid.Row="1" Background="LightGray">
+            <ToolBar ToolBarTray.IsLocked="True" Background="LightGray">
                 <Button x:Name="NewFileToolBarButton" ToolTip="New File (Ctrl+N)" Click="NewFileToolBarButton_Click">
                     <Image Source="./Resources/NewFile.png"></Image>
                 </Button>
@@ -125,13 +125,11 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <local:PathEditorView Grid.Row="0" Grid.Column="1" Height="300">
-
-            </local:PathEditorView>
-
-            <views:SerialMonitorView Grid.Row="1" Grid.ColumnSpan="2" Height="200">
-                
-            </views:SerialMonitorView>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <views:ManualControlView></views:ManualControlView>
+            </Grid>
+            <views:PathEditorView Grid.Row="0" Grid.Column="1" Height="300"></views:PathEditorView>
+            <views:SerialMonitorView Grid.Row="1" Grid.ColumnSpan="2" Height="200"></views:SerialMonitorView>
         </Grid>
     </Grid>
 </Window>

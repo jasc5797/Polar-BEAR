@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Management;
-using PolarBearGUI_WPF.Models;
 
-namespace PolarBearGUI_WPF
+namespace PolarBearGUI_WPF.Models
 {
     public class COMPortInfoModel : Model
     {
@@ -87,18 +86,6 @@ namespace PolarBearGUI_WPF
             return comPortInfoList;
         }
 
-       
-        public override bool Equals(object obj)
-        {
-            return obj is COMPortInfoModel && Equals(obj as COMPortInfoModel);
-        }
-
-        public bool Equals(COMPortInfoModel comPortInfo)
-        {
-            return FullName == comPortInfo.FullName &&
-                DeviceName == comPortInfo.DeviceName &&
-                COMPort == comPortInfo.COMPort;
-        }
 
         public override int GetHashCode()
         {
@@ -107,8 +94,21 @@ namespace PolarBearGUI_WPF
             int hashCOMPort = COMPort == null ? 0 : COMPort.GetHashCode();
             return hashFullName ^ hashDeviceName ^ hashCOMPort;
         }
+
+        public override bool Equals(Model model)
+        {
+            if (model is COMPortInfoModel)
+            {
+                COMPortInfoModel comPortInfoModel = model as COMPortInfoModel;
+                return FullName == comPortInfoModel.FullName &&
+                    DeviceName == comPortInfoModel.DeviceName &&
+                    COMPort == comPortInfoModel.COMPort;
+            }
+            return false;
+        }
     }
 
+    /*
     class COMPortInfoComparer : IEqualityComparer<COMPortInfoModel>
     {
         public bool Equals(COMPortInfoModel x, COMPortInfoModel y)
@@ -127,4 +127,5 @@ namespace PolarBearGUI_WPF
             return comPortInfo.GetHashCode();
         }
     }
+    */
 }

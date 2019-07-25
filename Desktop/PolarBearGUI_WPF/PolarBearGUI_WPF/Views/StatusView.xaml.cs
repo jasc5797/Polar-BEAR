@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace PolarBearGUI_WPF.Views
 {
     /// <summary>
-    /// Interaction logic for StepView.xaml
+    /// Interaction logic for StatusView.xaml
     /// </summary>
-    public partial class StepView : UserControl
+    public partial class StatusView : UserControl
     {
-        public StepView()
+        public StatusView()
         {
             InitializeComponent();
-            DataContext = new StepViewModel();
         }
     }
 }

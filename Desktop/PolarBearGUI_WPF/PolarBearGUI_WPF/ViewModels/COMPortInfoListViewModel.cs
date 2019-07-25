@@ -1,25 +1,40 @@
-﻿using System;
+﻿using PolarBearGUI_WPF.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace PolarBearGUI_WPF.ViewModels
 {
-    public class COMPortInfoListViewModel
+    public class COMPortInfoListViewModel : DispatcherViewModel
     {
-        private COMPortInfoList comPortInfoList;
+        private List<COMPortInfoModel> comPortInfoList;
 
-        public COMPortInfoList COMPortInfoList
+        public List<COMPortInfoModel> COMPortInfos
         {
             get
             {
                 return comPortInfoList;
             }
+            private set
+            {
+                comPortInfoList = value;
+                NotifyPropertyChanged("COMPortInfos");
+            }
         }
-        public COMPortInfoListViewModel()
+
+        public COMPortInfoListViewModel() : base()
         {
-            comPortInfoList = new COMPortInfoList();
+            comPortInfoList = new List<COMPortInfoModel>();
+        }
+
+        protected override void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            List<COMPortInfoModel> newCOMPortInfoList = COMPortInfoModel.GetCOMPortInfoList();
+            if (!EqualsModelLists(comPortInfoList, newCOMPortInfoList))
+            {
+                COMPortInfos = newCOMPortInfoList;
+            }
         }
     }
 }

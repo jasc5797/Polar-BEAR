@@ -1,30 +1,36 @@
-﻿<UserControl x:Class="PolarBearGUI_WPF.PathEditorView"
+﻿<UserControl x:Class="PolarBearGUI_WPF.Views.PathEditorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PolarBearGUI_WPF"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:PolarBearGUI_WPF.Views"
              mc:Ignorable="d" >
-    <Grid Width="500">
+    <Grid Margin="5, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Background="LightGray">
             <!--<Canvas DockPanel.Dock="Right" Width="20"></Canvas>-->
-            <Label DockPanel.Dock="Left" Content="Path Editor"/>
+            <Label DockPanel.Dock="Left" Content="Path Editor" Margin="5,0"/>
             <Button DockPanel.Dock="Right" ToolTip="Add New Step" BorderThickness="0" Width="25" Height="25">
-                <Image Source="./Resources/Add.png" Stretch="None"></Image>
+                <Image Source="/Resources/Add.png" Stretch="None"></Image>
             </Button>
             <Button DockPanel.Dock="Right" ToolTip="Remove Selected Step" BorderThickness="0" Width="25" Height="25">
-                <Image Source="./Resources/Remove.png" Stretch="None"></Image>
+                <Image Source="/Resources/Remove.png" Stretch="None"></Image>
             </Button>
             <Canvas DockPanel.Dock="Right"></Canvas>
         </DockPanel>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
-            <StackPanel Orientation="Vertical">
-                
-            </StackPanel>
-        </ScrollViewer>
+        <ListView Grid.Row="1" ItemsSource="{Binding StepViewModelList}" 
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <views:StepView></views:StepView>
+                        <Separator></Separator>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

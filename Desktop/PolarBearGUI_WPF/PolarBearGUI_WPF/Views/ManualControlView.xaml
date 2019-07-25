@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="PolarBearGUI_WPF.Views.ManualControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PolarBearGUI_WPF.Views"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Margin" Value="2"></Setter>
+        </Style>
+    </UserControl.Resources>
+        
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Tilt Control"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Width="75">
+                <DockPanel>
+                    <Image Source="/Resources/Undo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
+                    <TextBlock TextWrapping="Wrap" DockPanel.Dock="Bottom">CCW</TextBlock>
+                </DockPanel>
+            </Button>
+            <Button Grid.Column="2" Width="75">
+                <DockPanel>
+                    <Image Source="/Resources/Redo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
+                    <TextBlock TextWrapping="Wrap">CW</TextBlock>
+                </DockPanel>
+            </Button>
+        </Grid>
+        <Label Grid.Row="2" Content="Rotate Control"/>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Width="75">
+                <DockPanel>
+                    <Image Source="/Resources/Undo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
+                    <TextBlock TextWrapping="Wrap">CCW</TextBlock>
+                </DockPanel>
+            </Button>
+            <Button Grid.Column="1" Width="75">
+                <DockPanel>
+                    <Image Source="/Resources/Redo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
+                    <TextBlock TextWrapping="Wrap" DockPanel.Dock="Bottom">CW</TextBlock>
+                </DockPanel>
+            </Button>
+        </Grid>
+        <Label Grid.Row="4" Content="Extension Control"/>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Width="75">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/Resources/Backward.png" Stretch="None"></Image>
+                    <TextBlock TextWrapping="Wrap">Retract</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="1" Width="75">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/Resources/Forward.png" Stretch="None"></Image>
+                    <TextBlock TextWrapping="Wrap">Extend</TextBlock>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

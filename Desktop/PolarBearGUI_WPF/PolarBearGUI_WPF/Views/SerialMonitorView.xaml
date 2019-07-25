@@ -3,10 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:PolarBearGUI_WPF.Views"
              mc:Ignorable="d" >
     <Grid Background="LightGray">
-        <ListView Height="auto" Margin="5,5,5,5" ItemsSource="{Binding SerialCommunicationList}"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+            <views:StatusView DockPanel.Dock="Left"></views:StatusView>
+            <Button x:Name="ClearButton" Content="Clear" DockPanel.Dock="Right" Height="25"
+                    Width="50" BorderThickness="0" Margin="5,0"></Button>
+            <CheckBox x:Name="AutoScrollCheckBox" Content="Auto Scroll" DockPanel.Dock="Right" 
+                      VerticalAlignment="Center" Margin="5" IsChecked="True" Checked="AutoScrollCheckBox_Checked"></CheckBox>
+            <Canvas DockPanel.Dock="Right"></Canvas>
+        </DockPanel>
+        <ListView Grid.Row="1" Height="auto" Margin="5,0,5,5" ItemsSource="{Binding SerialCommunicationList}"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="SerialListView">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Time}" Header="Time" Width="100"></GridViewColumn>

@@ -1,7 +1,6 @@
 ﻿using System;
-using PolarBearGUI_WPF.Models;
 
-namespace PolarBearGUI_WPF
+namespace PolarBearGUI_WPF.Models
 {
     public class SerialCommunication : Model
     {
@@ -50,6 +49,26 @@ namespace PolarBearGUI_WPF
             Time = DateTime.Now.ToString("T");
             Message = message;
             messageType = type;
+        }
+
+        public override bool Equals(Model model)
+        {
+            if (model is SerialCommunication)
+            {
+                SerialCommunication serialCommunication = model as SerialCommunication;
+                return Time == serialCommunication.Time &&
+                    Message == serialCommunication.Message &&
+                    MessageType == serialCommunication.MessageType;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashTime = Time == null ? 0 : Time.GetHashCode();
+            int hashMessage = Message == null ? 0 : Message.GetHashCode();
+            int hashMessageType = MessageType == null ? 0 : MessageType.GetHashCode();
+            return hashTime ^ hashMessage ^ hashMessageType;
         }
     }
 }
