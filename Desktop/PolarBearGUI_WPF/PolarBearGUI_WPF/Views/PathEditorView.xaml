@@ -4,7 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:PolarBearGUI_WPF.Views"
+             xmlns:viewmodels="clr-namespace:PolarBearGUI_WPF.ViewModels"
              mc:Ignorable="d" >
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:DelayViewModel}">
+            <StackPanel Orientation="Vertical">
+                <views:DelayView></views:DelayView>
+                <Separator></Separator>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:TiltViewModel}">
+            <StackPanel Orientation="Vertical">
+                <views:TiltView></views:TiltView>
+                <Separator></Separator>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:RotationViewModel}">
+            <StackPanel Orientation="Vertical">
+                <views:RotationView></views:RotationView>
+                <Separator></Separator>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ExtensionViewModel}">
+            <StackPanel Orientation="Vertical">
+                <views:ExtensionView></views:ExtensionView>
+                <Separator></Separator>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid Margin="5, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -24,20 +51,7 @@
 
         <ListView Grid.Row="1" ItemsSource="{Binding StepViewModelList}" 
                  ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch" >
-            <ListView.Resources>
-                <DataTemplate DataType="{x:Type views:DelayView}">
-                    <StackPanel Orientation="Vertical">
-                        <views:DelayView></views:DelayView>
-                        <Separator></Separator>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type views:TiltView}">
-                    <StackPanel Orientation="Vertical">
-                        <views:TiltView></views:TiltView>
-                        <Separator></Separator>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.Resources>
+            
         </ListView>
     </Grid>
 </UserControl>

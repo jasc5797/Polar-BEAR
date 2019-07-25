@@ -28,7 +28,8 @@ namespace PolarBearGUI_WPF.ViewModels
             stepViewModelList = new List<StepViewModel>();
             stepViewModelList.Add(new DelayViewModel());
             stepViewModelList.Add(new TiltViewModel());
-            stepViewModelList.Add(new TiltViewModel());
+            stepViewModelList.Add(new RotationViewModel());
+            stepViewModelList.Add(new ExtensionViewModel());
         }
     }
 }

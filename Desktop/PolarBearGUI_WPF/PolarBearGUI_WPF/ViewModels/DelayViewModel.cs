@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PolarBearGUI_WPF.ViewModels
 {
-    class DelayViewModel : StepViewModel
+    public class DelayViewModel : StepViewModel
     {
         public DelayViewModel()
         {
