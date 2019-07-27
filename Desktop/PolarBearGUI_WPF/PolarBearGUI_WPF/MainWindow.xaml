@@ -83,35 +83,37 @@
             </MenuItem>
         </Menu>
         <ToolBarTray Grid.Row="1" Background="LightGray">
-            <ToolBar ToolBarTray.IsLocked="True" Background="LightGray">
-                <Button x:Name="NewFileToolBarButton" ToolTip="New File (Ctrl+N)" Click="NewFileToolBarButton_Click">
+            <ToolBar ToolBarTray.IsLocked="True" Background="LightGray" Loaded="ToolBar_Loaded">
+                <Button ToolBar.OverflowMode="Never" x:Name="NewFileToolBarButton" ToolTip="New File (Ctrl+N)" Click="NewFileToolBarButton_Click">
                     <Image Source="./Resources/NewFile.png"></Image>
                 </Button>
-                <Button x:Name="OpenFileToolBarButton" ToolTip="Open File (Ctrl+O)" Click="OpenFileToolBarButton_Click">
+                <Button ToolBar.OverflowMode="Never" x:Name="OpenFileToolBarButton" ToolTip="Open File (Ctrl+O)" Click="OpenFileToolBarButton_Click">
                     <Image Source="./Resources/OpenFile.png"></Image>
                 </Button>
-                <Button x:Name="SaveFileToolBarButton" ToolTip="Save File (Ctrl+S)" Click="SaveFileToolBarButton_Click">
+                <Button ToolBar.OverflowMode="Never" x:Name="SaveFileToolBarButton" ToolTip="Save File (Ctrl+S)" Click="SaveFileToolBarButton_Click">
                     <Image Source="./Resources/Save.png"></Image>
                 </Button>
-                <Separator/>
-                <Button x:Name="UndoToolBarButton" ToolTip="Undo (Ctrl+Z)" Click="UndoToolBarButton_Click">
+                <Separator ToolBar.OverflowMode="Never"/>
+                <Button ToolBar.OverflowMode="AsNeeded" x:Name="UndoToolBarButton" ToolTip="Undo (Ctrl+Z)" Click="UndoToolBarButton_Click">
                     <Image Source="./Resources/Undo.png"></Image>
                 </Button>
-                <Button x:Name="RedoToolBarButton" ToolTip="Redo (Ctrl+Y)" Click="RedoToolBarButton_Click">
+                <Button ToolBar.OverflowMode="Never" x:Name="RedoToolBarButton" ToolTip="Redo (Ctrl+Y)" Click="RedoToolBarButton_Click">
                     <Image Source="./Resources/Redo.png"></Image>
                 </Button>
-                <Separator/>
-                <views:COMPortInfoListView>
+                <Separator ToolBar.OverflowMode="Never"/>
+                <views:COMPortInfoListView ToolBar.OverflowMode="Never">
                     
                 </views:COMPortInfoListView>
-                <Separator/>
-                <Button x:Name="RunToolBarButton" ToolTip="Run (F5)" Click="RunToolBarButton_Click" IsEnabled="False"
+                <Separator ToolBar.OverflowMode="Never"/>
+                <Button ToolBar.OverflowMode="Never" x:Name="RunToolBarButton" ToolTip="Run (F5)" Click="RunToolBarButton_Click" IsEnabled="False"
                         ToolTipService.ShowOnDisabled="True" IsEnabledChanged="RunToolBarButton_IsEnabledChanged">
-                    <DynamicResource ResourceKey="RunDisabled"/>
+                    <!--<DynamicResource ResourceKey="RunDisabled"/>-->
+                    <Image Source="./Resources/Run_Grey.png"></Image>
                 </Button>
-                <Button x:Name="StopToolBarButton" ToolTip="Stop (Shift+F5)" Click="StopToolBarButton_Click" IsEnabled="False"
+                <Button ToolBar.OverflowMode="Never" x:Name="StopToolBarButton" ToolTip="Stop (Shift+F5)" Click="StopToolBarButton_Click" IsEnabled="False"
                         ToolTipService.ShowOnDisabled="True" IsEnabledChanged="StopToolBarButton_IsEnabledChanged">
-                    <DynamicResource ResourceKey="StopDisabled"/>
+                    <!--<DynamicResource ResourceKey="StopDisabled"/>-->
+                    <Image Source="./Resources/Stop.png"></Image>
                 </Button>
             </ToolBar>
         </ToolBarTray>

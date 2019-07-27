@@ -4,32 +4,49 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:PolarBearGUI_WPF.Views"
+             xmlns:stepViews="clr-namespace:PolarBearGUI_WPF.Views.StepViews"
              xmlns:viewmodels="clr-namespace:PolarBearGUI_WPF.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:stepViewModels="clr-namespace:PolarBearGUI_WPF.ViewModels.StepViewModels"
+             xmlns:stepEditViews="clr-namespace:PolarBearGUI_WPF.Views.StepViews.StepEditViews"
+             xmlns:setEditViewModels="clr-namespace:PolarBearGUI_WPF.ViewModels.StepViewModels.StepEditViewModels"
              mc:Ignorable="d" >
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type viewmodels:DelayViewModel}">
+        <DataTemplate DataType="{x:Type stepViewModels:DelayViewModel}">
             <StackPanel Orientation="Vertical">
-                <views:DelayView></views:DelayView>
+                <stepViews:DelayView></stepViews:DelayView>
                 <Separator></Separator>
             </StackPanel>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:TiltViewModel}">
+        <DataTemplate DataType="{x:Type stepViewModels:TiltViewModel}">
             <StackPanel Orientation="Vertical">
-                <views:TiltView></views:TiltView>
+                <stepViews:TiltView></stepViews:TiltView>
                 <Separator></Separator>
             </StackPanel>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:RotationViewModel}">
+        <DataTemplate DataType="{x:Type stepViewModels:RotationViewModel}">
             <StackPanel Orientation="Vertical">
-                <views:RotationView></views:RotationView>
+                <stepViews:RotationView></stepViews:RotationView>
                 <Separator></Separator>
             </StackPanel>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:ExtensionViewModel}">
+        <DataTemplate DataType="{x:Type stepViewModels:ExtensionViewModel}">
             <StackPanel Orientation="Vertical">
-                <views:ExtensionView></views:ExtensionView>
+                <stepViews:ExtensionView></stepViews:ExtensionView>
                 <Separator></Separator>
             </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type setEditViewModels:DelayEditViewModel}">
+            <stepEditViews:DelayEditView></stepEditViews:DelayEditView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type setEditViewModels:RotationEditViewModel}">
+            <stepEditViews:RotationEditView></stepEditViews:RotationEditView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type setEditViewModels:TiltEditViewModel}">
+            <stepEditViews:TiltEditView></stepEditViews:TiltEditView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type setEditViewModels:ExtensionEditViewModel}">
+            <stepEditViews:ExtensionEditView></stepEditViews:ExtensionEditView>
         </DataTemplate>
     </UserControl.Resources>
     <Grid Margin="5, 0">
@@ -37,7 +54,11 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray">
             <!--<Canvas DockPanel.Dock="Right" Width="20"></Canvas>-->
             <Label DockPanel.Dock="Left" Content="Path Editor" Margin="5,0"/>
             <Button DockPanel.Dock="Right" ToolTip="Add New Step" BorderThickness="0" Width="25" Height="25">
@@ -49,9 +70,22 @@
             <Canvas DockPanel.Dock="Right"></Canvas>
         </DockPanel>
 
-        <ListView Grid.Row="1" ItemsSource="{Binding StepViewModelList}" 
-                 ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch" >
-            
+        <ListView x:Name="stepListView" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding StepViewModelList}" 
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch">
         </ListView>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Background="DarkGray">
+
+                <Label Content="Properties:"/>
+                <Label Content="{Binding SelectedItem.Step.Type, ElementName=stepListView}"></Label>
+            </StackPanel>
+
+            <ContentPresenter Grid.Row="1" Content="{Binding SelectedItem.StepEditViewModel, ElementName=stepListView}"></ContentPresenter>
+
+        </Grid>
     </Grid>
 </UserControl>

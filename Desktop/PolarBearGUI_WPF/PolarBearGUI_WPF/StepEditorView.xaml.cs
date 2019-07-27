@@ -1,5 +1,5 @@
-﻿using PolarBearGUI_WPF.Utilities;
-using PolarBearGUI_WPF.ViewModels;
+﻿using PolarBearGUI_WPF.ViewModels;
+using PolarBearGUI_WPF.ViewModels.StepViewModels.StepEditViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,24 +15,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PolarBearGUI_WPF.Views
+namespace PolarBearGUI_WPF
 {
     /// <summary>
-    /// Interaction logic for PathEditorView.xaml
+    /// Interaction logic for StepEditorView.xaml
     /// </summary>
-    public partial class PathEditorView : UserControl
+    public partial class StepEditorView : UserControl
     {
-        public RelayCommand StepSelectedCommand;
-
-        public PathEditorView()
+        public StepEditorView()
         {
             InitializeComponent();
-            DataContext = new PathEditorViewModel();
-        }
-
-        public void StepSelected(object step)
-        {
-
+            DataContext = new StepEditorViewModel();
         }
     }
 }

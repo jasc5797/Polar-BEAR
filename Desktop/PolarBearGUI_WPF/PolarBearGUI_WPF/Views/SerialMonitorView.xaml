@@ -13,7 +13,8 @@
         <DockPanel Grid.Row="0">
             <views:StatusView DockPanel.Dock="Left"></views:StatusView>
             <Button x:Name="ClearButton" Content="Clear" DockPanel.Dock="Right" Height="25"
-                    Width="50" BorderThickness="0" Margin="5,0"></Button>
+                    Width="50" BorderThickness="0" Margin="5,0" 
+                    Command="{Binding ClearSerialCommunicationCommand}"></Button>
             <CheckBox x:Name="AutoScrollCheckBox" Content="Auto Scroll" DockPanel.Dock="Right" 
                       VerticalAlignment="Center" Margin="5" IsChecked="True" Checked="AutoScrollCheckBox_Checked"></CheckBox>
             <Canvas DockPanel.Dock="Right"></Canvas>

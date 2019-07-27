@@ -121,11 +121,11 @@ namespace PolarBearGUI_WPF
         {
             if (RunToolBarButton.IsEnabled)
             {
-                RunToolBarButton.Content = FindResource("RunEnabled");
+                //RunToolBarButton.Content = FindResource("RunEnabled");
             }
             else
             {
-                RunToolBarButton.Content = FindResource("RunDisabled");
+               // RunToolBarButton.Content = FindResource("RunDisabled");
             }
         }
 
@@ -133,11 +133,11 @@ namespace PolarBearGUI_WPF
         {
             if (StopToolBarButton.IsEnabled)
             {
-                RunToolBarButton.Content = FindResource("StopEnabled");
+                //RunToolBarButton.Content = FindResource("StopEnabled");
             }
             else
             {
-                RunToolBarButton.Content = FindResource("StopDisabled");
+                //RunToolBarButton.Content = FindResource("StopDisabled");
             }
         }
 
@@ -146,6 +146,22 @@ namespace PolarBearGUI_WPF
             Console.WriteLine("Reading");
             string test = arduinoSerialPort.Read();
             Console.WriteLine(test);
+        }
+
+        private void ToolBar_Loaded(object sender, RoutedEventArgs e)
+        {
+            ToolBar toolBar = sender as ToolBar;
+            var overflowGrid = toolBar.Template.FindName("OverflowGrid", toolBar) as FrameworkElement;
+            if (overflowGrid != null)
+            {
+                overflowGrid.Visibility = Visibility.Collapsed;
+            }
+
+            var mainPanelBorder = toolBar.Template.FindName("MainPanelBorder", toolBar) as FrameworkElement;
+            if (mainPanelBorder != null)
+            {
+                mainPanelBorder.Margin = new Thickness(0);
+            }
         }
     }
 }

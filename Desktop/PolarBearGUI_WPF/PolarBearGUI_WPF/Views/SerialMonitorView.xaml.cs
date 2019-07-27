@@ -44,7 +44,5 @@ namespace PolarBearGUI_WPF.Views
         {
             AutoScroll();
         }
-
-
     }
 }

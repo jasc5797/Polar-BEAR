@@ -23,6 +23,10 @@ namespace PolarBearGUI_WPF.Models
         {
             get
             {
+                if (string.IsNullOrEmpty(fullName))
+                {
+                    return "Unknown";
+                }
                 return fullName;
             }
             private set
@@ -36,6 +40,10 @@ namespace PolarBearGUI_WPF.Models
         {
             get
             {
+                if (string.IsNullOrEmpty(deviceName))
+                {
+                    return "Unknown";
+                }
                 return deviceName;
             }
             private set
@@ -50,6 +58,10 @@ namespace PolarBearGUI_WPF.Models
         {
             get
             {
+                if (string.IsNullOrEmpty(comPort))
+                {
+                    return "Unknown";
+                }
                 return comPort;
             }
             private set

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PolarBearGUI_WPF.Utilities;
+using PolarBearGUI_WPF.ViewModels.StepViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,12 +25,15 @@ namespace PolarBearGUI_WPF.ViewModels
             }
         }
 
+
+
         public PathEditorViewModel()
         {
             stepViewModelList = new List<StepViewModel>();
-            stepViewModelList.Add(new DelayViewModel());
             stepViewModelList.Add(new TiltViewModel());
+            stepViewModelList.Add(new DelayViewModel());
             stepViewModelList.Add(new RotationViewModel());
+            stepViewModelList.Add(new DelayViewModel());
             stepViewModelList.Add(new ExtensionViewModel());
         }
     }

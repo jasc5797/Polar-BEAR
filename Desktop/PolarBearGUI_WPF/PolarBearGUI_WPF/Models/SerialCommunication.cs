@@ -15,6 +15,10 @@ namespace PolarBearGUI_WPF.Models
         {
             get
             {
+                if (string.IsNullOrEmpty(time))
+                {
+                    return "Unknown";
+                }
                 return time;
             }
             private set
@@ -27,6 +31,10 @@ namespace PolarBearGUI_WPF.Models
         {
             get
             {
+                if (string.IsNullOrEmpty(message))
+                {
+                    return "Unknown";
+                }
                 return message;
             }
             private set

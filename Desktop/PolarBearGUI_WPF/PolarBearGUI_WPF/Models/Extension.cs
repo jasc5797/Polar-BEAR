@@ -12,7 +12,7 @@ namespace PolarBearGUI_WPF.Models
         {
             get
             {
-                return "Rotation";
+                return "Extension";
             }
         }
 
