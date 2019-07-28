@@ -25,10 +25,11 @@ namespace PolarBearGUI_WPF.ViewModels
             }
         }
 
-
+        public RelayCommand RemoveCommand;
 
         public PathEditorViewModel()
         {
+            //RemoveCommand = new RelayCommand()
             stepViewModelList = new List<StepViewModel>();
             stepViewModelList.Add(new TiltViewModel());
             stepViewModelList.Add(new DelayViewModel());

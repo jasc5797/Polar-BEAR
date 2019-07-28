@@ -71,7 +71,8 @@
         </DockPanel>
 
         <ListView x:Name="stepListView" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding StepViewModelList}" 
-                 ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch">
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch"
+                  SelectionMode="Single">
         </ListView>
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>

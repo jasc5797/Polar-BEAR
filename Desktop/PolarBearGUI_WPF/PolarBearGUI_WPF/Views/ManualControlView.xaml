@@ -9,10 +9,12 @@
         <Style TargetType="Button">
             <Setter Property="BorderThickness" Value="0"></Setter>
             <Setter Property="Margin" Value="2"></Setter>
+            <Setter Property="Width" Value="75"></Setter>
+            <Setter Property="Height" Value="45"></Setter>
         </Style>
     </UserControl.Resources>
         
-    <Grid>
+    <Grid Height="225">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
