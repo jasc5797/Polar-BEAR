@@ -23,6 +23,21 @@ namespace PolarBearGUI_WPF.ViewModels
             }
         }
 
+        private COMPortInfoModel comPortInfo;
+
+        public COMPortInfoModel COMPortInfoModel
+        {
+            get
+            {
+                return comPortInfo;
+            }
+            set
+            {
+                comPortInfo = value;
+                NotifyPropertyChanged("COMPortInfoModel");
+            }
+        }
+
         public COMPortInfoListViewModel() : base()
         {
             comPortInfoList = new List<COMPortInfoModel>();

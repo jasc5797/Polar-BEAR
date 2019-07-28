@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="Polar BEAR" Height="600" Width="800" MinHeight="600" MinWidth="800" Topmost="False"
         WindowState="Normal"  WindowStartupLocation="CenterScreen"
-        Icon="./Resources/PolarBearShadow.ico" Background="LightGray">
+        Icon="./Resources/PolarBearShadow.ico" Background="LightGray"
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        >
     <Window.Resources>
         
         <Style TargetType="Button">
@@ -102,11 +104,13 @@
                     <Image Source="./Resources/Redo.png"></Image>
                 </Button>
                 <Separator ToolBar.OverflowMode="Never"/>
-                <views:COMPortInfoListView ToolBar.OverflowMode="Never">
-                    
-                </views:COMPortInfoListView>
+                <views:COMPortInfoListView x:Name="COMPortInfoListView" ToolBar.OverflowMode="Never"></views:COMPortInfoListView>
+                <!--
+                <Button x:Name="Test" Content="Test" Click="Test_Click"></Button>
+                <Label Content="{Binding ElementName=COMPortInfoListView, Path=SelectedCOMItem.FullName}"></Label>
+                -->
                 <Separator ToolBar.OverflowMode="Never"/>
-                <Button ToolBar.OverflowMode="Never" x:Name="RunToolBarButton" ToolTip="Run (F5)" Click="RunToolBarButton_Click" IsEnabled="False"
+                <Button ToolBar.OverflowMode="Never" x:Name="RunToolBarButton" ToolTip="Run (F5)" Click="RunToolBarButton_Click" IsEnabled="True"
                         ToolTipService.ShowOnDisabled="True" IsEnabledChanged="RunToolBarButton_IsEnabledChanged">
                     <!--<DynamicResource ResourceKey="RunDisabled"/>-->
                     <Image Source="./Resources/Run_Grey.png"></Image>

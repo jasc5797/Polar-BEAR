@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using PolarBearGUI_WPF.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -102,14 +103,14 @@ namespace PolarBearGUI_WPF
 
         private void RunToolBarButton_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            COMPortInfoModel comPortInfo = (COMPortInfoModel)(PortComboBox.SelectedItem);
+            
+            COMPortInfoModel comPortInfo = COMPortInfoListView.SelectedCOMItem;
             if (comPortInfo != null)
             {
                 arduinoSerialPort = new ArduinoSerialPort();
                 arduinoSerialPort.PortName = comPortInfo.COMPort;
                 arduinoSerialPort.Open();
-            }*/
+            }
         }
 
         private void StopToolBarButton_Click(object sender, RoutedEventArgs e)
@@ -162,6 +163,11 @@ namespace PolarBearGUI_WPF
             {
                 mainPanelBorder.Margin = new Thickness(0);
             }
+        }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            var test = COMPortInfoListView.SelectedCOMItem;
         }
     }
 }
