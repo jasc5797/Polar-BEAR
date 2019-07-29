@@ -136,8 +136,8 @@
                 <views:ManualControlView></views:ManualControlView>
             </Grid>
             <views:PathEditorView Grid.Row="0" Grid.Column="1"></views:PathEditorView>
-            <GridSplitter Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"></GridSplitter>
-            <views:SerialMonitorView Grid.Row="2" Grid.ColumnSpan="2" ></views:SerialMonitorView>
+            <GridSplitter Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Background="LightGray"></GridSplitter>
+            <views:SerialMonitorView x:Name="ArduinoSerialPortView" Grid.Row="2" Grid.ColumnSpan="2" ></views:SerialMonitorView>
         </Grid>
     </Grid>
 </Window>

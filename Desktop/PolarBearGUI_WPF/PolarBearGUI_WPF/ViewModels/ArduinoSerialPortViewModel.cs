@@ -2,6 +2,7 @@
 using PolarBearGUI_WPF.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace PolarBearGUI_WPF.ViewModels
     {
         private ArduinoSerialPort arduinoSerialPort;
 
+        /*
         public ArduinoSerialPort ArduinoSerialPort
         {
             get {
@@ -22,11 +24,29 @@ namespace PolarBearGUI_WPF.ViewModels
                 arduinoSerialPort = value;
                 NotifyPropertyChanged("ArduinoSerialPort");
             }
+        }*/
+
+        private ObservableCollection<SerialCommunication> serialCommunications;
+
+        public ObservableCollection<SerialCommunication> SerialCommunications
+        {
+            get
+            {
+                return serialCommunications;
+            }
+            set
+            {
+                serialCommunications = value;
+                NotifyPropertyChanged("SerialCommunications");
+            }
         }
 
-        public ArduinoSerialPortViewModel()
+        public ArduinoSerialPortViewModel(string COMPort)
         {
-            arduinoSerialPort = new ArduinoSerialPort();
+            serialCommunications = new ObservableCollection<SerialCommunication>();
+            arduinoSerialPort = new ArduinoSerialPort(serialCommunications);
+            arduinoSerialPort.PortName = COMPort;
+            arduinoSerialPort.Open();
         }
     }
 }

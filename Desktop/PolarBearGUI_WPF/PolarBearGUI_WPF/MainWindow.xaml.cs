@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using PolarBearGUI_WPF.Models;
+using PolarBearGUI_WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -107,9 +108,15 @@ namespace PolarBearGUI_WPF
             COMPortInfoModel comPortInfo = COMPortInfoListView.SelectedCOMItem;
             if (comPortInfo != null)
             {
-                arduinoSerialPort = new ArduinoSerialPort();
-                arduinoSerialPort.PortName = comPortInfo.COMPort;
-                arduinoSerialPort.Open();
+                SerialPort serialPort = new SerialPort();
+                serialPort.BaudRate = 9600;
+                serialPort.Handshake = Handshake.None;
+                serialPort.PortName = comPortInfo.COMPort;
+                serialPort.Open();
+
+                ArduinoSerialPortView.DataContext = new SerialCommunicationViewModel(serialPort);
+                //ArduinoSerialPortViewModel arduinoSerialPortViewModel = new ArduinoSerialPortViewModel(comPortInfo.COMPort);
+                //ArduinoSerialPortView.DataContext = arduinoSerialPortViewModel;
             }
         }
 
