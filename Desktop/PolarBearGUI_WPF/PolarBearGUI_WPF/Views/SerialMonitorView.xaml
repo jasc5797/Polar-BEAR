@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:PolarBearGUI_WPF.Views"
+             xmlns:customUserControls="clr-namespace:PolarBearGUI_WPF.CustomUserControls"
              mc:Ignorable="d" >
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
@@ -11,7 +12,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-            <views:StatusView DockPanel.Dock="Left"></views:StatusView>
+            <customUserControls:StatusView DockPanel.Dock="Left"></customUserControls:StatusView>
             <Button x:Name="ClearButton" Content="Clear" DockPanel.Dock="Right" Height="25"
                     Width="50" BorderThickness="0" Margin="5,0" 
                     Command="{Binding ClearSerialCommunicationCommand}"></Button>

@@ -1,6 +1,10 @@
-﻿using PolarBearGUI_WPF.ViewModels;
+﻿using PolarBearGUI_WPF.Models;
+using PolarBearGUI_WPF.ViewModels;
+using PolarBearGUI_WPF.ViewModels.StepViewModels;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace PolarBearGUI_WPF.Views
@@ -10,6 +14,25 @@ namespace PolarBearGUI_WPF.Views
     /// </summary>
     public partial class SerialMonitorView : UserControl
     {
+
+        public static readonly DependencyProperty StepViewModelsProperty =
+            DependencyProperty.Register("StepList",
+            typeof(List<StepViewModel>),
+            typeof(SerialMonitorView),
+            new FrameworkPropertyMetadata(new List<StepViewModel>()));
+
+        public List<StepViewModel> StepViewModels
+        {
+            get
+            {
+                return (List<StepViewModel>)GetValue(StepViewModelsProperty);
+            }
+            set
+            {
+                SetValue(StepViewModelsProperty, value);
+            }
+        }
+
         public SerialMonitorView()
         {
             InitializeComponent();

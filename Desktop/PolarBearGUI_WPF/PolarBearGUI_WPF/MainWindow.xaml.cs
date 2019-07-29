@@ -27,11 +27,24 @@ namespace PolarBearGUI_WPF
     {
         private ArduinoSerialPort arduinoSerialPort;
 
+        private SerialPort serialPort;
+        public SerialPort SerialPort
+        {
+            get
+            {
+                return serialPort;
+            }
+            set
+            {
+                serialPort = value;
+            }
+        }
+
         public MainWindow()
         {
 
             InitializeComponent();
-
+            serialPort = new SerialPort();
         }
 
         private void MenuBarItem_Click(object sender, RoutedEventArgs e)
@@ -108,21 +121,32 @@ namespace PolarBearGUI_WPF
             COMPortInfoModel comPortInfo = COMPortInfoListView.SelectedCOMItem;
             if (comPortInfo != null)
             {
-                SerialPort serialPort = new SerialPort();
-                serialPort.BaudRate = 9600;
-                serialPort.Handshake = Handshake.None;
-                serialPort.PortName = comPortInfo.COMPort;
-                serialPort.Open();
+                if (SerialPort.IsOpen)
+                {
+                    SerialPort.Close();
+                }
+                SerialPort.BaudRate = 9600;
+                SerialPort.Handshake = Handshake.None;
+                SerialPort.PortName = comPortInfo.COMPort;
+                SerialPort.Open();
 
-                ArduinoSerialPortView.DataContext = new SerialCommunicationViewModel(serialPort);
+                ArduinoSerialPortView.DataContext = new SerialCommunicationViewModel(SerialPort);
                 //ArduinoSerialPortViewModel arduinoSerialPortViewModel = new ArduinoSerialPortViewModel(comPortInfo.COMPort);
                 //ArduinoSerialPortView.DataContext = arduinoSerialPortViewModel;
+
+                StopToolBarButton.IsEnabled = true;
+                RunToolBarButton.IsEnabled = false;
             }
         }
 
         private void StopToolBarButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (SerialPort.IsOpen)
+            {
+                SerialPort.Close();
+            }
+            StopToolBarButton.IsEnabled = false;
+            RunToolBarButton.IsEnabled = true;
         }
 
         private void RunToolBarButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)

@@ -3,6 +3,7 @@ using PolarBearGUI_WPF.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Threading;
@@ -53,11 +54,26 @@ namespace PolarBearGUI_WPF.ViewModels
         {
             this.serialPort = serialPort;
             serialPort.DataReceived += SerialPort_DataReceived;
+            serialPort.NewLine = ";";
+            serialPort.WriteLine("o");
         }
 
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            string test = serialPort.ReadLine().Replace("\r", "");
+            if (!serialPort.IsOpen)
+            {
+                return;
+            }
+            string test;
+            try
+            {
+                test = serialPort.ReadLine().Replace("\r", "");
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex);
+                return;
+            }
             if (string.IsNullOrEmpty(test))
             {
                 return;
@@ -116,6 +132,11 @@ namespace PolarBearGUI_WPF.ViewModels
         public void Clear()
         {
             SerialCommunicationList = new List<SerialCommunication>();
+        }
+
+        public bool IsOpen()
+        {
+            return serialPort.IsOpen;
         }
 
     }

@@ -28,12 +28,12 @@ namespace PolarBearGUI_WPF.Models
 
         public bool IsOpen { get { return serialPort.IsOpen; } }
 
-        private ObservableCollection<SerialCommunication> serialCommunications;
+        public delegate void ArduinoDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e);
+        public event ArduinoDataReceivedEventHandler ArduinoDataReceived;
 
         
-        public ArduinoSerialPort(ObservableCollection<SerialCommunication> serialCommunications)
+        public ArduinoSerialPort()
         {
-            this.serialCommunications = serialCommunications;
             Initialize();
         }
 
@@ -43,15 +43,16 @@ namespace PolarBearGUI_WPF.Models
             serialPort = new SerialPort();
             serialPort.BaudRate = 9600;
             serialPort.Handshake = Handshake.None;
+            serialPort.NewLine = ";";
 
-            serialPort.DataReceived += SerialPort_DataReceived;
 
         }
 
-        private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        public void SetDataReceivedHandler(SerialDataReceivedEventHandler serialDataReceivedEventHandler)
         {
-            serialCommunications.Add(new SerialCommunication(serialPort.ReadExisting(), SerialCommunication.Type.RECIEVE));
+            serialPort.DataReceived += serialDataReceivedEventHandler;
         }
+
 
         public void Open()
         {
@@ -65,9 +66,9 @@ namespace PolarBearGUI_WPF.Models
             serialPort.Close();
         }
         
-        public string Read()
+        public string ReadLine()
         {
-            return serialPort.ReadExisting();
+            return serialPort.ReadLine();
         }
 
         public void Send(string message)
