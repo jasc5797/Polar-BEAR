@@ -1,15 +1,10 @@
 ﻿using PolarBearGUI_WPF.Models;
 using PolarBearGUI_WPF.Utilities;
-using PolarBearGUI_WPF.ViewModels.Commands;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace PolarBearGUI_WPF.ViewModels
 {

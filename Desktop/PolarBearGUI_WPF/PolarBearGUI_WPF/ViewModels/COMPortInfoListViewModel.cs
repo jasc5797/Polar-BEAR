@@ -1,8 +1,6 @@
 ﻿using PolarBearGUI_WPF.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Threading;
 
 namespace PolarBearGUI_WPF.ViewModels
 {

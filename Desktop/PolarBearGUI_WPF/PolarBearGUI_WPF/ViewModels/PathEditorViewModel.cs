@@ -1,12 +1,7 @@
 ﻿using PolarBearGUI_WPF.Dialogs.Service;
 using PolarBearGUI_WPF.Utilities;
 using PolarBearGUI_WPF.ViewModels.StepViewModels;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PolarBearGUI_WPF.ViewModels
 {

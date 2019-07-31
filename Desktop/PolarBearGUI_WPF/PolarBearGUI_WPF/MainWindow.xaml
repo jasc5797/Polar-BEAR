@@ -20,8 +20,6 @@
         
         <Image x:Key="StopEnabled" Source="./Resources/Stop.png"/>
         <Image x:Key="StopDisabled" Source="./Resources/Stop_Grey.png"/>
-
-        <utilities:SelectedCOMItemToBoolConverter x:Key="SelectedCOMItemToBoolConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>

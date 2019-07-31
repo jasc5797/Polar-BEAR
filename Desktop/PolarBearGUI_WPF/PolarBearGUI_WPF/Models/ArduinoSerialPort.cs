@@ -1,12 +1,6 @@
 ﻿using PolarBearGUI_WPF.JSONCommands;
 using PolarBearGUI_WPF.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PolarBearGUI_WPF.Models
 {
