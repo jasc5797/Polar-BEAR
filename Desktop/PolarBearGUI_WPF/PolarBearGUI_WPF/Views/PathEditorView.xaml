@@ -80,19 +80,23 @@
                   SelectionMode="Single" gong:DragDrop.IsDragSource="True" gong:DragDrop.IsDropTarget="True"
                   gong:DragDrop.ShowAlwaysDropTargetAdorner="True" SelectedItem="{Binding SelectedStepViewModel}">
         </ListView>
+        <xctk:PropertyGrid Grid.Row="1" Grid.Column="1" SelectedObject="{Binding SelectedItem.Step, ElementName=stepListView}">
+            
+        </xctk:PropertyGrid>
+
+
+        <!--
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" Background="DarkGray">
-
                 <Label Content="Properties:"/>
                 <Label Content="{Binding SelectedItem.Step.Type, ElementName=stepListView}"></Label>
             </StackPanel>
-
             <ContentPresenter Grid.Row="1" Content="{Binding SelectedItem.StepEditViewModel, ElementName=stepListView}"></ContentPresenter>
-
         </Grid>
+        -->
     </Grid>
 </UserControl>

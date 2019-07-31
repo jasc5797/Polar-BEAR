@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace PolarBearGUI_WPF.Models
 
         private int interval;
 
+        [DisplayName("Interval")]
         public int Interval
         {
             get
