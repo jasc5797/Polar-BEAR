@@ -11,8 +11,8 @@
             <Label  x:Name="TypeLabel" Content="{Binding Step.Type}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
-            <Label Content="Interval:"></Label>
-            <Label Content="{Binding Step.Interval}"/>
+            <Label Content="Length:"></Label>
+            <Label Content="{Binding Step.Length}"/>
         </StackPanel>
 
     </DockPanel>

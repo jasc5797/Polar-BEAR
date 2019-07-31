@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace PolarBearGUI_WPF.Models
 
         private double degrees;
 
+        [Description("Degrees to Rotate")]
         public double Degrees
         {
             get
@@ -51,8 +53,8 @@ namespace PolarBearGUI_WPF.Models
         {
             int hashTime = CreationTime == null ? 0 : CreationTime.GetHashCode();
             int hashType = Type == null ? 0 : Type.GetHashCode();
-            int hashInterval = Degrees.GetHashCode();
-            return hashTime ^ hashType ^ hashInterval;
+            int hashDegrees = Degrees.GetHashCode();
+            return hashTime ^ hashType ^ hashDegrees;
         }
     }
 }

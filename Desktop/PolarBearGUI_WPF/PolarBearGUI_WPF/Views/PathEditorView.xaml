@@ -3,13 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:views="clr-namespace:PolarBearGUI_WPF.Views"
              xmlns:stepViews="clr-namespace:PolarBearGUI_WPF.Views.StepViews"
-             xmlns:viewmodels="clr-namespace:PolarBearGUI_WPF.ViewModels"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:stepViewModels="clr-namespace:PolarBearGUI_WPF.ViewModels.StepViewModels"
-             xmlns:stepEditViews="clr-namespace:PolarBearGUI_WPF.Views.StepViews.StepEditViews"
-             xmlns:setEditViewModels="clr-namespace:PolarBearGUI_WPF.ViewModels.StepViewModels.StepEditViewModels"
              xmlns:gong="urn:gong-wpf-dragdrop"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" >
@@ -38,18 +33,6 @@
                 <Separator></Separator>
             </StackPanel>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type setEditViewModels:DelayEditViewModel}">
-            <stepEditViews:DelayEditView></stepEditViews:DelayEditView>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type setEditViewModels:RotationEditViewModel}">
-            <stepEditViews:RotationEditView></stepEditViews:RotationEditView>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type setEditViewModels:TiltEditViewModel}">
-            <stepEditViews:TiltEditView></stepEditViews:TiltEditView>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type setEditViewModels:ExtensionEditViewModel}">
-            <stepEditViews:ExtensionEditView></stepEditViews:ExtensionEditView>
-        </DataTemplate>
     </UserControl.Resources>
     <Grid Margin="5, 0">
         <Grid.RowDefinitions>
@@ -60,14 +43,14 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray">
+        <DockPanel Grid.Row="0" Grid.Column="0" Background="DarkGray">
             <!--<Canvas DockPanel.Dock="Right" Width="20"></Canvas>-->
             <Label DockPanel.Dock="Left" Content="Path Editor" Margin="5,0"/>
             <Button DockPanel.Dock="Right" ToolTip="Add New Step" BorderThickness="0" Width="25" Height="25" 
                     Command="{Binding AddStepCommand}">
                 <Image Source="/Resources/Add.png" Stretch="None"></Image>
             </Button>
-            <Button DockPanel.Dock="Right" ToolTip="Remove Selected Step" BorderThickness="0" Width="25" Height="25"
+            <Button DockPanel.Dock="Right" ToolTip="Remove Selected Step" BorderThickness="0" Width="25" Height="25" Margin="2,0"
                     Command="{Binding RemoveStepCommand}">
                 <Image Source="/Resources/Remove.png" Stretch="None"></Image>
             </Button>
@@ -80,23 +63,10 @@
                   SelectionMode="Single" gong:DragDrop.IsDragSource="True" gong:DragDrop.IsDropTarget="True"
                   gong:DragDrop.ShowAlwaysDropTargetAdorner="True" SelectedItem="{Binding SelectedStepViewModel}">
         </ListView>
-        <xctk:PropertyGrid Grid.Row="1" Grid.Column="1" SelectedObject="{Binding SelectedItem.Step, ElementName=stepListView}">
-            
+        <Label Content="Properties:" Grid.Row="0" Grid.Column="1"  Background="DarkGray"/>
+        <xctk:PropertyGrid Grid.Row="1" Grid.Column="1" SelectedObject="{Binding SelectedItem.Step, ElementName=stepListView}"
+                           ShowSearchBox="False" ShowSortOptions="False">
+
         </xctk:PropertyGrid>
-
-
-        <!--
-        <Grid Grid.Row="1" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Background="DarkGray">
-                <Label Content="Properties:"/>
-                <Label Content="{Binding SelectedItem.Step.Type, ElementName=stepListView}"></Label>
-            </StackPanel>
-            <ContentPresenter Grid.Row="1" Content="{Binding SelectedItem.StepEditViewModel, ElementName=stepListView}"></ContentPresenter>
-        </Grid>
-        -->
     </Grid>
 </UserControl>

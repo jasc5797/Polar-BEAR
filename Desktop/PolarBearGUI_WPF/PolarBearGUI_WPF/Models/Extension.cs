@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace PolarBearGUI_WPF.Models
 
         private double distance;
 
+        [Description("Distance to Extend")]
         public double Distance
         {
             get
@@ -51,8 +53,8 @@ namespace PolarBearGUI_WPF.Models
         {
             int hashTime = CreationTime == null ? 0 : CreationTime.GetHashCode();
             int hashType = Type == null ? 0 : Type.GetHashCode();
-            int hashInterval = Distance.GetHashCode();
-            return hashTime ^ hashType ^ hashInterval;
+            int hashDistance = Distance.GetHashCode();
+            return hashTime ^ hashType ^ hashDistance;
         }
     }
 }

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using PolarBearGUI_WPF.Models;
+﻿using PolarBearGUI_WPF.Models;
 using PolarBearGUI_WPF.Utilities;
-using PolarBearGUI_WPF.ViewModels.StepViewModels.StepEditViewModels;
 
 namespace PolarBearGUI_WPF.ViewModels.StepViewModels
 {
@@ -26,7 +19,5 @@ namespace PolarBearGUI_WPF.ViewModels.StepViewModels
                 NotifyPropertyChanged("Step");
             }
         }
-
-        public StepEditViewModel StepEditViewModel { get; set; }
     }
 }

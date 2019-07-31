@@ -1,5 +1,4 @@
 ﻿using PolarBearGUI_WPF.Models;
-using PolarBearGUI_WPF.ViewModels.StepViewModels.StepEditViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +12,6 @@ namespace PolarBearGUI_WPF.ViewModels.StepViewModels
         public TiltViewModel()
         {
             Step = new Tilt(5.4);
-            StepEditViewModel = new TiltEditViewModel(Step as Tilt);
         }
     }
 }

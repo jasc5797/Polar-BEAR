@@ -17,25 +17,25 @@ namespace PolarBearGUI_WPF.Models
             }
         }
 
-        private int interval;
+        private int length;
 
-        [DisplayName("Interval")]
-        public int Interval
+        [Description("Length of the Delay")]
+        public int Length
         {
             get
             {
-                return interval;
+                return length;
             }
             set
             {
-                interval = value;
-                NotifyPropertyChanged("Interval");
+                length = value;
+                NotifyPropertyChanged("Length");
             }
         }
 
-        public Delay(int interval) : base()
+        public Delay(int length) : base()
         {
-            this.interval = interval;
+            this.length = length;
 
         }
 
@@ -44,7 +44,7 @@ namespace PolarBearGUI_WPF.Models
             if (model is Delay)
             {
                 Delay delay = model as Delay;
-                return Interval == delay.Interval &&
+                return Length == delay.Length &&
                     CreationTime == delay.CreationTime;
             }
             return false;
@@ -55,8 +55,8 @@ namespace PolarBearGUI_WPF.Models
 
             int hashTime = CreationTime == null ? 0 : CreationTime.GetHashCode();
             int hashType = Type == null ? 0 : Type.GetHashCode();
-            int hashInterval = Interval.GetHashCode();
-            return hashTime ^ hashType ^ hashInterval;
+            int hashLength = Length.GetHashCode();
+            return hashTime ^ hashType ^ hashLength;
         }
     }
 }

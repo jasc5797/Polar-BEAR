@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PolarBearGUI_WPF"
              xmlns:views="clr-namespace:PolarBearGUI_WPF.Views"
-             xmlns:stepeditviews="clr-namespace:PolarBearGUI_WPF.Views.StepViews.StepEditViews"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <DataTemplate DataType="{x:Type local:StepEditorView}">
