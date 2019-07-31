@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="PolarBearGUI_WPF.CustomUserControls.LabeledDoubleUpDown"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PolarBearGUI_WPF.CustomUserControls"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" >
+    <Grid VerticalAlignment="Center" Margin="5" x:Name="Root">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" SharedSizeGroup="Name"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto" SharedSizeGroup="Units"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Content="{Binding NameLabel}"></Label>
+        <!--<TextBox Grid.Column="1" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></TextBox>-->
+        <xctk:DoubleUpDown Grid.Column="1" Value="{Binding DoubleValue, UpdateSourceTrigger=PropertyChanged}"></xctk:DoubleUpDown>
+        <Label Grid.Column="2" Content="{Binding UnitsLabel}"></Label>
+    </Grid>
+</UserControl>

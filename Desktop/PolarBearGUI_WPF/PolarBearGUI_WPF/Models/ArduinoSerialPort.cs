@@ -1,4 +1,5 @@
-﻿using PolarBearGUI_WPF.Utilities;
+﻿using PolarBearGUI_WPF.JSONCommands;
+using PolarBearGUI_WPF.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,10 +29,18 @@ namespace PolarBearGUI_WPF.Models
 
         public bool IsOpen { get { return serialPort.IsOpen; } }
 
+
+        public SerialDataReceivedEventHandler SerialDataReceivedEventHandler
+        {
+            get;
+            set;
+        }
+
+        /*
         public delegate void ArduinoDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e);
         public event ArduinoDataReceivedEventHandler ArduinoDataReceived;
+        */
 
-        
         public ArduinoSerialPort()
         {
             Initialize();
@@ -48,22 +57,41 @@ namespace PolarBearGUI_WPF.Models
 
         }
 
+        /*
         public void SetDataReceivedHandler(SerialDataReceivedEventHandler serialDataReceivedEventHandler)
         {
             serialPort.DataReceived += serialDataReceivedEventHandler;
         }
+        */
 
+        public void Open(string comPortName)
+        {
+            serialPort.PortName = comPortName;
+            serialPort.DataReceived += SerialDataReceivedEventHandler;
+            Open();
+        }
 
         public void Open()
         {
-
+            if (IsOpen)
+            {
+                serialPort.DataReceived += SerialDataReceivedEventHandler;
+                Close();
+            }
             serialPort.Open();
+            string openCommand = JSONCommand.Serialize(JSONCommand.CommandTypes.Run);
+            serialPort.WriteLine(openCommand);
 
         }
 
         public void Close()
         {
-            serialPort.Close();
+            if (IsOpen)
+            {
+                serialPort.WriteLine("c");
+                serialPort.DataReceived -= SerialDataReceivedEventHandler;
+                serialPort.Close();
+            }
         }
         
         public string ReadLine()

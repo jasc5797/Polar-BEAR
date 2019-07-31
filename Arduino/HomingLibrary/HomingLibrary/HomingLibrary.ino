@@ -7,7 +7,8 @@
 // *** Include Statements ***
 
 // Third-Party Libraries
-#include "Component.h"
+#include <ArduinoJson.hpp> // Allows for reading JSON data from a serial connection
+#include <ArduinoJson.h>
 #include <Encoder.h> // Allows reading from and writing to the Encoders on Quadrature Motors
 #include <Bounce2.h> // Debounces signal from Limit Switches
 #include <CytronMotorDriver.h> // Controls Quadrature Motors using MD20A
@@ -17,9 +18,12 @@
 #include "QuadratureMotor.h"
 #include "StepperMotor.h"
 #include "Motor.h"
+#include "PolarBear.h"
+#include "Component.h"
 
 // *** Macro Definitions ***
 
+// Tilt Motor Arduino Pin Definitions
 #define TILT_LIMIT_PIN1 12
 #define TILT_LIMIT_PIN2 13
 #define TILT_PWM_PIN 6
@@ -27,68 +31,43 @@
 #define TILT_ENCODER_PIN_A 40
 #define TILT_ENCODER_PIN_B 38
 
+// Rotation Motor Arduino Pin Definitions
 #define ROTATION_LIMIT_PIN 7
 #define ROTATION_PWM_PIN 10
 #define ROTATION_DIR_PIN 9
 #define ROTATION_ENCODER_PIN_A 36
 #define ROTATION_ENCODER_PIN_B 34
 
-#define STEPPER_DIR_PIN 22
-#define STEPPER_STEP_PIN 24
-#define STEPPER_LIMIT_PIN 26
-#define STEPPER_SLEEP_PIN 46
-#define STEPPER_RESET_PIN 44
+// Extension Motor Arduino Pin Definitions
+#define EXTENSION_DIR_PIN 22
+#define EXTENSION_STEP_PIN 24
+#define EXTENSION_LIMIT_PIN 26
+#define EXTENSION_SLEEP_PIN 46
+#define EXTENSION_RESET_PIN 44
 
-//#define DEBUG true
-
+//  *** Object Definitions ***
 QuadratureMotor* tiltMotor;
 QuadratureMotor* rotationMotor;
-
 StepperMotor* extensionMotor;
 
-LimitSwitch* limitSwitchA;
-LimitSwitch* limitSwitchB;
-LimitSwitch* limitSwitchC;
-
+PolarBear* polarBear;
 
 // the setup function runs once when you press reset or power the board
 void setup() 
 {
-	Serial.begin(9600);
+	Serial.begin(9600); // Open a serial connection
 
 	tiltMotor = new QuadratureMotor(TILT_PWM_PIN, TILT_DIR_PIN, TILT_ENCODER_PIN_A, TILT_ENCODER_PIN_B, TILT_LIMIT_PIN1, TILT_LIMIT_PIN2);
 	rotationMotor = new QuadratureMotor(ROTATION_PWM_PIN, ROTATION_DIR_PIN, ROTATION_ENCODER_PIN_A, ROTATION_ENCODER_PIN_B, ROTATION_LIMIT_PIN);
-	extensionMotor = new StepperMotor(STEPPER_STEP_PIN, STEPPER_DIR_PIN, STEPPER_LIMIT_PIN, STEPPER_SLEEP_PIN, STEPPER_RESET_PIN);
+	extensionMotor = new StepperMotor(EXTENSION_STEP_PIN, EXTENSION_DIR_PIN, EXTENSION_LIMIT_PIN, EXTENSION_SLEEP_PIN, EXTENSION_RESET_PIN);
 
-	/*
-	limitSwitchA = new LimitSwitch(TILT_LIMIT_PIN1);
-	limitSwitchB = new LimitSwitch(TILT_LIMIT_PIN2);
-	limitSwitchC = new LimitSwitch(ROTATION_LIMIT_PIN);
-	*/
+	polarBear = new PolarBear(tiltMotor, rotationMotor, extensionMotor);
 
 	Serial.println("Setup Complete");
-
-	// Homing Tests
-	tiltMotor->testTravelDistance(1);
-	rotationMotor->testTravelDistance(1);
 }
 
 // the loop function runs over and over again until power down or reset
 void loop() 
 {
-	// Manual Movement Tests
-	//tiltMotor->moveManual(true);
-	//rotationMotor->moveManual(false);
-	//extensionMotor->moveManual();
-	
-
-	
-
-	// Test the limit switches
-	// Make sure to run if the arm has been rewired
-	/*
-	limitSwitchA->test("Tilt Forward");
-	limitSwitchB->test("Tilt Backward");
-	limitSwitchC->test("Rotation");
-	*/
+	polarBear->update();
 }

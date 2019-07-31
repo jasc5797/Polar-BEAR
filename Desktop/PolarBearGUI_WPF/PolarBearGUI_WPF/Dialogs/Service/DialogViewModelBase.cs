@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PolarBearGUI_WPF.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PolarBearGUI_WPF.Dialogs.Service
 {
-    public abstract class DialogViewModelBase<T>
+    public abstract class DialogViewModelBase<T> : NotifyPropertyChangedObject
     {
         public string Title { get; set; }
         public string Message { get; set; }

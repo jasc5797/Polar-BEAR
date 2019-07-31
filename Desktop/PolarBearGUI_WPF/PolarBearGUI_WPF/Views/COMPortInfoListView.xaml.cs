@@ -20,12 +20,7 @@ namespace PolarBearGUI_WPF.Views
             typeof(COMPortInfoListView),
             new PropertyMetadata(null));
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         public COMPortInfoModel SelectedCOMItem
         {
@@ -39,6 +34,14 @@ namespace PolarBearGUI_WPF.Views
                 SetValue(SelectedCOMProperty, value);
                 NotifyPropertyChanged("SelectedCOMItem");
             }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public COMPortInfoListView()

@@ -22,17 +22,14 @@ namespace PolarBearGUI_WPF.Views
     /// </summary>
     public partial class PathEditorView : UserControl
     {
-        public RelayCommand StepSelectedCommand;
-
+ 
+               
         public PathEditorView()
         {
             InitializeComponent();
             DataContext = new PathEditorViewModel();
-        }
-
-        public void StepSelected(object step)
-        {
 
         }
+          
     }
 }

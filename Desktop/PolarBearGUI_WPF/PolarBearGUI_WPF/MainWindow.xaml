@@ -9,16 +9,19 @@
         WindowState="Normal"  WindowStartupLocation="CenterScreen"
         Icon="./Resources/PolarBearShadow.ico" Background="LightGray"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
-        >
+        xmlns:utilities="clr-namespace:PolarBearGUI_WPF.Utilities">
     <Window.Resources>
-        
+
         <Style TargetType="Button">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
         <Image x:Key="RunEnabled" Source="./Resources/Run.png"/>
         <Image x:Key="RunDisabled" Source="./Resources/Run_Grey.png"/>
+        
         <Image x:Key="StopEnabled" Source="./Resources/Stop.png"/>
         <Image x:Key="StopDisabled" Source="./Resources/Stop_Grey.png"/>
+
+        <utilities:SelectedCOMItemToBoolConverter x:Key="SelectedCOMItemToBoolConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -110,15 +113,52 @@
                 <Label Content="{Binding ElementName=COMPortInfoListView, Path=SelectedCOMItem.FullName}"></Label>
                 -->
                 <Separator ToolBar.OverflowMode="Never"/>
-                <Button ToolBar.OverflowMode="Never" x:Name="RunToolBarButton" ToolTip="Run (F5)" Click="RunToolBarButton_Click" IsEnabled="True"
-                        ToolTipService.ShowOnDisabled="True" IsEnabledChanged="RunToolBarButton_IsEnabledChanged">
-                    <!--<DynamicResource ResourceKey="RunDisabled"/>-->
-                    <Image Source="./Resources/Run_Grey.png"></Image>
+                <Button ToolBar.OverflowMode="Never" x:Name="RunToolBarButton" ToolTip="Run (F5)" Click="RunToolBarButton_Click"
+                        ToolTipService.ShowOnDisabled="True" IsEnabledChanged="RunToolBarButton_IsEnabledChanged"
+                        IsEnabled="False">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="True">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <StaticResource ResourceKey="RunEnabled"></StaticResource>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <StaticResource ResourceKey="RunDisabled"></StaticResource>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button ToolBar.OverflowMode="Never" x:Name="StopToolBarButton" ToolTip="Stop (Shift+F5)" Click="StopToolBarButton_Click" IsEnabled="False"
                         ToolTipService.ShowOnDisabled="True" IsEnabledChanged="StopToolBarButton_IsEnabledChanged">
-                    <!--<DynamicResource ResourceKey="StopDisabled"/>-->
-                    <Image Source="./Resources/Stop.png"></Image>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="True">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <StaticResource ResourceKey="StopEnabled"></StaticResource>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <StaticResource ResourceKey="StopDisabled"></StaticResource>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
             </ToolBar>
         </ToolBarTray>

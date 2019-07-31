@@ -1,0 +1,26 @@
+﻿<Window x:Class="PolarBearGUI_WPF.Dialogs.StepAddDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PolarBearGUI_WPF.Dialogs"
+        mc:Ignorable="d"
+        Title="Add Step" Height="125" Width="250" ResizeMode="NoResize"
+        Name="AddStepWindow" Icon="/Resources/PolarBEAR.ico">
+    <DockPanel Background="LightGray">
+        <Label DockPanel.Dock="Top" HorizontalAlignment="Left" Content="Choose Step Type:"/>
+        <ComboBox DockPanel.Dock="Top" HorizontalAlignment="Center" Width="200" Margin="5" 
+                  SelectedValue="{Binding StepType}" SelectedIndex="0">
+            <ComboBoxItem Name="Item1">Delay</ComboBoxItem>
+            <ComboBoxItem Name="Item2">Tilt</ComboBoxItem>
+            <ComboBoxItem Name="Item3">Rotation</ComboBoxItem>
+            <ComboBoxItem Name="Item4">Extension</ComboBoxItem>
+        </ComboBox>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <Button Content="OK" Width="75" Margin="5" Command="{Binding OKCommand}"
+                    CommandParameter="{Binding ElementName=AddStepWindow}"></Button>
+            <Button Content="Cancel" Width="75" Margin="5" Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding ElementName=AddStepWindow}"></Button>
+        </StackPanel>
+    </DockPanel>
+</Window>

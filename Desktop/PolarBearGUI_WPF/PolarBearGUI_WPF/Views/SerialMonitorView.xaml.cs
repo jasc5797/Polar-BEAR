@@ -32,6 +32,25 @@ namespace PolarBearGUI_WPF.Views
                 SetValue(StepViewModelsProperty, value);
             }
         }
+        /*
+
+        public static readonly DependencyProperty ArduinoSerialPortProperty =
+            DependencyProperty.Register("ArduinoSerialPortProperty",
+            typeof(ArduinoSerialPort),
+            typeof(SerialCommunicationViewModel),
+            new FrameworkPropertyMetadata(new ArduinoSerialPort()));
+
+        public ArduinoSerialPort ArduinoSerialPort
+        {
+            get
+            {
+                return (ArduinoSerialPort)GetValue(ArduinoSerialPortProperty);
+            }
+            set
+            {
+                SetValue(ArduinoSerialPortProperty, value);
+            }
+        }*/
 
         public SerialMonitorView()
         {

@@ -1,4 +1,5 @@
 ﻿using PolarBearGUI_WPF.Models;
+using PolarBearGUI_WPF.Utilities;
 using PolarBearGUI_WPF.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
@@ -7,15 +8,17 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace PolarBearGUI_WPF.ViewModels
 {
 
-    public class SerialCommunicationViewModel : DispatcherViewModel
+    public class SerialCommunicationViewModel : CustomViewModel
     {
 
-        private List<SerialCommunication> serialCommunicationList;
-        public List<SerialCommunication> SerialCommunicationList
+        private ObservableCollection<SerialCommunication> serialCommunicationList;
+        public ObservableCollection<SerialCommunication> SerialCommunicationList
         {
             get
             {
@@ -28,46 +31,40 @@ namespace PolarBearGUI_WPF.ViewModels
             }
         }
 
-        public SerialCommunicationCommand ClearSerialCommunicationCommand { get; private set; }
+        public RelayCommand ClearSerialCommunicationCommand { get; private set; }
 
-        private SerialPort serialPort;
-
-        public SerialCommunicationViewModel() : base()
+        private ArduinoSerialPort arduinoSerialPort;
+        public ArduinoSerialPort ArduinoSerialPort
         {
-            ClearSerialCommunicationCommand = new SerialCommunicationCommand(Clear);
-
-            serialCommunicationList = new List<SerialCommunication>();
-            /*
-            serialCommunicationList.Add(new SerialCommunication("Polar BEAR is Ready", SerialCommunication.Type.RECIEVE));
-            serialCommunicationList.Add(new SerialCommunication("Polar BEAR is Idle", SerialCommunication.Type.RECIEVE));  
-            serialCommunicationList.Add(new SerialCommunication("Sending Path Data", SerialCommunication.Type.SEND));
-            serialCommunicationList.Add(new SerialCommunication("Starting Path", SerialCommunication.Type.RECIEVE));
-            serialCommunicationList.Add(new SerialCommunication("Tilting Arm 5.4 Degrees", SerialCommunication.Type.RECIEVE));
-            serialCommunicationList.Add(new SerialCommunication("Tilt Completed", SerialCommunication.Type.RECIEVE));
-            serialCommunicationList.Add(new SerialCommunication("Delaying for 100 Milliseconds", SerialCommunication.Type.RECIEVE));
-            serialCommunicationList.Add(new SerialCommunication("Delay Completed", SerialCommunication.Type.RECIEVE));
-            */
-
+            get
+            {
+                return arduinoSerialPort;
+            }
+            set
+            {
+                arduinoSerialPort = value;
+                arduinoSerialPort.SerialDataReceivedEventHandler = SerialPort_DataReceived;
+            }
         }
 
-        public SerialCommunicationViewModel(SerialPort serialPort) : this()
+        public SerialCommunicationViewModel()
         {
-            this.serialPort = serialPort;
-            serialPort.DataReceived += SerialPort_DataReceived;
-            serialPort.NewLine = ";";
-            serialPort.WriteLine("o");
+            ClearSerialCommunicationCommand = new RelayCommand(Clear);
+
+            serialCommunicationList = new ObservableCollection<SerialCommunication>();
+
         }
 
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (!serialPort.IsOpen)
+            if (!ArduinoSerialPort.IsOpen)
             {
                 return;
             }
             string test;
             try
             {
-                test = serialPort.ReadLine().Replace("\r", "");
+                test = ArduinoSerialPort.ReadLine().Trim();
             }
             catch (IOException ex)
             {
@@ -79,7 +76,16 @@ namespace PolarBearGUI_WPF.ViewModels
                 return;
             }
 
-            List<SerialCommunication> communications = new List<SerialCommunication>(serialCommunicationList);
+            SerialCommunication serial = new SerialCommunication(test, SerialCommunication.Type.RECIEVE);
+
+            Application.Current.Dispatcher.Invoke(delegate
+                {
+                    SerialCommunicationList.Add(serial);
+                }
+            );
+            
+            /*
+            ObservableCollection<SerialCommunication> communications = new ObservableCollection<SerialCommunication>(serialCommunicationList);
             //SerialCommunication serial = new SerialCommunication("This is a test", SerialCommunication.Type.RECIEVE);
             SerialCommunication serial = new SerialCommunication(test, SerialCommunication.Type.RECIEVE);
 
@@ -99,44 +105,23 @@ namespace PolarBearGUI_WPF.ViewModels
 
                 SerialCommunicationList = communications;
                 
-            }
-        }
-
-        protected override void DispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            /*
-            if (serialPort == null || !serialPort.IsOpen)
-            {
-                return;
-            }
-            string test = serialPort.ReadLine().Replace("\r", "");
-            if (string.IsNullOrEmpty(test))
-            {
-                return;
-            }
-
-            List<SerialCommunication> communications = new List<SerialCommunication>(serialCommunicationList);
-            //SerialCommunication serial = new SerialCommunication("This is a test", SerialCommunication.Type.RECIEVE);
-            SerialCommunication serial = new SerialCommunication(test, SerialCommunication.Type.RECIEVE);
-
-            communications.Add(serial);
-            
-
-            if (!EqualsModelLists(serialCommunicationList, communications))
-            {
-                SerialCommunicationList = communications;
-            }
-            */
+            }*/
         }
 
         public void Clear()
         {
-            SerialCommunicationList = new List<SerialCommunication>();
+            SerialCommunicationList = new ObservableCollection<SerialCommunication>();
+        }
+
+        // If this is used the clear button does not automatically enable again even after data is added to SerialCommunicationList
+        public bool CanClear()
+        {
+            return SerialCommunicationList.Count > 0;
         }
 
         public bool IsOpen()
         {
-            return serialPort.IsOpen;
+            return ArduinoSerialPort.IsOpen;
         }
 
     }

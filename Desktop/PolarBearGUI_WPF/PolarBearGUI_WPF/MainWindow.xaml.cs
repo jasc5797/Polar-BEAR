@@ -25,26 +25,27 @@ namespace PolarBearGUI_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ArduinoSerialPort arduinoSerialPort;
+        private ArduinoSerialPort ArduinoSerialPort { get; set; }
 
-        private SerialPort serialPort;
-        public SerialPort SerialPort
-        {
-            get
-            {
-                return serialPort;
-            }
-            set
-            {
-                serialPort = value;
-            }
-        }
+        public SerialPort SerialPort { get; set; }
 
         public MainWindow()
         {
 
             InitializeComponent();
-            serialPort = new SerialPort();
+            SerialPort = new SerialPort();
+            ArduinoSerialPort = new ArduinoSerialPort();
+
+            COMPortInfoListView.PortComboBox.SelectionChanged += PortComboBox_SelectionChanged;
+
+            SerialCommunicationViewModel serialCommunicationViewModel = ArduinoSerialPortView.DataContext as SerialCommunicationViewModel;
+            serialCommunicationViewModel.ArduinoSerialPort = ArduinoSerialPort;
+        }
+
+        private void PortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            RunToolBarButton.IsEnabled = comboBox.SelectedItem != null;
         }
 
         private void MenuBarItem_Click(object sender, RoutedEventArgs e)
@@ -94,17 +95,6 @@ namespace PolarBearGUI_WPF
 
         }
 
-        private void PortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-           // COMPortInfoModel comPortInfo = (COMPortInfoModel)(PortComboBox.SelectedItem);
-            //RunToolBarButton.IsEnabled = comPortInfo != null && comPortInfo.DeviceName.Contains("Arduino");
-        }
-
-        private void PortComboBox_DropDownClosed(object sender, EventArgs e)
-        {
-
-        }
-
         private void PreviewToolMenuItem_Click(object sender, RoutedEventArgs e)
         {
 
@@ -121,16 +111,10 @@ namespace PolarBearGUI_WPF
             COMPortInfoModel comPortInfo = COMPortInfoListView.SelectedCOMItem;
             if (comPortInfo != null)
             {
-                if (SerialPort.IsOpen)
-                {
-                    SerialPort.Close();
-                }
-                SerialPort.BaudRate = 9600;
-                SerialPort.Handshake = Handshake.None;
-                SerialPort.PortName = comPortInfo.COMPort;
-                SerialPort.Open();
+                ArduinoSerialPort.Open(comPortInfo.COMPort);
 
-                ArduinoSerialPortView.DataContext = new SerialCommunicationViewModel(SerialPort);
+                //ArduinoSerialPortView.DataContext = new SerialCommunicationViewModel();
+
                 //ArduinoSerialPortViewModel arduinoSerialPortViewModel = new ArduinoSerialPortViewModel(comPortInfo.COMPort);
                 //ArduinoSerialPortView.DataContext = arduinoSerialPortViewModel;
 
@@ -141,9 +125,9 @@ namespace PolarBearGUI_WPF
 
         private void StopToolBarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SerialPort.IsOpen)
+            if (ArduinoSerialPort.IsOpen)
             {
-                SerialPort.Close();
+                ArduinoSerialPort.Close();
             }
             StopToolBarButton.IsEnabled = false;
             RunToolBarButton.IsEnabled = true;
@@ -175,9 +159,9 @@ namespace PolarBearGUI_WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Reading");
-            string test = arduinoSerialPort.Read();
-            Console.WriteLine(test);
+            //Console.WriteLine("Reading");
+           // string test = arduinoSerialPort.Read();
+            //Console.WriteLine(test);
         }
 
         private void ToolBar_Loaded(object sender, RoutedEventArgs e)

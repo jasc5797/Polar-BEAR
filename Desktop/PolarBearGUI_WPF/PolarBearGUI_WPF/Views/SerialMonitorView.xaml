@@ -13,12 +13,11 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
             <customUserControls:StatusView DockPanel.Dock="Left"></customUserControls:StatusView>
-            <Button x:Name="ClearButton" Content="Clear" DockPanel.Dock="Right" Height="25"
+            <Button x:Name="ClearButton" Content="Clear" DockPanel.Dock="Right" Height="25" HorizontalAlignment="Right"
                     Width="50" BorderThickness="0" Margin="5,0" 
                     Command="{Binding ClearSerialCommunicationCommand}"></Button>
-            <CheckBox x:Name="AutoScrollCheckBox" Content="Auto Scroll" DockPanel.Dock="Right" 
+            <CheckBox x:Name="AutoScrollCheckBox" Content="Auto Scroll" DockPanel.Dock="Right" HorizontalAlignment="Right"
                       VerticalAlignment="Center" Margin="5" IsChecked="True" Checked="AutoScrollCheckBox_Checked"></CheckBox>
-            <Canvas DockPanel.Dock="Right"></Canvas>
         </DockPanel>
         <ListView Grid.Row="1" Height="auto" Margin="5,0,5,5" ItemsSource="{Binding SerialCommunicationList}"
                   ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="SerialListView">

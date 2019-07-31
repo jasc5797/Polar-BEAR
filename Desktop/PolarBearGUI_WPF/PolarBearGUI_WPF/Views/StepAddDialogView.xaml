@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="PolarBearGUI_WPF.Views.StepAddDialogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PolarBearGUI_WPF.Views"
+             mc:Ignorable="d">
+    <DockPanel Background="LightGray">
+        <Label DockPanel.Dock="Top" HorizontalAlignment="Left" Content="Choose Step Type:"/>
+        <ComboBox Name="TypeComboBox" DockPanel.Dock="Top" HorizontalAlignment="Center" ItemsSource="{Binding StepTypes}" SelectedItem="{Binding StepType}" Width="200" Margin="5"/>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <Button Content="OK" Width="75" Margin="5" Command="{Binding OKCommand}" 
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"></Button>
+            <Button Content="Cancel" Width="75" Margin="5" Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"></Button>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

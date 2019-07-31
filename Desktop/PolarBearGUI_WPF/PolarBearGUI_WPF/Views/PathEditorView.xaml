@@ -10,6 +10,8 @@
              xmlns:stepViewModels="clr-namespace:PolarBearGUI_WPF.ViewModels.StepViewModels"
              xmlns:stepEditViews="clr-namespace:PolarBearGUI_WPF.Views.StepViews.StepEditViews"
              xmlns:setEditViewModels="clr-namespace:PolarBearGUI_WPF.ViewModels.StepViewModels.StepEditViewModels"
+             xmlns:gong="urn:gong-wpf-dragdrop"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" >
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type stepViewModels:DelayViewModel}">
@@ -61,18 +63,22 @@
         <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray">
             <!--<Canvas DockPanel.Dock="Right" Width="20"></Canvas>-->
             <Label DockPanel.Dock="Left" Content="Path Editor" Margin="5,0"/>
-            <Button DockPanel.Dock="Right" ToolTip="Add New Step" BorderThickness="0" Width="25" Height="25">
+            <Button DockPanel.Dock="Right" ToolTip="Add New Step" BorderThickness="0" Width="25" Height="25" 
+                    Command="{Binding AddStepCommand}">
                 <Image Source="/Resources/Add.png" Stretch="None"></Image>
             </Button>
-            <Button DockPanel.Dock="Right" ToolTip="Remove Selected Step" BorderThickness="0" Width="25" Height="25">
+            <Button DockPanel.Dock="Right" ToolTip="Remove Selected Step" BorderThickness="0" Width="25" Height="25"
+                    Command="{Binding RemoveStepCommand}">
                 <Image Source="/Resources/Remove.png" Stretch="None"></Image>
             </Button>
             <Canvas DockPanel.Dock="Right"></Canvas>
         </DockPanel>
 
-        <ListView x:Name="stepListView" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding StepViewModelList}" 
+        <ListView x:Name="stepListView" Grid.Row="1" Grid.Column="0" 
+                  ItemsSource="{Binding StepViewModelList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                  ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch"
-                  SelectionMode="Single">
+                  SelectionMode="Single" gong:DragDrop.IsDragSource="True" gong:DragDrop.IsDropTarget="True"
+                  gong:DragDrop.ShowAlwaysDropTargetAdorner="True" SelectedItem="{Binding SelectedStepViewModel}">
         </ListView>
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>

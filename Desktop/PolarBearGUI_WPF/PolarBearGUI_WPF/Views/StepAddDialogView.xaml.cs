@@ -1,0 +1,31 @@
+﻿using PolarBearGUI_WPF.Dialogs.Service;
+using PolarBearGUI_WPF.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace PolarBearGUI_WPF.Views
+{
+    /// <summary>
+    /// Interaction logic for StepAddDialogView.xaml
+    /// </summary>
+    public partial class StepAddDialogView : UserControl
+    {
+        public StepAddDialogView()
+        {
+            InitializeComponent();
+            DataContext = new StepAddDialogViewModel();
+        }
+    }
+}

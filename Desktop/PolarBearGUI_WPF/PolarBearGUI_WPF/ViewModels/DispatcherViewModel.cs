@@ -9,7 +9,7 @@ using System.Windows.Threading;
 
 namespace PolarBearGUI_WPF.ViewModels
 {
-    public abstract class DispatcherViewModel : NotifyPropertyChangedObject
+    public abstract class DispatcherViewModel : CustomViewModel
     {
         private DispatcherTimer dispatcherTimer;
 
@@ -23,10 +23,7 @@ namespace PolarBearGUI_WPF.ViewModels
 
         protected abstract void DispatcherTimer_Tick(object sender, EventArgs e);
 
-        protected bool EqualsModelLists(IEnumerable<Model> x, IEnumerable<Model> y)
-        {
-            return x.Count() == y.Count() && !x.Except(y).Any();
-        }
+
 
     }
 }
