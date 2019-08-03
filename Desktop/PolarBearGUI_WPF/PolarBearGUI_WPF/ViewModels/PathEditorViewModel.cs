@@ -1,6 +1,9 @@
-﻿using PolarBearGUI_WPF.Dialogs.Service;
+﻿using Newtonsoft.Json;
+using PolarBearGUI_WPF.Dialogs.Service;
+using PolarBearGUI_WPF.Models;
 using PolarBearGUI_WPF.Utilities;
 using PolarBearGUI_WPF.ViewModels.StepViewModels;
+using System;
 using System.Collections.ObjectModel;
 
 namespace PolarBearGUI_WPF.ViewModels
@@ -56,6 +59,9 @@ namespace PolarBearGUI_WPF.ViewModels
             if (stepViewModel != null)
             {
                 StepViewModelList.Add(stepViewModel as StepViewModel);
+                var json = Step.SerializeStep(stepViewModel.Step);
+                Console.WriteLine(json);
+                var step = Step.DeserializeStep(json);
             }
         }
 
