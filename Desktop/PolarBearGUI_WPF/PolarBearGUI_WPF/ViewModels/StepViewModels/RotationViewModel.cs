@@ -4,9 +4,7 @@ namespace PolarBearGUI_WPF.ViewModels.StepViewModels
 {
     public class RotationViewModel : StepViewModel
     {
-        public RotationViewModel()
-        {
-            Step = new Rotation(180.0);
-        }
+        public RotationViewModel() : base(new Rotation(180.0)) { }
+        public RotationViewModel(Rotation rotation) : base(rotation) { }
     }
 }

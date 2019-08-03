@@ -20,7 +20,7 @@
                       VerticalAlignment="Center" Margin="5" IsChecked="True" Checked="AutoScrollCheckBox_Checked"></CheckBox>
         </DockPanel>
         <ListView Grid.Row="1" Height="auto" Margin="5,0,5,5" ItemsSource="{Binding SerialCommunicationList}"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="SerialListView">
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" x:Name="SerialListView">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Time}" Header="Time" Width="100"></GridViewColumn>

@@ -1,4 +1,4 @@
-﻿using PolarBearGUI_WPF.JSONCommands;
+﻿using PolarBearGUI_WPF.JSON;
 using PolarBearGUI_WPF.Utilities;
 using System.IO.Ports;
 
@@ -73,8 +73,8 @@ namespace PolarBearGUI_WPF.Models
                 Close();
             }
             serialPort.Open();
-            string openCommand = JSONCommand.Serialize(JSONCommand.CommandTypes.Run);
-            serialPort.WriteLine(openCommand);
+            JSONCommand jsonCommand = new JSONCommand { Command = JSONCommand.CommandTypes.Open };
+            Send(jsonCommand);
 
         }
 
@@ -96,6 +96,11 @@ namespace PolarBearGUI_WPF.Models
         public void Send(string message)
         {
             serialPort.WriteLine(message);
+        }
+
+        public void Send(JSONCommand jsonCommand)
+        {
+            Send(jsonCommand.Serialize());
         }
 
     }

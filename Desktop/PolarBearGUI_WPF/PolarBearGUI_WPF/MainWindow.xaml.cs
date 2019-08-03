@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using PolarBearGUI_WPF.JSON;
 using PolarBearGUI_WPF.Models;
 using PolarBearGUI_WPF.ViewModels;
 using System;
@@ -17,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Path = PolarBearGUI_WPF.Models.Path;
 
 namespace PolarBearGUI_WPF
 {
@@ -61,13 +63,29 @@ namespace PolarBearGUI_WPF
         private void OpenFileMenuItem_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.ShowDialog();
+            openFileDialog.Title = "Load Path";
+            openFileDialog.Filter = "Polar BEAR File (.bear)| *.bear";
+            bool? result = openFileDialog.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                Path path = (Path)Model.DeserializeFromFile(openFileDialog.FileName);
+                (PathEditor.DataContext as PathEditorViewModel).StepList = path.Steps;
+            }
         }
 
         private void SaveFileMenuItem_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.ShowDialog();
+            saveFileDialog.Title = "Save Path";
+            saveFileDialog.Filter = "Polar BEAR File (.bear)| *.bear";
+            bool? result = saveFileDialog.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                List<Step> steps = (PathEditor.DataContext as PathEditorViewModel).StepList;
+                Path path = new Path(steps);
+               // string json = path.Serialize();
+                path.SerializeToFile(saveFileDialog.FileName);
+            }
         }
 
         private void NewFileToolBarButton_Click(object sender, RoutedEventArgs e)
@@ -113,13 +131,12 @@ namespace PolarBearGUI_WPF
             {
                 ArduinoSerialPort.Open(comPortInfo.COMPort);
 
-                //ArduinoSerialPortView.DataContext = new SerialCommunicationViewModel();
-
-                //ArduinoSerialPortViewModel arduinoSerialPortViewModel = new ArduinoSerialPortViewModel(comPortInfo.COMPort);
-                //ArduinoSerialPortView.DataContext = arduinoSerialPortViewModel;
-
                 StopToolBarButton.IsEnabled = true;
                 RunToolBarButton.IsEnabled = false;
+
+                List<Step> steps = (PathEditor.DataContext as PathEditorViewModel).StepList;
+                JSONCommand jsonCommand = new JSONCommand(new Path(steps));
+                ArduinoSerialPort.Send(jsonCommand);
             }
         }
 

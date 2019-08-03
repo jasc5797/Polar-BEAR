@@ -4,9 +4,8 @@ namespace PolarBearGUI_WPF.ViewModels.StepViewModels
 {
     class ExtensionViewModel : StepViewModel
     {
-        public ExtensionViewModel()
-        {
-            Step = new Extension(0.5);
-        }
+        public ExtensionViewModel() : base (new Extension(0.5)) { }
+
+        public ExtensionViewModel(Extension extension) : base(extension) { }
     }
 }

@@ -17,9 +17,17 @@
 class PolarBear
 {
 public:
+
 	PolarBear(QuadratureMotor* tiltMotor, QuadratureMotor* rotationMotor, StepperMotor* extensionMotor);
 
 	void update();
+
+private:
+	QuadratureMotor* tiltMotor;
+	QuadratureMotor* rotationMotor;
+	StepperMotor* extensionMotor;
+
+	void updateComponents();
 
 };
 #endif

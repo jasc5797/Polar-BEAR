@@ -4,6 +4,8 @@ using PolarBearGUI_WPF.Models;
 using PolarBearGUI_WPF.Utilities;
 using PolarBearGUI_WPF.ViewModels.StepViewModels;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace PolarBearGUI_WPF.ViewModels
@@ -35,6 +37,18 @@ namespace PolarBearGUI_WPF.ViewModels
         }
 
 
+        public List<Step> StepList
+        {
+            get
+            {
+                return StepViewModel.ConvertStepViewModelsToSteps(StepViewModelList);
+            }
+            set
+            {
+                StepViewModelList = new ObservableCollection<StepViewModel>(StepViewModel.ConvertStepsToStepViewModels(value));
+                NotifyPropertyChanged("StepList");
+            }
+        }
 
         public PathEditorViewModel()
         {
@@ -59,9 +73,6 @@ namespace PolarBearGUI_WPF.ViewModels
             if (stepViewModel != null)
             {
                 StepViewModelList.Add(stepViewModel as StepViewModel);
-                var json = Step.SerializeStep(stepViewModel.Step);
-                Console.WriteLine(json);
-                var step = Step.DeserializeStep(json);
             }
         }
 

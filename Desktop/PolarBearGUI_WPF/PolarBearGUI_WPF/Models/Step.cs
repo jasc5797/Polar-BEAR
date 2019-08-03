@@ -22,27 +22,6 @@ namespace PolarBearGUI_WPF.Models
         {
             CreationTime = DateTime.Now;
         }
-
-        public static Step DeserializeStep(string json)
-        {
-            
-            return JsonConvert.DeserializeObject<Step>(json, jsonSerializerSettings);
-        }
-
-        public static List<Step> DeserializeStepList(string json)
-        {
-            return null;
-        }
-
-        public static string SerializeStep(Step step)
-        {
-            return JsonConvert.SerializeObject(step, jsonSerializerSettings);
-        }
-
-        public static string SerializeStepList(List<Step> stepList)
-        {
-            return JsonConvert.SerializeObject(stepList, jsonSerializerSettings);
-        }
-        
+     
     }
 }

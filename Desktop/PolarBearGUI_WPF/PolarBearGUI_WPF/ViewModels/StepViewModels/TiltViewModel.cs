@@ -4,9 +4,8 @@ namespace PolarBearGUI_WPF.ViewModels.StepViewModels
 {
     class TiltViewModel : StepViewModel
     {
-        public TiltViewModel()
-        {
-            Step = new Tilt(5.4);
-        }
+        public TiltViewModel() : base(new Tilt(5.4)) { }
+
+        public TiltViewModel(Tilt tilt) : base(tilt) { }
     }
 }
