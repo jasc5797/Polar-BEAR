@@ -15,4 +15,5 @@ C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\S
  C:\Users\stinsoncerraj\Desktop\Github\Polar-BEAR\Arduino\HomingLibrary\HomingLibrary/LimitSwitch.h \
  C:\Users\stinsoncerraj\Documents\Arduino\libraries\Bounce2-master\src/Bounce2.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
+ C:\Users\stinsoncerraj\Desktop\Github\Polar-BEAR\Arduino\HomingLibrary\HomingLibrary/Component.h \
  C:\Users\stinsoncerraj\Desktop\Github\Polar-BEAR\Arduino\HomingLibrary\HomingLibrary/Motor.h

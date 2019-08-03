@@ -12,14 +12,15 @@
 
 //#include <Bounce2-master/src/Bounce2.h>
 #include <Bounce2.h>
+#include "Component.h"
 
 #define INTERVAL 20
 
-class LimitSwitch
+class LimitSwitch : public Component
 {
 public:
 
-	LimitSwitch(int limitPin);
+	LimitSwitch(int limitPin, char* name = "Limit Switch");
 	~LimitSwitch();
 
 	// Bounce Wrappers
@@ -30,7 +31,7 @@ public:
 
 
 	// Test Functions
-	void test(char* name);
+	void test();
 
 private:
 

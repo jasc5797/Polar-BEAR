@@ -28,7 +28,7 @@ class StepperMotor : public Motor
 {
 
 public:
-	StepperMotor(int stepPin, int directionPin, int limitPin, int sleepPin, int resetPin);
+	StepperMotor(int stepPin, int directionPin, int limitPin, int sleepPin, int resetPin, char* name = "Stepper Motor");
 
 
 	void moveManual();

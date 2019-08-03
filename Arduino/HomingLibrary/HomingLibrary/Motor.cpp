@@ -1,6 +1,8 @@
 
 #include "Motor.h"
 
+Motor::Motor(char* name) : Component(name) { }
+
 Motor::STATE Motor::getState()
 {
 	return state; 

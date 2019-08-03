@@ -13,4 +13,5 @@ C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\L
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
  C:\Users\stinsoncerraj\Documents\Arduino\libraries\Bounce2-master\src/Bounce2.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
+ C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\Component.h

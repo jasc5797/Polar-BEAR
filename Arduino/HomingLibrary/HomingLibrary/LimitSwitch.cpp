@@ -5,7 +5,7 @@
 #include "LimitSwitch.h"
 
 
-LimitSwitch::LimitSwitch(int limitPin)
+LimitSwitch::LimitSwitch(int limitPin, char* name) : Component(name)
 {
 	//bounce = Bounce();
 	bounce.attach(limitPin);
@@ -32,7 +32,7 @@ bool LimitSwitch::released()
 	return bounce.fell();
 }
 
-void LimitSwitch::test(char* name)
+void LimitSwitch::test()
 {
 	bool stateChanged = update();
 	if (stateChanged)

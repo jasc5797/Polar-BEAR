@@ -5,7 +5,7 @@
 #include "StepperMotor.h"
 
 
-StepperMotor::StepperMotor(int stepPin, int directionPin, int limitPin, int sleepPin, int resetPin)
+StepperMotor::StepperMotor(int stepPin, int directionPin, int limitPin, int sleepPin, int resetPin, char* name) : Motor(name)
 {
 	this->stepPin = stepPin;
 	this->directionPin = directionPin;

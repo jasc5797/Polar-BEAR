@@ -1,6 +1,6 @@
 C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\VM_DBG\VM_DBG.cpp.o: \
- c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\enterprise\common7\ide\extensions\e1d25j4i.jmc\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.cpp \
- c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\enterprise\common7\ide\extensions\e1d25j4i.jmc\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.h \
+ c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\community\common7\ide\extensions\5rm0fooj.nwt\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.cpp \
+ c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\community\common7\ide\extensions\5rm0fooj.nwt\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \

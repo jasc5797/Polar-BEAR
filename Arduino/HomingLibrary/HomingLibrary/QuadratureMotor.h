@@ -55,7 +55,7 @@ public:
 	};
 
 
-	QuadratureMotor(int pwmPin, int dirPin, int encoderPinA, int encoderPinB, int limitPin1, int limitPin2 = DISCONNECTED);
+	QuadratureMotor(int pwmPin, int dirPin, int encoderPinA, int encoderPinB, int limitPin1, int limitPin2 = DISCONNECTED, char* name = "Quadrature Motor");
 	//~QuadratureMotor();
 
 

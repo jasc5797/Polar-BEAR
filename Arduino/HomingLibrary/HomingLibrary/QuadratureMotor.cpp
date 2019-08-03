@@ -4,7 +4,7 @@
 
 #include "QuadratureMotor.h"
 
-QuadratureMotor::QuadratureMotor(int pwmPin, int dirPin, int encoderPinA, int encoderPinB, int limitPin1, int limitPin2)
+QuadratureMotor::QuadratureMotor(int pwmPin, int dirPin, int encoderPinA, int encoderPinB, int limitPin1, int limitPin2, char* name) : Motor(name)
 {
 	motor = new CytronMD(PWM_DIR, pwmPin, dirPin);
 	encoder = new Encoder(encoderPinA, encoderPinB);
@@ -19,6 +19,7 @@ QuadratureMotor::QuadratureMotor(int pwmPin, int dirPin, int encoderPinA, int en
 		limitMode = ONE;
 	}
 }
+
 
 void QuadratureMotor::setState(STATE state)
 {

@@ -6,6 +6,7 @@
 
 // *** Include Statements ***
 
+
 // Third-Party Libraries
 #include <ArduinoJson.hpp> // Allows for reading JSON data from a serial connection
 #include <ArduinoJson.h>
@@ -22,6 +23,7 @@
 #include "Component.h"
 
 // *** Macro Definitions ***
+
 
 // Tilt Motor Arduino Pin Definitions
 #define TILT_LIMIT_PIN1 12
@@ -53,7 +55,7 @@ StepperMotor* extensionMotor;
 PolarBear* polarBear;
 
 // the setup function runs once when you press reset or power the board
-void setup() 
+void setup()
 {
 	Serial.begin(9600); // Open a serial connection
 
@@ -69,5 +71,9 @@ void setup()
 // the loop function runs over and over again until power down or reset
 void loop() 
 {
-	polarBear->update();
+	//polarBear->update();
+	extensionMotor->moveManual();
 }
+
+	
+	//
