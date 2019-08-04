@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PolarBearGUI_WPF.Views"
-             mc:Ignorable="d" >
+             mc:Ignorable="d">
     <UserControl.Resources>
         <Style TargetType="Button">
             <Setter Property="BorderThickness" Value="0"></Setter>
@@ -18,13 +18,19 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="25.6"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Content="Manual Control" Background="DarkGray" FontWeight="Bold"></Label>
             <Label Grid.Row="1" Content="Tilt Control" HorizontalContentAlignment="Center"/>
@@ -41,14 +47,20 @@
                 <Button Grid.Column="0" Grid.Row="0" Width="75">
                     <DockPanel>
                         <Image Source="/Resources/Undo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
-                        <TextBlock TextWrapping="Wrap" DockPanel.Dock="Bottom">CCW</TextBlock>
+                        <TextBlock TextWrapping="Wrap" DockPanel.Dock="Bottom" HorizontalAlignment="Center">CCW</TextBlock>
                     </DockPanel>
                 </Button>
                 <Button Grid.Column="2" Grid.Row="0" Width="75">
                     <DockPanel>
                         <Image Source="/Resources/Redo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
-                        <TextBlock TextWrapping="Wrap">CW</TextBlock>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">CW</TextBlock>
                     </DockPanel>
+                </Button>
+                <Button Grid.Row="1" Grid.ColumnSpan="2" Width="160" Margin="5">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Resources/Home.png" Stretch="None"></Image>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">Home</TextBlock>
+                    </StackPanel>
                 </Button>
             </Grid>
             <Separator Grid.Row="3"></Separator>
@@ -58,6 +70,10 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
                 <Button Grid.Column="0" Width="75">
                     <DockPanel>
                         <Image Source="/Resources/Undo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
@@ -67,8 +83,14 @@
                 <Button Grid.Column="1" Width="75">
                     <DockPanel>
                         <Image Source="/Resources/Redo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
-                        <TextBlock TextWrapping="Wrap" DockPanel.Dock="Bottom">CW</TextBlock>
+                        <TextBlock TextWrapping="Wrap" DockPanel.Dock="Bottom" HorizontalAlignment="Center">CW</TextBlock>
                     </DockPanel>
+                </Button>
+                <Button Grid.Row="1" Grid.ColumnSpan="2" Width="160" Margin="5">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Resources/Home.png" Stretch="None"></Image>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">Home</TextBlock>
+                    </StackPanel>
                 </Button>
             </Grid>
             <Separator Grid.Row="6"></Separator>
@@ -78,16 +100,66 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Width="75">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Grid.Row="0" Width="75">
                     <StackPanel Orientation="Vertical">
                         <Image Source="/Resources/Backward.png" Stretch="None"></Image>
-                        <TextBlock TextWrapping="Wrap">Retract</TextBlock>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">Retract</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="1" Grid.Row="0" Width="75">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Resources/Forward.png" Stretch="None"></Image>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">Extend</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Row="1" Grid.ColumnSpan="2" Width="160" Margin="5">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Resources/Home.png" Stretch="None"></Image>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">Home</TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Separator Grid.Row="9"></Separator>
+            <Label Grid.Row="10" Content="End Effector Tilt Control" HorizontalContentAlignment="Center"/>
+            <Grid Grid.Row="11">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Width="75">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Resources/Undo.png" Stretch="None"></Image>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">CCW</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Grid.Column="1" Width="75">
                     <StackPanel Orientation="Vertical">
-                        <Image Source="/Resources/Forward.png" Stretch="None"></Image>
-                        <TextBlock TextWrapping="Wrap">Extend</TextBlock>
+                        <Image Source="/Resources/Redo.png" Stretch="None"></Image>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">CW</TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Separator Grid.Row="12"></Separator>
+            <Label Grid.Row="13" Content="End Effector Rotation Control" HorizontalContentAlignment="Center"/>
+            <Grid Grid.Row="14">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Width="75">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Resources/Undo.png" Stretch="None"></Image>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">CCW</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="1" Width="75">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Resources/Redo.png" Stretch="None"></Image>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">CW</TextBlock>
                     </StackPanel>
                 </Button>
             </Grid>

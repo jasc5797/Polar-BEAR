@@ -124,6 +124,8 @@ namespace PolarBearGUI_WPF
                 StopToolBarButton.IsEnabled = true;
                 RunToolBarButton.IsEnabled = false;
 
+                ManualControlView.IsEnabled = false;
+
                 //List<Step> steps = (PathEditor.DataContext as PathEditorViewModel).StepList;
                 //JSONCommand jsonCommand = new JSONCommand(new Path(steps));
                 //ArduinoSerialPort.Send(jsonCommand);
@@ -139,6 +141,8 @@ namespace PolarBearGUI_WPF
             }
             StopToolBarButton.IsEnabled = false;
             RunToolBarButton.IsEnabled = true;
+
+            ManualControlView.IsEnabled = true;
             
         }
 
@@ -148,6 +152,8 @@ namespace PolarBearGUI_WPF
             
             StopToolBarButton.IsEnabled = false;
             RunToolBarButton.IsEnabled = true;
+
+            ManualControlView.IsEnabled = true;
         }
 
         private void ToolBar_Loaded(object sender, RoutedEventArgs e)
@@ -181,6 +187,8 @@ namespace PolarBearGUI_WPF
                     RunToolBarButton.IsEnabled = true;
                     DisconnectToolBarButton.Visibility = Visibility.Visible;
                     DisconnectToolBarButton.IsEnabled = true;
+
+                    ManualControlView.IsEnabled = true;
                 }
             }
         }
@@ -194,6 +202,8 @@ namespace PolarBearGUI_WPF
             StopToolBarButton.IsEnabled = false;
             DisconnectToolBarButton.IsEnabled = false;
             DisconnectToolBarButton.Visibility = Visibility.Collapsed;
+
+            ManualControlView.IsEnabled = false;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

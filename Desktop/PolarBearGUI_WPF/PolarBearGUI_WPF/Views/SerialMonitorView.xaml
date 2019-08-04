@@ -6,7 +6,7 @@
              xmlns:views="clr-namespace:PolarBearGUI_WPF.Views"
              xmlns:customUserControls="clr-namespace:PolarBearGUI_WPF.CustomUserControls"
              mc:Ignorable="d" >
-    <Border BorderThickness="1" BorderBrush="Gray" Margin="5, 0, 5, 5" CornerRadius="1">
+    <Border BorderThickness="1" BorderBrush="Gray" Margin="0, 0, 5, 5" CornerRadius="1">
         <Grid Background="LightGray">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
