@@ -20,6 +20,7 @@ namespace PolarBearGUI_WPF.CustomUserControls
     /// </summary>
     public partial class StatusView : UserControl
     {
+        
         public static readonly DependencyProperty StatusProperty =
             DependencyProperty.Register("Status",
                 typeof(string),
@@ -37,7 +38,7 @@ namespace PolarBearGUI_WPF.CustomUserControls
                 SetValue(StatusProperty, value);
             }
         }
-
+        
 
         public StatusView()
         {

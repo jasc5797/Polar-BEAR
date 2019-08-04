@@ -32,13 +32,20 @@ void StepperMotor::moveManual()
 	if (Serial.available())
 	{
 		char input = Serial.read();
+		Serial.print("Manual Moving ");
+		Serial.println(name);
 		if (input == 'f')
 		{
-			Serial.println("Moving forward");
+			Serial.println("Moving Forward");
 		}
 		else if (input == 'b')
 		{
 			Serial.println("Moving Backward");
+		}
+		else
+		{
+			Serial.println("Unknown Command");
+			return;
 		}
 
 		for (int i = 0; i <= MANUAL_STEPS; i++)

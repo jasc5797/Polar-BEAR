@@ -1,5 +1,8 @@
-﻿using PolarBearGUI_WPF.JSON;
+﻿using Newtonsoft.Json;
+using PolarBearGUI_WPF.JSON;
 using PolarBearGUI_WPF.Utilities;
+using PolarBearGUI_WPF.ViewModels;
+using System;
 using System.IO.Ports;
 
 namespace PolarBearGUI_WPF.Models
@@ -23,12 +26,37 @@ namespace PolarBearGUI_WPF.Models
 
         public bool IsOpen { get { return serialPort.IsOpen; } }
 
-
-        public SerialDataReceivedEventHandler SerialDataReceivedEventHandler
+        public enum StatusTypes
         {
-            get;
-            set;
+            Disconnected,
+            Connected,
+            Run,
+            Error
         }
+
+        private StatusTypes status;
+
+        public StatusTypes Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                status = value;
+                NotifyPropertyChanged("Status");
+            }
+        }
+
+        public Path Path { get; set; }
+
+
+        public SerialDataReceivedEventHandler SerialDataReceivedEventHandler { get; set; }
+
+        public SerialCommunicationViewModel SerialCommunicationViewModel { get; set; }
+
+        public MainWindow MainWindow { get; set; }
 
         /*
         public delegate void ArduinoDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e);
@@ -42,13 +70,12 @@ namespace PolarBearGUI_WPF.Models
 
         private void Initialize()
         {
+            status = StatusTypes.Disconnected;
 
             serialPort = new SerialPort();
             serialPort.BaudRate = 9600;
             serialPort.Handshake = Handshake.None;
             serialPort.NewLine = ";";
-
-
         }
 
         /*
@@ -73,9 +100,9 @@ namespace PolarBearGUI_WPF.Models
                 Close();
             }
             serialPort.Open();
+            //Status = StatusTypes.Connected;
             JSONCommand jsonCommand = new JSONCommand { Command = JSONCommand.CommandTypes.Open };
             Send(jsonCommand);
-
         }
 
         public void Close()
@@ -86,8 +113,17 @@ namespace PolarBearGUI_WPF.Models
                 serialPort.DataReceived -= SerialDataReceivedEventHandler;
                 serialPort.Close();
             }
+            Status = StatusTypes.Disconnected;
         }
-        
+
+        public void Run()
+        {
+            if (IsOpen)
+            {
+                Status = StatusTypes.Run;
+            }
+        }
+
         public string ReadLine()
         {
             return serialPort.ReadLine();
@@ -96,11 +132,68 @@ namespace PolarBearGUI_WPF.Models
         public void Send(string message)
         {
             serialPort.WriteLine(message);
+            SerialCommunicationViewModel.AddSentMessage(message);
+        }
+
+        public void HandleMessage(string message)
+        {
+            try
+            {
+                HandleMessage(JsonConvert.DeserializeObject<JSONStatus>(message));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unable to deserialize status: " + ex.ToString());
+            }
+        }
+
+        public void HandleMessage(JSONStatus jsonStatus)
+        {
+            switch(jsonStatus.Status)
+            {
+                case JSONStatus.StatusTypes.Opened:
+                    Status = StatusTypes.Connected;
+                    break;
+                case JSONStatus.StatusTypes.Waiting:
+                    SendNextStep();
+                    break;
+                case JSONStatus.StatusTypes.Ready:
+                    MainWindow.RunCompleted();
+                    break;
+                case JSONStatus.StatusTypes.Stopped:
+
+                    break;
+            }
         }
 
         public void Send(JSONCommand jsonCommand)
         {
             Send(jsonCommand.Serialize());
+        }
+
+        public void SendNextStep()
+        {
+            JSONCommand jsonCommand = new JSONCommand();
+            if (Path.IsEmpty)
+            {
+                jsonCommand.Command = JSONCommand.CommandTypes.Finished;
+            }
+            else
+            {
+                jsonCommand.Command = JSONCommand.CommandTypes.Run;
+                jsonCommand.Step = Path.GetNextStep();
+            }
+            Send(jsonCommand);   
+        }
+
+        public void Stop()
+        {
+            Path.Clear();
+            JSONCommand jsonCommand = new JSONCommand()
+            {
+                Command = JSONCommand.CommandTypes.Stop
+            };
+            Send(jsonCommand);
         }
 
     }

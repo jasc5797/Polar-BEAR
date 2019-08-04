@@ -12,21 +12,25 @@ namespace PolarBearGUI_WPF.JSON
     public class JSONCommand// : Model
     {
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum CommandTypes { Open, Close, Run, Stop };
+        public enum CommandTypes { Open, Close, Run, Stop, Finished };
         public CommandTypes Command { get; set; }
 
-        public Path Path { get; set; }
+        public Step Step { get; set; }
+
+        //public Path Path { get; set; }
 
         public JSONCommand()
         {
-            Path = new Path();
+           // Path = new Path();
         }
 
+        /*
         public JSONCommand(Path path)
         {
             Command = CommandTypes.Run;
             Path = path;
         }
+        */
 
         /*
         public override bool Equals(Model model)

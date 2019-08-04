@@ -12,7 +12,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-            <customUserControls:StatusView DockPanel.Dock="Left"></customUserControls:StatusView>
+            <customUserControls:StatusView DockPanel.Dock="Left" Status="{Binding ArduinoSerialPort.Status }"></customUserControls:StatusView>
             <Button x:Name="ClearButton" Content="Clear" DockPanel.Dock="Right" Height="25" HorizontalAlignment="Right"
                     Width="50" BorderThickness="0" Margin="5,0" 
                     Command="{Binding ClearSerialCommunicationCommand}"></Button>

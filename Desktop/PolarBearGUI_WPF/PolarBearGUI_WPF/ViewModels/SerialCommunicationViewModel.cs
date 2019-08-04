@@ -1,4 +1,5 @@
-﻿using PolarBearGUI_WPF.Models;
+﻿using PolarBearGUI_WPF.JSON;
+using PolarBearGUI_WPF.Models;
 using PolarBearGUI_WPF.Utilities;
 using System;
 using System.Collections.ObjectModel;
@@ -26,6 +27,8 @@ namespace PolarBearGUI_WPF.ViewModels
             }
         }
 
+        
+
         public RelayCommand ClearSerialCommunicationCommand { get; private set; }
 
         private ArduinoSerialPort arduinoSerialPort;
@@ -39,6 +42,7 @@ namespace PolarBearGUI_WPF.ViewModels
             {
                 arduinoSerialPort = value;
                 arduinoSerialPort.SerialDataReceivedEventHandler = SerialPort_DataReceived;
+                arduinoSerialPort.SerialCommunicationViewModel = this;
             }
         }
 
@@ -56,51 +60,40 @@ namespace PolarBearGUI_WPF.ViewModels
             {
                 return;
             }
-            string test;
+            string message;
             try
             {
-                test = ArduinoSerialPort.ReadLine().Trim();
+                message = ArduinoSerialPort.ReadLine().Trim();
             }
             catch (IOException ex)
             {
                 Console.WriteLine(ex);
                 return;
             }
-            if (string.IsNullOrEmpty(test))
+            if (string.IsNullOrEmpty(message))
             {
                 return;
             }
 
-            SerialCommunication serial = new SerialCommunication(test, SerialCommunication.Type.RECIEVE);
+            SerialCommunication serial = new SerialCommunication(message, SerialCommunication.Type.RECIEVE);
 
             Application.Current.Dispatcher.Invoke(delegate
                 {
                     SerialCommunicationList.Add(serial);
+                    arduinoSerialPort.HandleMessage(message);
                 }
             );
-            
-            /*
-            ObservableCollection<SerialCommunication> communications = new ObservableCollection<SerialCommunication>(serialCommunicationList);
-            //SerialCommunication serial = new SerialCommunication("This is a test", SerialCommunication.Type.RECIEVE);
-            SerialCommunication serial = new SerialCommunication(test, SerialCommunication.Type.RECIEVE);
+        }
 
-            communications.Add(serial);
-
-
-            if (!EqualsModelLists(serialCommunicationList, communications))
-            {
-                if (communications.Count > 25)
-                {
-                    int difference = communications.Count - 25;
-                    for (int i = 0; i < difference; i++)
-                    {
-                        communications.RemoveAt(0);
-                    }
-                }
-
-                SerialCommunicationList = communications;
-                
-            }*/
+        public void AddSentMessage(JSONCommand jsonCommand)
+        {
+            AddSentMessage(jsonCommand.Serialize());
+        }
+        
+        public void AddSentMessage(string message)
+        {
+            SerialCommunication serial = new SerialCommunication(message, SerialCommunication.Type.SEND);
+            SerialCommunicationList.Add(serial);
         }
 
         public void Clear()

@@ -24,6 +24,27 @@ namespace PolarBearGUI_WPF.Models
             Steps = steps;
         }
 
+        public Step GetNextStep()
+        {
+            if (Steps.Count > 0)
+            {
+                Step step = Steps.First();
+                Steps.Remove(step);
+                return step;
+            }
+            return null;
+        }
+
+        public bool IsEmpty
+        {
+            get { return Steps.Count == 0; }
+        }
+
+        public void Clear()
+        {
+            Steps.Clear();
+        }
+        
         public override bool Equals(Model model)
         {
             if (model is Path)

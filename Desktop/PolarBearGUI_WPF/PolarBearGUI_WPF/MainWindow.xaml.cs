@@ -4,21 +4,8 @@ using PolarBearGUI_WPF.Models;
 using PolarBearGUI_WPF.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Path = PolarBearGUI_WPF.Models.Path;
 
 namespace PolarBearGUI_WPF
 {
@@ -27,16 +14,16 @@ namespace PolarBearGUI_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ArduinoSerialPort ArduinoSerialPort { get; set; }
-
-        public SerialPort SerialPort { get; set; }
+        public ArduinoSerialPort ArduinoSerialPort { get; set; }
 
         public MainWindow()
         {
 
+
             InitializeComponent();
-            SerialPort = new SerialPort();
+
             ArduinoSerialPort = new ArduinoSerialPort();
+            ArduinoSerialPort.MainWindow = this;
 
             COMPortInfoListView.PortComboBox.SelectionChanged += PortComboBox_SelectionChanged;
 
@@ -47,7 +34,7 @@ namespace PolarBearGUI_WPF
         private void PortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
-            RunToolBarButton.IsEnabled = comboBox.SelectedItem != null;
+            ConnectToolBarButton.IsEnabled = comboBox.SelectedItem != null && !ArduinoSerialPort.IsOpen;
         }
 
         private void MenuBarItem_Click(object sender, RoutedEventArgs e)
@@ -83,7 +70,6 @@ namespace PolarBearGUI_WPF
             {
                 List<Step> steps = (PathEditor.DataContext as PathEditorViewModel).StepList;
                 Path path = new Path(steps);
-               // string json = path.Serialize();
                 path.SerializeToFile(saveFileDialog.FileName);
             }
         }
@@ -129,56 +115,39 @@ namespace PolarBearGUI_WPF
             COMPortInfoModel comPortInfo = COMPortInfoListView.SelectedCOMItem;
             if (comPortInfo != null)
             {
-                ArduinoSerialPort.Open(comPortInfo.COMPort);
+                //ArduinoSerialPort.Open(comPortInfo.COMPort);
+              
+                ArduinoSerialPort.Path = new Path((PathEditor.DataContext as PathEditorViewModel).StepList);
+                ArduinoSerialPort.SendNextStep();
+
 
                 StopToolBarButton.IsEnabled = true;
                 RunToolBarButton.IsEnabled = false;
 
-                List<Step> steps = (PathEditor.DataContext as PathEditorViewModel).StepList;
-                JSONCommand jsonCommand = new JSONCommand(new Path(steps));
-                ArduinoSerialPort.Send(jsonCommand);
+                //List<Step> steps = (PathEditor.DataContext as PathEditorViewModel).StepList;
+                //JSONCommand jsonCommand = new JSONCommand(new Path(steps));
+                //ArduinoSerialPort.Send(jsonCommand);
             }
         }
 
         private void StopToolBarButton_Click(object sender, RoutedEventArgs e)
         {
+            
             if (ArduinoSerialPort.IsOpen)
             {
-                ArduinoSerialPort.Close();
+                ArduinoSerialPort.Stop();
             }
             StopToolBarButton.IsEnabled = false;
             RunToolBarButton.IsEnabled = true;
+            
         }
 
-        private void RunToolBarButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (RunToolBarButton.IsEnabled)
-            {
-                //RunToolBarButton.Content = FindResource("RunEnabled");
-            }
-            else
-            {
-               // RunToolBarButton.Content = FindResource("RunDisabled");
-            }
-        }
 
-        private void StopToolBarButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        public void RunCompleted()
         {
-            if (StopToolBarButton.IsEnabled)
-            {
-                //RunToolBarButton.Content = FindResource("StopEnabled");
-            }
-            else
-            {
-                //RunToolBarButton.Content = FindResource("StopDisabled");
-            }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //Console.WriteLine("Reading");
-           // string test = arduinoSerialPort.Read();
-            //Console.WriteLine(test);
+            
+            StopToolBarButton.IsEnabled = false;
+            RunToolBarButton.IsEnabled = true;
         }
 
         private void ToolBar_Loaded(object sender, RoutedEventArgs e)
@@ -197,9 +166,32 @@ namespace PolarBearGUI_WPF
             }
         }
 
-        private void Test_Click(object sender, RoutedEventArgs e)
+
+        private void ConnectToolBarButton_Click(object sender, RoutedEventArgs e)
         {
-            var test = COMPortInfoListView.SelectedCOMItem;
+            COMPortInfoModel comPortInfo = COMPortInfoListView.SelectedCOMItem;
+            if (comPortInfo != null)
+            {
+                ArduinoSerialPort.Open(comPortInfo.COMPort);
+
+               
+                ConnectToolBarButton.IsEnabled = false;
+                ConnectToolBarButton.Visibility = Visibility.Collapsed;
+                RunToolBarButton.IsEnabled = true;
+                DisconnectToolBarButton.Visibility = Visibility.Visible;
+                DisconnectToolBarButton.IsEnabled = true;
+            }
+        }
+
+        private void DisconnectToolBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            ArduinoSerialPort.Close();
+            ConnectToolBarButton.IsEnabled = true;
+            ConnectToolBarButton.Visibility = Visibility.Visible;
+            RunToolBarButton.IsEnabled = false;
+            StopToolBarButton.IsEnabled = false;
+            DisconnectToolBarButton.IsEnabled = false;
+            DisconnectToolBarButton.Visibility = Visibility.Collapsed;
         }
     }
 }

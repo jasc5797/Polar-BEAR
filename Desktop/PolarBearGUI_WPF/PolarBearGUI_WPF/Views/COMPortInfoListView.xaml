@@ -12,7 +12,8 @@
         <Label Content="Port:" Grid.Column="0"></Label>
         <ComboBox x:Name="PortComboBox" Grid.Column="1" Width="200"
                           SelectionChanged="PortComboBox_SelectionChanged" 
-                          ItemsSource="{Binding COMPortInfos}" SelectedItem="{Binding SelectedCOMItem, Mode=TwoWay}" ToolTip="Arduino COM Port">
+                          ItemsSource="{Binding COMPortInfos}" SelectedItem="{Binding SelectedCOMItem, Mode=TwoWay}" 
+                          ToolTip="Arduino COM Port" VerticalAlignment="Center">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding FullName}"/>

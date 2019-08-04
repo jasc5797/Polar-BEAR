@@ -57,8 +57,13 @@ namespace PolarBearGUI_WPF.Views
             InitializeComponent();
             DataContext = new SerialCommunicationViewModel();
             ((INotifyCollectionChanged)(SerialListView.Items)).CollectionChanged += SerialListView_CollectionChanged;
+            this.DataContextChanged += SerialMonitorView_DataContextChanged;
 
+        }
 
+        private void SerialMonitorView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
 
         private void AutoScroll()
@@ -76,10 +81,7 @@ namespace PolarBearGUI_WPF.Views
 
         private void SerialListView_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Reset)
-            {
-                AutoScroll();
-            }
+            AutoScroll();
         }
 
         private void AutoScrollCheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)

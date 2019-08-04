@@ -74,6 +74,3 @@ void loop()
 	//polarBear->update();
 	extensionMotor->moveManual();
 }
-
-	
-	//

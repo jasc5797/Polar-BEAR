@@ -20,6 +20,10 @@
         
         <Image x:Key="StopEnabled" Source="./Resources/Stop.png"/>
         <Image x:Key="StopDisabled" Source="./Resources/Stop_Grey.png"/>
+
+        <Image x:Key="Connect" Source="./Resources/Connect.png" />
+        <Image x:Key="ConnectDisabled" Source="./Resources/Connect_Grey.png" />
+        <Image x:Key="Disconnect" Source="./Resources/Disconnect.png" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -88,31 +92,53 @@
         </Menu>
         <ToolBarTray Grid.Row="1" Background="LightGray">
             <ToolBar ToolBarTray.IsLocked="True" Background="LightGray" Loaded="ToolBar_Loaded">
-                <Button ToolBar.OverflowMode="Never" x:Name="NewFileToolBarButton" ToolTip="New File (Ctrl+N)" Click="NewFileToolBarButton_Click">
+                <Button x:Name="NewFileToolBarButton" ToolTip="New File (Ctrl+N)" Click="NewFileToolBarButton_Click">
                     <Image Source="./Resources/NewFile.png"></Image>
                 </Button>
-                <Button ToolBar.OverflowMode="Never" x:Name="OpenFileToolBarButton" ToolTip="Open File (Ctrl+O)" Click="OpenFileToolBarButton_Click">
+                <Button x:Name="OpenFileToolBarButton" ToolTip="Open File (Ctrl+O)" Click="OpenFileToolBarButton_Click">
                     <Image Source="./Resources/OpenFile.png"></Image>
                 </Button>
-                <Button ToolBar.OverflowMode="Never" x:Name="SaveFileToolBarButton" ToolTip="Save File (Ctrl+S)" Click="SaveFileToolBarButton_Click">
+                <Button x:Name="SaveFileToolBarButton" ToolTip="Save File (Ctrl+S)" Click="SaveFileToolBarButton_Click">
                     <Image Source="./Resources/Save.png"></Image>
                 </Button>
-                <Separator ToolBar.OverflowMode="Never"/>
-                <Button ToolBar.OverflowMode="AsNeeded" x:Name="UndoToolBarButton" ToolTip="Undo (Ctrl+Z)" Click="UndoToolBarButton_Click">
+                <Separator/>
+                <Button x:Name="UndoToolBarButton" ToolTip="Undo (Ctrl+Z)" Click="UndoToolBarButton_Click">
                     <Image Source="./Resources/Undo.png"></Image>
                 </Button>
-                <Button ToolBar.OverflowMode="Never" x:Name="RedoToolBarButton" ToolTip="Redo (Ctrl+Y)" Click="RedoToolBarButton_Click">
+                <Button x:Name="RedoToolBarButton" ToolTip="Redo (Ctrl+Y)" Click="RedoToolBarButton_Click">
                     <Image Source="./Resources/Redo.png"></Image>
                 </Button>
-                <Separator ToolBar.OverflowMode="Never"/>
-                <views:COMPortInfoListView x:Name="COMPortInfoListView" ToolBar.OverflowMode="Never"></views:COMPortInfoListView>
-                <!--
-                <Button x:Name="Test" Content="Test" Click="Test_Click"></Button>
-                <Label Content="{Binding ElementName=COMPortInfoListView, Path=SelectedCOMItem.FullName}"></Label>
-                -->
-                <Separator ToolBar.OverflowMode="Never"/>
-                <Button ToolBar.OverflowMode="Never" x:Name="RunToolBarButton" ToolTip="Run (F5)" Click="RunToolBarButton_Click"
-                        ToolTipService.ShowOnDisabled="True" IsEnabledChanged="RunToolBarButton_IsEnabledChanged"
+                <Separator/>
+                <views:COMPortInfoListView x:Name="COMPortInfoListView"></views:COMPortInfoListView>
+                <Separator/>
+                <Button x:Name="ConnectToolBarButton" Click="ConnectToolBarButton_Click" IsEnabled="False">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="True">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <StaticResource ResourceKey="Connect"></StaticResource>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <StaticResource ResourceKey="ConnectDisabled"></StaticResource>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="DisconnectToolBarButton" ToolTip="Disconnect" ToolTipService.ShowOnDisabled="True" 
+                        IsEnabled="False" Content="{StaticResource Disconnect}" Click="DisconnectToolBarButton_Click"
+                        Visibility="Collapsed">
+                </Button>
+                <Button x:Name="RunToolBarButton" ToolTip="Run (F5)" Click="RunToolBarButton_Click"
+                        ToolTipService.ShowOnDisabled="True" 
                         IsEnabled="False">
                     <Button.Style>
                         <Style TargetType="Button">
@@ -135,8 +161,8 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button ToolBar.OverflowMode="Never" x:Name="StopToolBarButton" ToolTip="Stop (Shift+F5)" Click="StopToolBarButton_Click" IsEnabled="False"
-                        ToolTipService.ShowOnDisabled="True" IsEnabledChanged="StopToolBarButton_IsEnabledChanged">
+                <Button x:Name="StopToolBarButton" ToolTip="Stop (Shift+F5)" Click="StopToolBarButton_Click" IsEnabled="False"
+                        ToolTipService.ShowOnDisabled="True">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Style.Triggers>
