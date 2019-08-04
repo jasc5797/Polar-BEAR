@@ -41,6 +41,11 @@ void Motor::setTargetPosition(int targetPosition)
 	this->targetPosition = targetPosition;
 }
 
+void Motor::setTargetPositionRelative(int offset)
+{
+	this->targetPosition = currentPosition + offset;
+}
+
 bool Motor::isHoming()
 {
 	return state == HOME;

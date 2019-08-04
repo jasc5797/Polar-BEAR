@@ -5,15 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Add Step" Height="140" Width="250" ResizeMode="NoResize"
-        Name="AddStepWindow" Icon="/Resources/PolarBEAR.ico" WindowStartupLocation="CenterScreen" Loaded="AddStepWindow_Loaded">
+        Name="AddStepWindow" Icon="/Resources/PolarBEARShadow.ico" WindowStartupLocation="CenterScreen" Loaded="AddStepWindow_Loaded">
     <DockPanel Background="LightGray">
-        <Label DockPanel.Dock="Top" HorizontalAlignment="Left" Content="Choose Step Type:" Margin="20, 5"/>
+        <Label DockPanel.Dock="Top" HorizontalAlignment="Left" Content="Choose Step Type:" Margin="18, 5"/>
         <ComboBox x:Name="TypeComboBox" DockPanel.Dock="Top" HorizontalAlignment="Center" Width="200" Margin="5,0" 
                   SelectedValue="{Binding StepType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBoxItem Name="Item1">Delay</ComboBoxItem>
             <ComboBoxItem Name="Item2">Tilt</ComboBoxItem>
             <ComboBoxItem Name="Item3">Rotation</ComboBoxItem>
             <ComboBoxItem Name="Item4">Extension</ComboBoxItem>
+            <ComboBoxItem Name="Item5">Home</ComboBoxItem>
+            <ComboBoxItem Name="Item6">End Effector</ComboBoxItem>
         </ComboBox>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="5">
             <Button Content="OK" Width="75" Margin="5" Command="{Binding OKCommand}"

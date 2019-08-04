@@ -33,40 +33,76 @@
                 <Separator></Separator>
             </StackPanel>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type stepViewModels:HomeViewModel}">
+            <StackPanel Orientation="Vertical">
+                <stepViews:HomeView></stepViews:HomeView>
+                <Separator></Separator>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type stepViewModels:EndEffectorViewModel}">
+            <StackPanel Orientation="Vertical">
+                <stepViews:EndEffectorView></stepViews:EndEffectorView>
+                <Separator></Separator>
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
-    <Grid Margin="5, 0">
+    <Grid Margin="0, 0, 5, 0">
+        <!--
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+            <ColumnDefinition Width="250"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Row="0" Grid.Column="0" Background="DarkGray">
-            <!--<Canvas DockPanel.Dock="Right" Width="20"></Canvas>-->
-            <Label DockPanel.Dock="Left" Content="Path Editor" Margin="5,0"/>
-            <Button DockPanel.Dock="Right" ToolTip="Add New Step" BorderThickness="0" Width="25" Height="25" 
-                    Command="{Binding AddStepCommand}">
-                <Image Source="/Resources/Add.png" Stretch="None"></Image>
-            </Button>
-            <Button DockPanel.Dock="Right" ToolTip="Remove Selected Step" ToolTipService.ShowOnDisabled="True" BorderThickness="0" Width="25" Height="25" Margin="2,0"
-                    Command="{Binding RemoveStepCommand}">
-                <Image Source="/Resources/Remove.png" Stretch="None"></Image>
-            </Button>
-            <Canvas DockPanel.Dock="Right"></Canvas>
-        </DockPanel>
-
-        <ListView x:Name="stepListView" Grid.Row="1" Grid.Column="0" 
+        <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1" CornerRadius="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Row="0" Background="DarkGray">
+                    <!--<Canvas DockPanel.Dock="Right" Width="20"></Canvas>-->
+                    <Label DockPanel.Dock="Left" Content="Path Editor" Margin="5,0" FontWeight="Bold"></Label>
+                    <Border BorderThickness="1" BorderBrush="Gray" Margin="1" CornerRadius="1" DockPanel.Dock="Right" >
+                        <Button ToolTip="Add New Step" BorderThickness="0" Width="22" Height="22"  
+                              Command="{Binding AddStepCommand}">
+                            <Image Source="/Resources/Add.png" Stretch="None"></Image>
+                        </Button>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="Gray" Margin="1" CornerRadius="1" DockPanel.Dock="Right" >
+                        <Button DockPanel.Dock="Right" ToolTip="Remove Selected Step" ToolTipService.ShowOnDisabled="True" 
+                        BorderThickness="0" Width="22" Height="22" 
+                        Command="{Binding RemoveStepCommand}">
+                            <Image Source="/Resources/Remove.png" Stretch="None"></Image>
+                        </Button>
+                    </Border>
+                    <Canvas DockPanel.Dock="Right"></Canvas>
+                </DockPanel>
+                <ListView x:Name="stepListView" Grid.Row="1"
                   ItemsSource="{Binding StepViewModelList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                  ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch"
                   SelectionMode="Single" gong:DragDrop.IsDragSource="True" gong:DragDrop.IsDropTarget="True"
-                  gong:DragDrop.ShowAlwaysDropTargetAdorner="True" SelectedItem="{Binding SelectedStepViewModel}">
-        </ListView>
-        <Label Content="Properties:" Grid.Row="0" Grid.Column="1"  Background="DarkGray"/>
-        <xctk:PropertyGrid Grid.Row="1" Grid.Column="1" SelectedObject="{Binding SelectedItem.Step, ElementName=stepListView}"
-                           ShowSearchBox="False" ShowSortOptions="False">
+                  gong:DragDrop.ShowAlwaysDropTargetAdorner="True" SelectedItem="{Binding SelectedStepViewModel}"
+                          Margin="1, 0, 1, 1" BorderThickness="0">
+                </ListView>
+            </Grid>
+        </Border>
+        <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1" CornerRadius="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Properties" Background="DarkGray" FontWeight="Bold"/>
+                <xctk:PropertyGrid  Grid.Row="1" SelectedObject="{Binding SelectedItem.Step, ElementName=stepListView}"
+                           ShowSearchBox="False" ShowSortOptions="False" NameColumnWidth="150" BorderThickness="0">
 
-        </xctk:PropertyGrid>
+                </xctk:PropertyGrid>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

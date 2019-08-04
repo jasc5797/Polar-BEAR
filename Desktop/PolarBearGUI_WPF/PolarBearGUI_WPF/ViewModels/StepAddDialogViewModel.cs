@@ -59,6 +59,12 @@ namespace PolarBearGUI_WPF.ViewModels
                 case "Extension":
                     stepViewModel = new ExtensionViewModel();
                     break;
+                case "Home":
+                    stepViewModel = new HomeViewModel();
+                    break;
+                case "End Effector":
+                    stepViewModel = new EndEffectorViewModel();
+                    break;
                 default:
                     stepViewModel = null;
                     break;

@@ -6,28 +6,34 @@
              xmlns:views="clr-namespace:PolarBearGUI_WPF.Views"
              xmlns:customUserControls="clr-namespace:PolarBearGUI_WPF.CustomUserControls"
              mc:Ignorable="d" >
-    <Grid Background="LightGray">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0">
-            <customUserControls:StatusView DockPanel.Dock="Left" Status="{Binding ArduinoSerialPort.Status }"></customUserControls:StatusView>
-            <Button x:Name="ClearButton" Content="Clear" DockPanel.Dock="Right" Height="25" HorizontalAlignment="Right"
-                    Width="50" BorderThickness="0" Margin="5,0" 
-                    Command="{Binding ClearSerialCommunicationCommand}"></Button>
-            <CheckBox x:Name="AutoScrollCheckBox" Content="Auto Scroll" DockPanel.Dock="Right" HorizontalAlignment="Right"
-                      VerticalAlignment="Center" Margin="5" IsChecked="True" Checked="AutoScrollCheckBox_Checked"></CheckBox>
-        </DockPanel>
-        <ListView Grid.Row="1" Height="auto" Margin="5,0,5,5" ItemsSource="{Binding SerialCommunicationList}"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" x:Name="SerialListView">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Time}" Header="Time" Width="100"></GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding MessageType}" Header="Message Type" Width="100"></GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Message" Width="500"></GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+    <Border BorderThickness="1" BorderBrush="Gray" Margin="5, 0, 5, 5" CornerRadius="1">
+        <Grid Background="LightGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0" Background="DarkGray" >
+                <Label DockPanel.Dock="Left" Content="Serial Monitor" FontWeight="Bold"></Label>
+                <customUserControls:StatusView DockPanel.Dock="Left" Status="{Binding ArduinoSerialPort.Status }"></customUserControls:StatusView>
+                <Border  DockPanel.Dock="Right" BorderThickness="1" CornerRadius="1" BorderBrush="Gray" Margin="5, 0, 1, 1">
+                    <Button x:Name="ClearButton" Content="Clear" Height="25" HorizontalAlignment="Right"
+                        Width="50" BorderThickness="0"  
+                        Command="{Binding ClearSerialCommunicationCommand}"></Button>
+                </Border>
+                <CheckBox x:Name="AutoScrollCheckBox" Content="Auto Scroll" DockPanel.Dock="Right" HorizontalAlignment="Right"
+                          VerticalAlignment="Center" Margin="5" IsChecked="True" Checked="AutoScrollCheckBox_Checked"></CheckBox>
+            </DockPanel>
+            <ListView Grid.Row="1" Height="auto" ItemsSource="{Binding SerialCommunicationList}"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" x:Name="SerialListView"
+                      BorderThickness="0" Margin="1, 0, 1, 1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Time}" Header="Time" Width="100"></GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding MessageType}" Header="Message Type" Width="100"></GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Message" Width="500"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Border>
 </UserControl>

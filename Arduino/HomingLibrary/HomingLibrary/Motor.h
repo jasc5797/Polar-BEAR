@@ -37,6 +37,7 @@ public:
 	
 	int getTargetPosition();
 	void setTargetPosition(int targetPosition);
+	void setTargetPositionRelative(int offset);
 
 	bool isHoming();
 	bool isMoving();
@@ -50,6 +51,7 @@ protected:
 	STATE state = STOP;
 
 	int targetPosition;
+	int currentPosition;
 
 
 	virtual void move() = 0;

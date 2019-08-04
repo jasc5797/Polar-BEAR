@@ -27,10 +27,11 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
+            <!--<RowDefinition Height="auto"></RowDefinition>-->
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        <!-- 
         <Menu IsMainMenu="True" Grid.Row="0">
             <MenuItem Header="_File">
                 <MenuItem x:Name="NewFileMenuItem" Header="_New" Click="NewFileMenuItem_Click" InputGestureText="Ctrl+N">
@@ -89,18 +90,19 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-        </Menu>
-        <ToolBarTray Grid.Row="1" Background="LightGray">
+        </Menu>-->
+        <ToolBarTray Grid.Row="0" Background="LightGray">
             <ToolBar ToolBarTray.IsLocked="True" Background="LightGray" Loaded="ToolBar_Loaded">
-                <Button x:Name="NewFileToolBarButton" ToolTip="New File (Ctrl+N)" Click="NewFileToolBarButton_Click">
+                <Button x:Name="NewFileToolBarButton" ToolTip="New File" Click="NewFileToolBarButton_Click">
                     <Image Source="./Resources/NewFile.png"></Image>
                 </Button>
-                <Button x:Name="OpenFileToolBarButton" ToolTip="Open File (Ctrl+O)" Click="OpenFileToolBarButton_Click">
+                <Button x:Name="OpenFileToolBarButton" ToolTip="Open File" Click="OpenFileToolBarButton_Click">
                     <Image Source="./Resources/OpenFile.png"></Image>
                 </Button>
-                <Button x:Name="SaveFileToolBarButton" ToolTip="Save File (Ctrl+S)" Click="SaveFileToolBarButton_Click">
+                <Button x:Name="SaveFileToolBarButton" ToolTip="Save File" Click="SaveFileToolBarButton_Click">
                     <Image Source="./Resources/Save.png"></Image>
                 </Button>
+                <!--
                 <Separator/>
                 <Button x:Name="UndoToolBarButton" ToolTip="Undo (Ctrl+Z)" Click="UndoToolBarButton_Click">
                     <Image Source="./Resources/Undo.png"></Image>
@@ -108,10 +110,12 @@
                 <Button x:Name="RedoToolBarButton" ToolTip="Redo (Ctrl+Y)" Click="RedoToolBarButton_Click">
                     <Image Source="./Resources/Redo.png"></Image>
                 </Button>
+                -->
                 <Separator/>
                 <views:COMPortInfoListView x:Name="COMPortInfoListView"></views:COMPortInfoListView>
                 <Separator/>
-                <Button x:Name="ConnectToolBarButton" Click="ConnectToolBarButton_Click" IsEnabled="False">
+                <Button x:Name="ConnectToolBarButton" Click="ConnectToolBarButton_Click" IsEnabled="False"
+                        ToolTip="Connect" ToolTipService.ShowOnDisabled="True">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Style.Triggers>
@@ -137,7 +141,7 @@
                         IsEnabled="False" Content="{StaticResource Disconnect}" Click="DisconnectToolBarButton_Click"
                         Visibility="Collapsed">
                 </Button>
-                <Button x:Name="RunToolBarButton" ToolTip="Run (F5)" Click="RunToolBarButton_Click"
+                <Button x:Name="RunToolBarButton" ToolTip="Run" Click="RunToolBarButton_Click"
                         ToolTipService.ShowOnDisabled="True" 
                         IsEnabled="False">
                     <Button.Style>
@@ -161,7 +165,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button x:Name="StopToolBarButton" ToolTip="Stop (Shift+F5)" Click="StopToolBarButton_Click" IsEnabled="False"
+                <Button x:Name="StopToolBarButton" ToolTip="Stop" Click="StopToolBarButton_Click" IsEnabled="False"
                         ToolTipService.ShowOnDisabled="True">
                     <Button.Style>
                         <Style TargetType="Button">
@@ -186,7 +190,7 @@
                 </Button>
             </ToolBar>
         </ToolBarTray>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>

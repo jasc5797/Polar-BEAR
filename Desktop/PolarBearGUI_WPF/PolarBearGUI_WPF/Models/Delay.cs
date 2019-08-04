@@ -39,7 +39,8 @@ namespace PolarBearGUI_WPF.Models
             if (model is Delay)
             {
                 Delay delay = model as Delay;
-                return Length == delay.Length &&
+                return Type == delay.Type &&
+                    Length == delay.Length &&
                     CreationTime == delay.CreationTime;
             }
             return false;

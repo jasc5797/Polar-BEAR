@@ -8,6 +8,8 @@
 
 
 // Third-Party Libraries
+#include "SerialJSON.h"
+#include <Servo.h> // Controls Servos
 #include <ArduinoJson.hpp> // Allows for reading JSON data from a serial connection
 #include <ArduinoJson.h>
 #include <Encoder.h> // Allows reading from and writing to the Encoders on Quadrature Motors
@@ -15,15 +17,15 @@
 #include <CytronMotorDriver.h> // Controls Quadrature Motors using MD20A
 
 // First-Party Libraries
+#include "Component.h"
+#include "Motor.h"
 #include "LimitSwitch.h"
 #include "QuadratureMotor.h"
 #include "StepperMotor.h"
-#include "Motor.h"
+#include "EndEffector.h"
 #include "PolarBear.h"
-#include "Component.h"
 
 // *** Macro Definitions ***
-
 
 // Tilt Motor Arduino Pin Definitions
 #define TILT_LIMIT_PIN1 12
@@ -47,12 +49,19 @@
 #define EXTENSION_SLEEP_PIN 46
 #define EXTENSION_RESET_PIN 44
 
-//  *** Object Definitions ***
+// End Effector Arduino Pin Definitions
+#define END_EFFECTOR_TILT_PIN 29
+#define END_EFFECTOR_ROTATION_PIN 31
+
+
+//  *** Object Declaration ***
 QuadratureMotor* tiltMotor;
 QuadratureMotor* rotationMotor;
 StepperMotor* extensionMotor;
-
+EndEffector* endEffector;
 PolarBear* polarBear;
+
+// *** Code ***
 
 // the setup function runs once when you press reset or power the board
 void setup()
@@ -63,14 +72,16 @@ void setup()
 	rotationMotor = new QuadratureMotor(ROTATION_PWM_PIN, ROTATION_DIR_PIN, ROTATION_ENCODER_PIN_A, ROTATION_ENCODER_PIN_B, ROTATION_LIMIT_PIN);
 	extensionMotor = new StepperMotor(EXTENSION_STEP_PIN, EXTENSION_DIR_PIN, EXTENSION_LIMIT_PIN, EXTENSION_SLEEP_PIN, EXTENSION_RESET_PIN);
 
-	polarBear = new PolarBear(tiltMotor, rotationMotor, extensionMotor);
+	endEffector = new EndEffector(END_EFFECTOR_TILT_PIN, END_EFFECTOR_ROTATION_PIN);
 
-	Serial.println("Setup Complete");
+	polarBear = new PolarBear(tiltMotor, rotationMotor, extensionMotor, endEffector);
+
+	Serial.println("Polar BEAR Setup Complete"); 
 }
 
 // the loop function runs over and over again until power down or reset
 void loop() 
 {
-	//polarBear->update();
-	extensionMotor->moveManual();
+	polarBear->update();
+	//extensionMotor->moveManual();
 }

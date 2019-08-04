@@ -42,8 +42,6 @@ private:
 
 	int sleepPin, resetPin;
 
-	int currentPosition;
-
 	LimitSwitch* limitSwitch;
 
 	void home();
