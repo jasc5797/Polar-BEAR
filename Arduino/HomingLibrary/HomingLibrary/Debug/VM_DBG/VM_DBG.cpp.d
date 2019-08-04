@@ -1,4 +1,4 @@
-C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\VM_DBG\VM_DBG.cpp.o: \
+C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\uno\Debug\VM_DBG\VM_DBG.cpp.o: \
  c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\community\common7\ide\extensions\5rm0fooj.nwt\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.cpp \
  c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\community\common7\ide\extensions\5rm0fooj.nwt\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
@@ -11,4 +11,4 @@ C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\V
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h

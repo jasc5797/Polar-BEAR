@@ -174,12 +174,14 @@ namespace PolarBearGUI_WPF
             {
                 ArduinoSerialPort.Open(comPortInfo.COMPort);
 
-               
-                ConnectToolBarButton.IsEnabled = false;
-                ConnectToolBarButton.Visibility = Visibility.Collapsed;
-                RunToolBarButton.IsEnabled = true;
-                DisconnectToolBarButton.Visibility = Visibility.Visible;
-                DisconnectToolBarButton.IsEnabled = true;
+                if (ArduinoSerialPort.IsOpen)
+                {
+                    ConnectToolBarButton.IsEnabled = false;
+                    ConnectToolBarButton.Visibility = Visibility.Collapsed;
+                    RunToolBarButton.IsEnabled = true;
+                    DisconnectToolBarButton.Visibility = Visibility.Visible;
+                    DisconnectToolBarButton.IsEnabled = true;
+                }
             }
         }
 
@@ -192,6 +194,14 @@ namespace PolarBearGUI_WPF
             StopToolBarButton.IsEnabled = false;
             DisconnectToolBarButton.IsEnabled = false;
             DisconnectToolBarButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (ArduinoSerialPort.IsOpen)
+            {
+                ArduinoSerialPort.Close();
+            }
         }
     }
 }

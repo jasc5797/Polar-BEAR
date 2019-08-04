@@ -4,6 +4,7 @@ using PolarBearGUI_WPF.Utilities;
 using PolarBearGUI_WPF.ViewModels;
 using System;
 using System.IO.Ports;
+using System.Windows;
 
 namespace PolarBearGUI_WPF.Models
 {
@@ -99,17 +100,36 @@ namespace PolarBearGUI_WPF.Models
                 serialPort.DataReceived += SerialDataReceivedEventHandler;
                 Close();
             }
-            serialPort.Open();
-            //Status = StatusTypes.Connected;
-            JSONCommand jsonCommand = new JSONCommand { Command = JSONCommand.CommandTypes.Open };
-            Send(jsonCommand);
+            try
+            {
+                serialPort.Open();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Could not open COM port: " + ex.ToString());
+                string message = "Unable to open port: " + PortName + Environment.NewLine + "Try reconnecting the Arduino";
+                string caption = "Unknown Connection Error";
+                MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            if (IsOpen)
+            {
+                //Status = StatusTypes.Connected;
+                JSONCommand jsonCommand = new JSONCommand { Command = JSONCommand.CommandTypes.Open };
+                Send(jsonCommand);
+            }
         }
 
         public void Close()
         {
             if (IsOpen)
             {
-                serialPort.WriteLine("c");
+                Path.Clear();
+                JSONCommand jsonCommmand = new JSONCommand()
+                {
+                    Command = JSONCommand.CommandTypes.Close
+                };
+                Send(jsonCommmand);
                 serialPort.DataReceived -= SerialDataReceivedEventHandler;
                 serialPort.Close();
             }

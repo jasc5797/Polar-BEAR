@@ -11,7 +11,7 @@ namespace PolarBearGUI_WPF.JSON
     public class JSONStatus
     {
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum StatusTypes { Opened, Ready, Waiting, Stopped };
+        public enum StatusTypes { Opened, Ready, Waiting, Stopped, Closed };
         public StatusTypes Status { get; set; }
     }
 }

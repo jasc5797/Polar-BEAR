@@ -23,6 +23,7 @@
 #define STATUS_READY "Ready"
 #define STATUS_WAITING "Waiting"
 #define STATUS_STOPPED "Stopped"
+#define STATUS_CLOSED "Closed"
 
 // Command Macros
 #define COMMAND "Command"

@@ -25,10 +25,19 @@
             </DockPanel>
             <ListView Grid.Row="1" Height="auto" ItemsSource="{Binding SerialCommunicationList}"
                   ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" x:Name="SerialListView"
-                      BorderThickness="0" Margin="1, 0, 1, 1">
+                      BorderThickness="0" Margin="1, 0, 1, 1" AlternationCount="2">
+                <ListView.Resources>
+                    <Style TargetType="ListViewItem">
+                        <Style.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
+                                <Setter Property="Background" Value="#f0f0f0" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.Resources>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Time}" Header="Time" Width="100"></GridViewColumn>
+                          <GridViewColumn DisplayMemberBinding="{Binding Time}" Header="Time" Width="100"></GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding MessageType}" Header="Message Type" Width="100"></GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Message" Width="500"></GridViewColumn>
                     </GridView>

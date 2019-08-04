@@ -9,7 +9,8 @@
         WindowState="Normal"  WindowStartupLocation="CenterScreen"
         Icon="./Resources/PolarBearShadow.ico" Background="LightGray"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
-        xmlns:utilities="clr-namespace:PolarBearGUI_WPF.Utilities">
+        xmlns:utilities="clr-namespace:PolarBearGUI_WPF.Utilities" 
+        Closing="Window_Closing">
     <Window.Resources>
 
         <Style TargetType="Button">

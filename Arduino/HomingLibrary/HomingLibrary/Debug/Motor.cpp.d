@@ -1,6 +1,6 @@
-C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\Motor.cpp.o: \
- C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\Motor.cpp \
- C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\Motor.h \
+C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\uno\Debug\Motor.cpp.o: \
+ C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\uno\Debug\Motor.cpp \
+ C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\uno\Debug\Motor.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -11,5 +11,5 @@ C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\M
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
- C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\Component.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h \
+ C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\uno\Debug\Component.h

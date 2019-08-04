@@ -11,6 +11,8 @@
 
 #include <Servo.h>
 
+#include "Component.h"
+
 #define END_EFFECTOR_TILT_MINIMUM 55
 #define END_EFFECTOR_TILT_MAXIMUM 155
 

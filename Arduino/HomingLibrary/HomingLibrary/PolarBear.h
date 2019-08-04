@@ -37,6 +37,8 @@ private:
 
 	void updateComponents();
 
+	void handleCommand();
+
 };
 #endif
 
