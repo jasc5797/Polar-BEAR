@@ -6,7 +6,11 @@ namespace PolarBearGUI_WPF.Models
 {
     public abstract class Model : NotifyPropertyChangedObject
     {
-        private static JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+        private static JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.All,
+            NullValueHandling = NullValueHandling.Ignore
+        };
 
         public override bool Equals(object obj)
         {
@@ -29,7 +33,8 @@ namespace PolarBearGUI_WPF.Models
             {
                 JsonSerializer jsonSerializer = new JsonSerializer()
                 {
-                    TypeNameHandling = jsonSerializerSettings.TypeNameHandling
+                    TypeNameHandling = jsonSerializerSettings.TypeNameHandling,
+                    NullValueHandling = jsonSerializerSettings.NullValueHandling
                 };
 
                 return (Model)jsonSerializer.Deserialize(streamReader, typeof(Model));

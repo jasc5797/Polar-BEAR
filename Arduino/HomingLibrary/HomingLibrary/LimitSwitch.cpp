@@ -41,11 +41,11 @@ void LimitSwitch::test()
 		if (read())
 		{
 			
-			Serial.println(" was pressed");
+			Serial.println(" was pressed;");
 		}
 		else
 		{
-			Serial.println(" was released");
+			Serial.println(" was released;");
 		}
 	}
 }

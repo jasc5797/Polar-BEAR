@@ -70,7 +70,7 @@ namespace PolarBearGUI_WPF.Models
             status = StatusTypes.Disconnected;
 
             serialPort = new SerialPort();
-            serialPort.BaudRate = 9600;
+            serialPort.BaudRate = 115200;
             serialPort.Handshake = Handshake.None;
             serialPort.NewLine = ";";
         }

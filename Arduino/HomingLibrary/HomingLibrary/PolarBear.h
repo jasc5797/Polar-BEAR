@@ -35,10 +35,28 @@ private:
 	
 	SerialJSON* serialJSON;
 
+	char* runType;
+	char* homeComponentType;
+
+	bool isRunning;
+
+
 	void updateComponents();
 
-	void handleCommand();
+	void handleNewCommand();
+	void handleRunningCommand();
+	void handleRun(DynamicJsonDocument commandJSON);
 
+	void handleTiltRun(JsonObject stepJSON);
+	void handleRotationRun(JsonObject stepJSON);
+	void handleExtensionRun(JsonObject stepJSON);
+	void handleHomeRun(JsonObject stepJSON);
+	void handleDelayRun(JsonObject stepJSON);
+	void handleEndEffectorRun(JsonObject stepJSON);
+
+	void handleStop();
+
+	void stopRunning();
 };
 #endif
 

@@ -35,6 +35,8 @@ public:
 
 	void moveIncremental();
 
+	virtual int degreesToSteps(double degrees);
+
 
 private:
 

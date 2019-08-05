@@ -55,11 +55,14 @@ namespace PolarBearGUI_WPF.ViewModels
             dialogService = new StepAddDialogService();
             
             StepViewModelList = new ObservableCollection<StepViewModel>();
+
+            /*
             StepViewModelList.Add(new TiltViewModel());
             StepViewModelList.Add(new DelayViewModel());
             StepViewModelList.Add(new RotationViewModel());
             StepViewModelList.Add(new DelayViewModel());
             StepViewModelList.Add(new ExtensionViewModel());
+            */
 
             AddStepCommand = new RelayCommand(AddStep, CanAddStep);
             RemoveStepCommand = new RelayCommand(RemoveStep, CanRemoveStep);

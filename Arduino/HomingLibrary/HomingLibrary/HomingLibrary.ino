@@ -50,8 +50,8 @@
 #define EXTENSION_RESET_PIN 44
 
 // End Effector Arduino Pin Definitions
-#define END_EFFECTOR_TILT_PIN 29
-#define END_EFFECTOR_ROTATION_PIN 31
+#define END_EFFECTOR_TILT_PIN 27
+#define END_EFFECTOR_ROTATION_PIN 25
 
 
 //  *** Object Declaration ***
@@ -61,12 +61,15 @@ StepperMotor* extensionMotor;
 EndEffector* endEffector;
 PolarBear* polarBear;
 
+//LimitSwitch* limitSwitch;
+
 // *** Code ***
 
 // the setup function runs once when you press reset or power the board
 void setup()
 {
-	Serial.begin(9600); // Open a serial connection
+	Serial.begin(115200); // Open a serial connection
+	Serial.setTimeout(10);
 
 	tiltMotor = new QuadratureMotor(TILT_PWM_PIN, TILT_DIR_PIN, TILT_ENCODER_PIN_A, TILT_ENCODER_PIN_B, TILT_LIMIT_PIN1, TILT_LIMIT_PIN2);
 	rotationMotor = new QuadratureMotor(ROTATION_PWM_PIN, ROTATION_DIR_PIN, ROTATION_ENCODER_PIN_A, ROTATION_ENCODER_PIN_B, ROTATION_LIMIT_PIN);
@@ -76,12 +79,15 @@ void setup()
 
 	polarBear = new PolarBear(tiltMotor, rotationMotor, extensionMotor, endEffector);
 
+	//limitSwitch = new LimitSwitch(ROTATION_LIMIT_PIN);
+
 	Serial.println("Polar BEAR Setup Complete"); 
 }
 
 // the loop function runs over and over again until power down or reset
 void loop() 
 {
+	//limitSwitch->test();
 	polarBear->update();
 	//extensionMotor->moveManual();
 }

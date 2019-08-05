@@ -64,7 +64,11 @@ namespace PolarBearGUI_WPF.JSON
 
         public string Serialize()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+            return JsonConvert.SerializeObject(this, Formatting.Indented, jsonSerializerSettings);
         }
 
 

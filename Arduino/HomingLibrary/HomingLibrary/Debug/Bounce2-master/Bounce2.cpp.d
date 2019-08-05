@@ -1,4 +1,4 @@
-C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\uno\Debug\Bounce2-master\Bounce2.cpp.o: \
+C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\megaADK\Debug\Bounce2-master\Bounce2.cpp.o: \
  C:\Users\stinsoncerraj\Documents\Arduino\libraries\Bounce2-master\src\Bounce2.cpp \
  C:\Users\stinsoncerraj\Documents\Arduino\libraries\Bounce2-master\src\Bounce2.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
@@ -11,4 +11,4 @@ C:\Users\stinsoncerraj\AppData\Local\Temp\VMBuilds\HomingLibrary\uno\Debug\Bounc
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h

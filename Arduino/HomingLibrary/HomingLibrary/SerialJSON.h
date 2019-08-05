@@ -41,6 +41,14 @@
 #define TYPE_EXTENSION "Extension"
 #define TYPE_END_EFFECTOR "End Effector"
 
+// Command Value Macros
+#define VALUE_DEGREES "Degrees"
+#define VALUE_LENGTH "Length"
+#define VALUE_TILT_DEGREES "TiltDegrees"
+#define VALUE_ROTATION_DEGREES "RotationDegrees"
+#define VALUE_DISTANCE "Distance"
+#define VALUE_COMPONENT "Component"
+
 // Serial Macros
 #define TERMINATOR ";"
 

@@ -96,6 +96,11 @@ void StepperMotor::moveIncremental()
 	delay(5000);
 }
 
+int StepperMotor::degreesToSteps(double degrees)
+{
+	return (degrees / 360.0) * STEPPER_STEPS_PER_REVOLUTION;
+}
+
 void StepperMotor::home()
 {
 	setState(STOP);

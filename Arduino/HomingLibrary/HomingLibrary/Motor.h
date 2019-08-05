@@ -13,7 +13,7 @@
 
 // If the motor is +/- X steps then the arm is in the right position
 // This is to reduce bouncing if the encoder does not perfectly line up
-#define MOTOR_ROUGHLY_EQUAL_STEPS 10
+#define MOTOR_ROUGHLY_EQUAL_STEPS 100
 
 class Motor : public Component
 {
@@ -39,11 +39,15 @@ public:
 	void setTargetPosition(int targetPosition);
 	void setTargetPositionRelative(int offset);
 
+	void setTargetPositionRelativeDegrees(double offsetDegrees);
+
 	bool isHoming();
 	bool isMoving();
 	bool isStopped();
 
 	bool hasError();
+
+	virtual int degreesToSteps(double degrees) = 0;
 
 
 protected:

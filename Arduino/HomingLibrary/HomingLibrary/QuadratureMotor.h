@@ -17,7 +17,7 @@
 
 #define DISCONNECTED -1
 
-#define MOTOR_STEPS_PER_REVOLUTION 12658.944
+#define QUADRATURE_MOTOR_STEPS_PER_REVOLUTION 12658.944
 
 #define ONE_LIMIT_STEPS -11920.20 // 10 tests (~ -338.99 degrees)
 
@@ -66,13 +66,17 @@ public:
 
 	void moveManual(char* name, char forward, char backward, int steps);
 
+	virtual void setState(STATE state);
+
+	virtual int degreesToSteps(double degrees);
+
 private:
 	int getTravelDistance();
 	int getTravelDistanceOneLimit();
 	int getTravelDistanceTwoLimit();
 
 	int16_t speed;
-	int targetPosition;
+	//int targetPosition;
 
 	LIMIT_MODE limitMode = ONE;
 
@@ -84,8 +88,6 @@ private:
 	Encoder* encoder;
 	LimitSwitch* limitSwitch1;
 	LimitSwitch* limitSwitch2;
-
-	virtual void setState(STATE state);
 
 	virtual void move();
 	virtual void home();

@@ -36,29 +36,40 @@ void QuadratureMotor::setState(STATE state)
 	}
 }
 
+int QuadratureMotor::degreesToSteps(double degrees)
+{
+	return (degrees / 360.0) * QUADRATURE_MOTOR_STEPS_PER_REVOLUTION;
+}
+
 void QuadratureMotor::home()
 {
 	switch (homeState)
 	{
 		case START:
+			Serial.println("Start;");
 			bool isPressed = moveUntilPressed(limitSwitch1, HOMING_SPEED, MOTOR_FORWARD);
 			if (isPressed)
 			{
+				Serial.println("Start-Pressed;");
 				homeState = PRESSED;
 			}
 			break;
 		case PRESSED:
+			Serial.println("Pressed;");
 			bool isReleased = moveUntilReleased(limitSwitch1, RELEASE_SPEED, MOTOR_BACKWARD);
 			if (isReleased)
 			{
+				Serial.println("Pressed-Released;");
 				homeState = RELEASED;
 			}
 			break;
 		case RELEASED:
+			Serial.println("Released;");
 			encoder->write(0);
 			homeState = COMPLETED;
 			break;
 		case COMPLETED:
+			Serial.println("Completed;");
 			setState(STOP);
 			break;
 		default:
@@ -69,6 +80,7 @@ void QuadratureMotor::home()
 
 void QuadratureMotor::move()
 {
+	Serial.println("move;");
 	switch (limitMode)
 	{
 		case ONE:
@@ -97,10 +109,16 @@ void QuadratureMotor::moveTwoLimit()
 void QuadratureMotor::moveHelper(LimitSwitch* limitSwitch)
 {
 	int currentPosition = encoder->read();
-
+	/*
+	Serial.println("Move Helper;");
+	Serial.println(currentPosition);
+	Serial.println(targetPosition);
+	Serial.println(";");
+	*/
 	// Check if the motor is rougly in the right position
 	if (isRoughlyEqual(currentPosition, targetPosition))
 	{
+		Serial.println("Roughly Equal;");
 		// Stop the motor if it is positioned right
 		setState(STOP);
 
@@ -184,7 +202,7 @@ void QuadratureMotor::testTravelDistance(int count)
 		Serial.print(": ");
 		Serial.print(distances[i]);
 		Serial.print(" steps, ");
-		Serial.print((distances[i] / MOTOR_STEPS_PER_REVOLUTION) * 360);
+		Serial.print((distances[i] / QUADRATURE_MOTOR_STEPS_PER_REVOLUTION) * 360);
 		Serial.println(" degrees");
 		sum += distances[i];
 	}
@@ -200,7 +218,7 @@ void QuadratureMotor::testTravelDistance(int count)
 	Serial.print("Average Steps: ");
 	Serial.println(average);
 	Serial.print("Average Degrees: ");
-	Serial.println((average / MOTOR_STEPS_PER_REVOLUTION) * 360);
+	Serial.println((average / QUADRATURE_MOTOR_STEPS_PER_REVOLUTION) * 360);
 	Serial.print("Variance: ");
 	Serial.println(variance);
 	Serial.print("Standard Deviation: ");

@@ -43,7 +43,19 @@ void Motor::setTargetPosition(int targetPosition)
 
 void Motor::setTargetPositionRelative(int offset)
 {
+	/*
+	Serial.println(currentPosition);
+	Serial.println(";");
+	Serial.println(offset);
+	Serial.println(";");
+	*/
 	this->targetPosition = currentPosition + offset;
+}
+
+void Motor::setTargetPositionRelativeDegrees(double offsetDegrees)
+{
+	int offset = degreesToSteps(offsetDegrees);
+	setTargetPositionRelative(offset);
 }
 
 bool Motor::isHoming()
@@ -68,5 +80,12 @@ bool Motor::hasError()
 
 bool Motor::isRoughlyEqual(int value1, int value2)
 {
+	/*
+	Serial.println(value1);
+	Serial.println(value2);
+	Serial.println(abs(value1 - value2));
+	Serial.println(abs(value1 - value2) <= MOTOR_ROUGHLY_EQUAL_STEPS);
+	Serial.println(";");
+	*/
 	return abs(value1 - value2) <= MOTOR_ROUGHLY_EQUAL_STEPS;
 }

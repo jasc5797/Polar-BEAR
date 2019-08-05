@@ -49,25 +49,25 @@ namespace PolarBearGUI_WPF.ViewModels
 
         private void EndEffectorRotationCCW()
         {
-            EndEffector endEffector = new EndEffector(0, -5);
+            EndEffector endEffector = new EndEffector(0, -10);
             ArduinoSerialPort.RunManualControl(endEffector);
         }
 
         private void EndEffectorRotationCW()
         {
-            EndEffector endEffector = new EndEffector(0, 5);
+            EndEffector endEffector = new EndEffector(0, 10);
             ArduinoSerialPort.RunManualControl(endEffector);
         }
 
         private void EndEffectorTiltCCW()
         {
-            EndEffector endEffector = new EndEffector(-5, 0);
+            EndEffector endEffector = new EndEffector(-10, 0);
             ArduinoSerialPort.RunManualControl(endEffector);
         }
 
         private void EndEffectorTiltCW()
         {
-            EndEffector endEffector = new EndEffector(5, 0);
+            EndEffector endEffector = new EndEffector(10, 0);
             ArduinoSerialPort.RunManualControl(endEffector);
         }
 
@@ -97,13 +97,13 @@ namespace PolarBearGUI_WPF.ViewModels
 
         private void RotationCCW()
         {
-            Rotation rotation = new Rotation(-5);
+            Rotation rotation = new Rotation(-25);
             ArduinoSerialPort.RunManualControl(rotation);
         }
 
         private void RotationCW()
         {
-            Rotation rotation = new Rotation(5);
+            Rotation rotation = new Rotation(25);
             ArduinoSerialPort.RunManualControl(rotation);
         }
 
