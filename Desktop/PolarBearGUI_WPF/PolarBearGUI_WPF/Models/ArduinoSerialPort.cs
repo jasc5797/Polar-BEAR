@@ -59,10 +59,6 @@ namespace PolarBearGUI_WPF.Models
 
         public MainWindow MainWindow { get; set; }
 
-        /*
-        public delegate void ArduinoDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e);
-        public event ArduinoDataReceivedEventHandler ArduinoDataReceived;
-        */
 
         public ArduinoSerialPort()
         {
@@ -78,13 +74,6 @@ namespace PolarBearGUI_WPF.Models
             serialPort.Handshake = Handshake.None;
             serialPort.NewLine = ";";
         }
-
-        /*
-        public void SetDataReceivedHandler(SerialDataReceivedEventHandler serialDataReceivedEventHandler)
-        {
-            serialPort.DataReceived += serialDataReceivedEventHandler;
-        }
-        */
 
         public void Open(string comPortName)
         {
@@ -124,7 +113,10 @@ namespace PolarBearGUI_WPF.Models
         {
             if (IsOpen)
             {
-                Path.Clear();
+                if (Path != null)
+                {
+                    Path.Clear();
+                }
                 JSONCommand jsonCommmand = new JSONCommand()
                 {
                     Command = JSONCommand.CommandTypes.Close
@@ -141,6 +133,22 @@ namespace PolarBearGUI_WPF.Models
             if (IsOpen)
             {
                 Status = StatusTypes.Run;
+            }
+        }
+
+        public void RunManualControl(Step step)
+        {
+            if (IsOpen)
+            {
+                Status = StatusTypes.Run;
+                Path = new Path();
+                Path.Steps.Add(step);
+
+                MainWindow.StopToolBarButton.IsEnabled = true;
+                MainWindow.RunToolBarButton.IsEnabled = false;
+                MainWindow.ManualControlView.IsEnabled = false;
+
+                SendNextStep();
             }
         }
 

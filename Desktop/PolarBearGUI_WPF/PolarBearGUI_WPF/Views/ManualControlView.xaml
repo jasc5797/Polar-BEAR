@@ -44,19 +44,19 @@
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0" Width="75">
+                <Button Grid.Column="0" Grid.Row="0" Width="75" Command="{Binding TiltCCWCommand}">
                     <DockPanel>
                         <Image Source="/Resources/Undo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
                         <TextBlock TextWrapping="Wrap" DockPanel.Dock="Bottom" HorizontalAlignment="Center">CCW</TextBlock>
                     </DockPanel>
                 </Button>
-                <Button Grid.Column="2" Grid.Row="0" Width="75">
+                <Button Grid.Column="2" Grid.Row="0" Width="75" Command="{Binding TiltCWCommand}">
                     <DockPanel>
                         <Image Source="/Resources/Redo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">CW</TextBlock>
                     </DockPanel>
                 </Button>
-                <Button Grid.Row="1" Grid.ColumnSpan="2" Width="160" Margin="5">
+                <Button Grid.Row="1" Grid.ColumnSpan="2" Width="160" Margin="5" Command="{Binding TiltHomeCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="/Resources/Home.png" Stretch="None"></Image>
                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">Home</TextBlock>
@@ -74,19 +74,19 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Grid.Column="0" Width="75">
+                <Button Grid.Column="0" Width="75" Command="{Binding RotationCCWCommand}">
                     <DockPanel>
                         <Image Source="/Resources/Undo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
                         <TextBlock TextWrapping="Wrap">CCW</TextBlock>
                     </DockPanel>
                 </Button>
-                <Button Grid.Column="1" Width="75">
+                <Button Grid.Column="1" Width="75" Command="{Binding RotationCWCommand}">
                     <DockPanel>
                         <Image Source="/Resources/Redo.png" Stretch="None" DockPanel.Dock="Top" Margin="5"></Image>
                         <TextBlock TextWrapping="Wrap" DockPanel.Dock="Bottom" HorizontalAlignment="Center">CW</TextBlock>
                     </DockPanel>
                 </Button>
-                <Button Grid.Row="1" Grid.ColumnSpan="2" Width="160" Margin="5">
+                <Button Grid.Row="1" Grid.ColumnSpan="2" Width="160" Margin="5" Command="{Binding RotationHomeCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="/Resources/Home.png" Stretch="None"></Image>
                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">Home</TextBlock>
@@ -104,19 +104,19 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Grid.Column="0" Grid.Row="0" Width="75">
+                <Button Grid.Column="0" Grid.Row="0" Width="75" Command="{Binding ExtensionRetractCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="/Resources/Backward.png" Stretch="None"></Image>
                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">Retract</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Grid.Column="1" Grid.Row="0" Width="75">
+                <Button Grid.Column="1" Grid.Row="0" Width="75" Command="{Binding ExtensionExtendCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="/Resources/Forward.png" Stretch="None"></Image>
                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">Extend</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="1" Grid.ColumnSpan="2" Width="160" Margin="5">
+                <Button Grid.Row="1" Grid.ColumnSpan="2" Width="160" Margin="5" Command="{Binding ExtensionHomeCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="/Resources/Home.png" Stretch="None"></Image>
                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">Home</TextBlock>
@@ -130,13 +130,13 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Width="75">
+                <Button Grid.Column="0" Width="75" Command="{Binding EndEffectorTiltCCWCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="/Resources/Undo.png" Stretch="None"></Image>
                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">CCW</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Grid.Column="1" Width="75">
+                <Button Grid.Column="1" Width="75" Command="{Binding EndEffectorTiltCWCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="/Resources/Redo.png" Stretch="None"></Image>
                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">CW</TextBlock>
@@ -150,13 +150,13 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Width="75">
+                <Button Grid.Column="0" Width="75" Command="{Binding EndEffectorRotationCCWCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="/Resources/Undo.png" Stretch="None"></Image>
                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">CCW</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Grid.Column="1" Width="75">
+                <Button Grid.Column="1" Width="75" Command="{Binding EndEffectorRotationCWCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="/Resources/Redo.png" Stretch="None"></Image>
                         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">CW</TextBlock>

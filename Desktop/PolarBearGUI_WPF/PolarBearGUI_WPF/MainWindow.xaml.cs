@@ -29,6 +29,10 @@ namespace PolarBearGUI_WPF
 
             SerialCommunicationViewModel serialCommunicationViewModel = ArduinoSerialPortView.DataContext as SerialCommunicationViewModel;
             serialCommunicationViewModel.ArduinoSerialPort = ArduinoSerialPort;
+
+            ManualControlViewModel manualControlViewModel = ManualControlView.DataContext as ManualControlViewModel;
+            manualControlViewModel.ArduinoSerialPort = ArduinoSerialPort;
+
         }
 
         private void PortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -89,25 +93,6 @@ namespace PolarBearGUI_WPF
 
         }
 
-        private void UndoToolBarButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RedoToolBarButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void PreviewToolMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void SettingsToolMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void RunToolBarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -133,8 +118,7 @@ namespace PolarBearGUI_WPF
         }
 
         private void StopToolBarButton_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {      
             if (ArduinoSerialPort.IsOpen)
             {
                 ArduinoSerialPort.Stop();
@@ -148,8 +132,7 @@ namespace PolarBearGUI_WPF
 
 
         public void RunCompleted()
-        {
-            
+        {    
             StopToolBarButton.IsEnabled = false;
             RunToolBarButton.IsEnabled = true;
 

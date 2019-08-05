@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PolarBearGUI_WPF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace PolarBearGUI_WPF.Views
         public ManualControlView()
         {
             InitializeComponent();
+            DataContext = new ManualControlViewModel();
         }
     }
 }
