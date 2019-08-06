@@ -14,6 +14,13 @@ PolarBear::PolarBear(QuadratureMotor* tiltMotor, QuadratureMotor* rotationMotor,
 	serialJSON = new SerialJSON();
 }
 
+void PolarBear::stop()
+{
+	tiltMotor->stop();
+	rotationMotor->stop();
+	stopRunning();
+}
+
 void PolarBear::update()
 {
 	handleNewCommand();

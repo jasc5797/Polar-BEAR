@@ -26,6 +26,7 @@ public:
 	PolarBear(QuadratureMotor* tiltMotor, QuadratureMotor* rotationMotor, StepperMotor* extensionMotor, EndEffector* endEffector);
 
 	void update();
+	void stop();
 
 private:
 	QuadratureMotor* tiltMotor;

@@ -8,7 +8,6 @@
 
 
 // Third-Party Libraries
-#include "SerialJSON.h"
 #include <Servo.h> // Controls Servos
 #include <ArduinoJson.hpp> // Allows for reading JSON data from a serial connection
 #include <ArduinoJson.h>
@@ -24,6 +23,7 @@
 #include "StepperMotor.h"
 #include "EndEffector.h"
 #include "PolarBear.h"
+#include "SerialJSON.h"
 
 // *** Macro Definitions ***
 
@@ -53,6 +53,10 @@
 #define END_EFFECTOR_TILT_PIN 27
 #define END_EFFECTOR_ROTATION_PIN 25
 
+// Stop Button Arduino Pin Definitions
+#define STOP_BUTTON_HIGH_PIN 43
+#define STOP_BUTTON_READ_PIN 2
+
 
 //  *** Object Declaration ***
 QuadratureMotor* tiltMotor;
@@ -61,8 +65,7 @@ StepperMotor* extensionMotor;
 EndEffector* endEffector;
 PolarBear* polarBear;
 
-//LimitSwitch* limitSwitch;
-//LimitSwitch* limitSwitch2;
+bool hasForceStopped = false;
 
 // *** Code ***
 
@@ -80,8 +83,10 @@ void setup()
 
 	polarBear = new PolarBear(tiltMotor, rotationMotor, extensionMotor, endEffector);
 
-	//limitSwitch = new LimitSwitch(12);
-	//limitSwitch2 = new LimitSwitch(13);
+	pinMode(STOP_BUTTON_HIGH_PIN, OUTPUT);
+	digitalWrite(STOP_BUTTON_HIGH_PIN, HIGH);
+	pinMode(STOP_BUTTON_READ_PIN, INPUT);
+	attachInterrupt(digitalPinToInterrupt(STOP_BUTTON_READ_PIN), stop, FALLING);
 
 	Serial.println("Polar BEAR Setup Complete"); 
 	delay(1000);
@@ -90,8 +95,15 @@ void setup()
 // the loop function runs over and over again until power down or reset
 void loop() 
 {
-	//limitSwitch->test();
-	//limitSwitch2->test();
 	polarBear->update();
-	//extensionMotor->moveManual();
+}
+
+// interrupt function that occurs when the stop button is pressed
+void stop()
+{
+	if (!hasForceStopped)
+	{
+		//polarBear->stop();
+	}
+	hasForceStopped = true;
 }
