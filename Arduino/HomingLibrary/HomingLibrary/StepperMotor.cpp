@@ -101,6 +101,11 @@ int StepperMotor::degreesToSteps(double degrees)
 	return (degrees / 360.0) * STEPPER_STEPS_PER_REVOLUTION;
 }
 
+void StepperMotor::stop()
+{
+
+}
+
 void StepperMotor::home()
 {
 	setState(STOP);

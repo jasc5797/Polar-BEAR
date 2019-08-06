@@ -37,6 +37,8 @@ public:
 
 	virtual int degreesToSteps(double degrees);
 
+	virtual void stop();
+
 
 private:
 

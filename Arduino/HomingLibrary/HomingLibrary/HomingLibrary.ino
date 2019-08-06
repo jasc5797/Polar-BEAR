@@ -62,6 +62,7 @@ EndEffector* endEffector;
 PolarBear* polarBear;
 
 //LimitSwitch* limitSwitch;
+//LimitSwitch* limitSwitch2;
 
 // *** Code ***
 
@@ -79,15 +80,18 @@ void setup()
 
 	polarBear = new PolarBear(tiltMotor, rotationMotor, extensionMotor, endEffector);
 
-	//limitSwitch = new LimitSwitch(ROTATION_LIMIT_PIN);
+	//limitSwitch = new LimitSwitch(12);
+	//limitSwitch2 = new LimitSwitch(13);
 
 	Serial.println("Polar BEAR Setup Complete"); 
+	delay(1000);
 }
 
 // the loop function runs over and over again until power down or reset
 void loop() 
 {
 	//limitSwitch->test();
+	//limitSwitch2->test();
 	polarBear->update();
 	//extensionMotor->moveManual();
 }

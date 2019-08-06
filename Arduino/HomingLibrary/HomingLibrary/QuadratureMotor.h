@@ -29,10 +29,16 @@ Average Degrees: -339.27
 #define TWO_LIMIT_STEPS
 
 #define HOMING_SPEED 25
-#define RELEASE_SPEED 10
+#define RELEASE_SPEED 25
 
 #define MOTOR_FORWARD 1
 #define MOTOR_BACKWARD -1
+
+#define ROTATION_MINIMUM 1000
+#define ROTATION_MAXIMUM QUADRATURE_MOTOR_STEPS_PER_REVOLUTION - 1000
+
+#define TILT_MINIMUM 1000
+#define TILT_MAXIMUM 1000
 
 
 class QuadratureMotor : public Motor
@@ -64,11 +70,16 @@ public:
 
 	void testTravelDistance(int count = 10);
 
-	void moveManual(char* name, char forward, char backward, int steps);
+	void moveToTarget(int steps);
+	void moveToTargetDegrees(double degrees);
 
 	virtual void setState(STATE state);
 
 	virtual int degreesToSteps(double degrees);
+
+	virtual void stop();
+
+	void homeBasic();
 
 private:
 	int getTravelDistance();

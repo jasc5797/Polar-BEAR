@@ -48,6 +48,7 @@ public:
 	bool hasError();
 
 	virtual int degreesToSteps(double degrees) = 0;
+	virtual void stop() = 0;
 
 
 protected:

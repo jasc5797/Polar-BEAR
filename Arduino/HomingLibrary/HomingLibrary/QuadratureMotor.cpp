@@ -41,30 +41,50 @@ int QuadratureMotor::degreesToSteps(double degrees)
 	return (degrees / 360.0) * QUADRATURE_MOTOR_STEPS_PER_REVOLUTION;
 }
 
+void QuadratureMotor::stop()
+{
+	motor->setSpeed(0);
+}
+
+void QuadratureMotor::homeBasic()
+{
+	bool isPressed = false;
+	do 
+	{
+		isPressed = moveUntilPressed(limitSwitch1, HOMING_SPEED, MOTOR_FORWARD);
+	} while (!isPressed);
+	bool isReleased = false;
+	do
+	{
+		isReleased = moveUntilReleased(limitSwitch1, RELEASE_SPEED, MOTOR_BACKWARD);
+	} while (!isReleased);
+	encoder->write(0);
+}
+
 void QuadratureMotor::home()
 {
 	switch (homeState)
 	{
 		case START:
-			Serial.println("Start;");
+			//Serial.println("Start;");
 			bool isPressed = moveUntilPressed(limitSwitch1, HOMING_SPEED, MOTOR_FORWARD);
 			if (isPressed)
 			{
-				Serial.println("Start-Pressed;");
+				//Serial.println("Start-Pressed;");
 				homeState = PRESSED;
 			}
 			break;
 		case PRESSED:
-			Serial.println("Pressed;");
+			//Serial.println("Pressed;");
 			bool isReleased = moveUntilReleased(limitSwitch1, RELEASE_SPEED, MOTOR_BACKWARD);
 			if (isReleased)
 			{
-				Serial.println("Pressed-Released;");
+				//Serial.println("Pressed-Released;");
 				homeState = RELEASED;
 			}
 			break;
 		case RELEASED:
-			Serial.println("Released;");
+			//Serial.println("Released;");
 			encoder->write(0);
 			homeState = COMPLETED;
 			break;
@@ -228,59 +248,57 @@ void QuadratureMotor::testTravelDistance(int count)
 	distances = NULL;
 }
 
-void QuadratureMotor::moveManual(char* name, char forward, char backward, int steps)
+void QuadratureMotor::moveToTargetDegrees(double degrees)
 {
+	moveToTarget(degreesToSteps(degrees));
+}
 
-	if (Serial.available())
+void QuadratureMotor::moveToTarget(int steps)
+{
+	int curPos = encoder->read();
+	int targetPos = curPos + steps;
+	/*
+	Serial.println(curPos);
+	Serial.println(targetPos);
+	Serial.println(";");
+	*/
+	LimitSwitch* limitSwitch;
+	int direction = curPos > targetPos ? MOTOR_BACKWARD : MOTOR_FORWARD;
+	if (direction == MOTOR_FORWARD)
 	{
-		//char forward = !alternate ? 'l' : 'u';
-		//char backward = !alternate ? 'r' : 'd';
-
-		char input = Serial.read();
-		int direction;
-		LimitSwitch* limitSwitch;
-		Serial.print(name);
-		if (input == forward)
+		limitSwitch = limitSwitch1;
+	}
+	else if (direction == MOTOR_BACKWARD)
+	{
+		if (limitMode == ONE)
 		{
-			
-			Serial.println(" moving forward");
-			direction = MOTOR_FORWARD;
 			limitSwitch = limitSwitch1;
 		}
-		else if (input == backward)
+		else
 		{
-			Serial.println(" moving Backward");
-			direction = MOTOR_BACKWARD;
-			if (limitMode == ONE)
-			{
-				limitSwitch = limitSwitch1;
-			}
-			else
-			{
-				limitSwitch = limitSwitch2;
-			}
+			limitSwitch = limitSwitch2;
 		}
-		int startPos = encoder->read();
-		bool isPressed;
+	}
+	bool isPressed = false;
+	do
+	{
+		isPressed = moveUntilPressed(limitSwitch, HOMING_SPEED, direction);
+		curPos = encoder->read();
+	} while (!isPressed && (direction == MOTOR_FORWARD ? curPos <= targetPos : curPos >= targetPos));
+
+	//		(limitMode == ONE ? curPos > ROTATION_MAXIMUM && curPos < ROTATION_MINIMUM : curPos > TILT_MAXIMUM && curPos < TILT_MINIMUM) &&
+
+	if (isPressed)
+	{
+
+		bool isReleased = false;
 		do
 		{
-			isPressed = moveUntilPressed(limitSwitch, HOMING_SPEED, direction);
-		} while (abs(startPos - encoder->read()) < 200 && !isPressed);
-
-		if (isPressed)
-		{
-
-			bool isReleased;
-			do
-			{
-				int releaseDirection = direction == MOTOR_FORWARD ? MOTOR_BACKWARD : MOTOR_FORWARD;
-				isReleased = moveUntilReleased(limitSwitch, RELEASE_SPEED, releaseDirection);
-			} while (!isReleased);
-		}
-		setSpeed(0);
-
-		Serial.println("Done");
+			int releaseDirection = direction == MOTOR_FORWARD ? MOTOR_BACKWARD : MOTOR_FORWARD;
+			isReleased = moveUntilReleased(limitSwitch, RELEASE_SPEED, releaseDirection);
+		} while (!isReleased);
 	}
+	setSpeed(0);
 }
 
 int QuadratureMotor::getTravelDistance()

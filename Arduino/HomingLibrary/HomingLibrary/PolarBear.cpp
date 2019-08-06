@@ -18,7 +18,7 @@ void PolarBear::update()
 {
 	handleNewCommand();
 	updateComponents();
-	handleRunningCommand();
+	//handleRunningCommand();
 	
 }
 
@@ -98,9 +98,13 @@ void PolarBear::handleNewCommand()
 		}
 		else if (serialJSON->isEqual(command, COMMAND_CLOSE))
 		{
+			tiltMotor->stop();
+			rotationMotor->stop();
+			/*
 			tiltMotor->setState(Motor::STATE::STOP);
 			rotationMotor->setState(Motor::STATE::STOP);
 			extensionMotor->setState(Motor::STATE::STOP);
+			*/
 			serialJSON->sendStatus(STATUS_CLOSED);
 		}
 	}
@@ -163,8 +167,10 @@ void PolarBear::handleTiltRun(JsonObject stepJSON)
 	double degrees = atof(degreesString);
 	*/
 	double degrees = stepJSON[VALUE_DEGREES];
-	tiltMotor->setTargetPositionRelativeDegrees(degrees);
-	tiltMotor->setState(Motor::STATE::MOVE);
+	//tiltMotor->setTargetPositionRelativeDegrees(degrees);
+	//tiltMotor->setState(Motor::STATE::MOVE);
+	tiltMotor->moveToTargetDegrees(degrees);
+	stopRunning();
 }
 
 void PolarBear::handleRotationRun(JsonObject stepJSON)
@@ -175,8 +181,10 @@ void PolarBear::handleRotationRun(JsonObject stepJSON)
 	double degrees = atof(degreesString);
 	*/
 	double degrees = stepJSON[VALUE_DEGREES];
-	rotationMotor->setTargetPositionRelativeDegrees(degrees);
-	rotationMotor->setState(Motor::STATE::MOVE);
+	//rotationMotor->setTargetPositionRelativeDegrees(degrees);
+	//rotationMotor->setState(Motor::STATE::MOVE);
+	rotationMotor->moveToTargetDegrees(degrees);
+	stopRunning();
 }
 
 void PolarBear::handleExtensionRun(JsonObject stepJSON)
@@ -195,21 +203,23 @@ void PolarBear::handleHomeRun(JsonObject stepJSON)
 	homeComponentType = stepJSON[VALUE_COMPONENT];
 	if (serialJSON->isEqual(homeComponentType, TYPE_TILT))
 	{
-		tiltMotor->setState(Motor::STATE::HOME);
+		//tiltMotor->setState(Motor::STATE::HOME);
+		tiltMotor->homeBasic();
 	}
 	else if (serialJSON->isEqual(homeComponentType, TYPE_ROTATION))
 	{
-		rotationMotor->setState(Motor::STATE::HOME);
+		//rotationMotor->setState(Motor::STATE::HOME);
+		rotationMotor->homeBasic();
 	}
 	else if (serialJSON->isEqual(homeComponentType, TYPE_EXTENSION))
 	{
-		extensionMotor->setState(Motor::STATE::HOME);
+		//extensionMotor->setState(Motor::STATE::HOME);
 	}
 	else
 	{	
 		Serial.println("Unknown Home Component;");
-		stopRunning();
 	}
+	stopRunning();
 }
 
 void PolarBear::handleDelayRun(JsonObject stepJSON)
