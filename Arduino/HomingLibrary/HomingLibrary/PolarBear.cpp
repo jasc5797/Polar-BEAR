@@ -194,8 +194,9 @@ void PolarBear::handleExtensionRun(JsonObject stepJSON)
 	double distance = atof(distanceString);
 	*/
 	double distance = stepJSON[VALUE_DISTANCE];
-	extensionMotor->setTargetPositionRelativeDegrees(distance);
-	extensionMotor->setState(Motor::STATE::MOVE);
+	//extensionMotor->setTargetPositionRelativeDegrees(distance);
+	//extensionMotor->setState(Motor::STATE::MOVE);
+	stopRunning();
 }
 
 void PolarBear::handleHomeRun(JsonObject stepJSON)

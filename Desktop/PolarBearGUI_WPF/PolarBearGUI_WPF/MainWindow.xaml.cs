@@ -46,12 +46,12 @@ namespace PolarBearGUI_WPF
             Console.WriteLine("Here");
         }
 
-        private void NewFileMenuItem_Click(object sender, RoutedEventArgs e)
+        private void NewFileToolBarButton_Click(object sender, RoutedEventArgs e)
         {
-
+            (PathEditor.DataContext as PathEditorViewModel).StepList = new List<Step>();
         }
 
-        private void OpenFileMenuItem_Click(object sender, RoutedEventArgs e)
+        private void OpenFileToolBarButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Load Path";
@@ -64,7 +64,7 @@ namespace PolarBearGUI_WPF
             }
         }
 
-        private void SaveFileMenuItem_Click(object sender, RoutedEventArgs e)
+        private void SaveFileToolBarButton_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Save Path";
@@ -76,21 +76,6 @@ namespace PolarBearGUI_WPF
                 Path path = new Path(steps);
                 path.SerializeToFile(saveFileDialog.FileName);
             }
-        }
-
-        private void NewFileToolBarButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void OpenFileToolBarButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void SaveFileToolBarButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
 
