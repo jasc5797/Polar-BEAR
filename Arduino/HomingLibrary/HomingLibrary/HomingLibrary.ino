@@ -65,7 +65,6 @@ StepperMotor* extensionMotor;
 EndEffector* endEffector;
 PolarBear* polarBear;
 
-bool hasForceStopped = false;
 
 // *** Code ***
 
@@ -73,7 +72,7 @@ bool hasForceStopped = false;
 void setup()
 {
 	Serial.begin(115200); // Open a serial connection
-	Serial.setTimeout(10);
+	Serial.setTimeout(10); 
 
 	tiltMotor = new QuadratureMotor(TILT_PWM_PIN, TILT_DIR_PIN, TILT_ENCODER_PIN_A, TILT_ENCODER_PIN_B, TILT_LIMIT_PIN1, TILT_LIMIT_PIN2);
 	rotationMotor = new QuadratureMotor(ROTATION_PWM_PIN, ROTATION_DIR_PIN, ROTATION_ENCODER_PIN_A, ROTATION_ENCODER_PIN_B, ROTATION_LIMIT_PIN);
@@ -83,10 +82,6 @@ void setup()
 
 	polarBear = new PolarBear(tiltMotor, rotationMotor, extensionMotor, endEffector);
 
-	pinMode(STOP_BUTTON_HIGH_PIN, OUTPUT);
-	digitalWrite(STOP_BUTTON_HIGH_PIN, HIGH);
-	pinMode(STOP_BUTTON_READ_PIN, INPUT);
-	attachInterrupt(digitalPinToInterrupt(STOP_BUTTON_READ_PIN), stop, FALLING);
 
 	Serial.println("Polar BEAR Setup Complete"); 
 	delay(1000);
@@ -96,14 +91,4 @@ void setup()
 void loop() 
 {
 	polarBear->update();
-}
-
-// interrupt function that occurs when the stop button is pressed
-void stop()
-{
-	if (!hasForceStopped)
-	{
-		//polarBear->stop();
-	}
-	hasForceStopped = true;
 }
