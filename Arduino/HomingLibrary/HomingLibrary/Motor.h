@@ -18,7 +18,12 @@
 class Motor : public Component
 {
 public:
-
+	/*
+	Many features in this class and any children class are not fully implemented.
+	Anything related to the state or the home() or move() functions was not completed.
+	This functionality was meant to allow for controlling multiple electrical components at the same time, however it was never fully finished
+	I left this portion of the code untouched in case of future development
+	*/
 	enum STATE { 
 		HOME, 
 		MOVE, 
