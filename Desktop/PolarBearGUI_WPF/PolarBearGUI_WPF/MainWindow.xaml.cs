@@ -82,7 +82,7 @@ namespace PolarBearGUI_WPF
         private void RunToolBarButton_Click(object sender, RoutedEventArgs e)
         {
             
-            COMPortInfoModel comPortInfo = COMPortInfoListView.SelectedCOMItem;
+            COMPortInfo comPortInfo = COMPortInfoListView.SelectedCOMItem;
             if (comPortInfo != null)
             {
                 //ArduinoSerialPort.Open(comPortInfo.COMPort);
@@ -143,7 +143,7 @@ namespace PolarBearGUI_WPF
 
         private void ConnectToolBarButton_Click(object sender, RoutedEventArgs e)
         {
-            COMPortInfoModel comPortInfo = COMPortInfoListView.SelectedCOMItem;
+            COMPortInfo comPortInfo = COMPortInfoListView.SelectedCOMItem;
             if (comPortInfo != null)
             {
                 ArduinoSerialPort.Open(comPortInfo.COMPort);

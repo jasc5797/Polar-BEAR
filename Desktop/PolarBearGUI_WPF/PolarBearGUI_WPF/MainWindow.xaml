@@ -113,7 +113,7 @@
                 </Button>
                 -->
                 <Separator/>
-                <views:COMPortInfoListView x:Name="COMPortInfoListView"></views:COMPortInfoListView>
+                <views:COMPortInfoView x:Name="COMPortInfoListView"></views:COMPortInfoView>
                 <Separator/>
                 <Button x:Name="ConnectToolBarButton" Click="ConnectToolBarButton_Click" IsEnabled="False"
                         ToolTip="Connect" ToolTipService.ShowOnDisabled="True">

@@ -62,11 +62,6 @@ namespace PolarBearGUI_WPF.Models
 
         public ArduinoSerialPort()
         {
-            Initialize();
-        }
-
-        private void Initialize()
-        {
             status = StatusTypes.Disconnected;
 
             serialPort = new SerialPort();

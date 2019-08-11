@@ -84,7 +84,7 @@ namespace PolarBearGUI_WPF.Views
             AutoScroll();
         }
 
-        private void AutoScrollCheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
+        private void AutoScrollCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             AutoScroll();
         }

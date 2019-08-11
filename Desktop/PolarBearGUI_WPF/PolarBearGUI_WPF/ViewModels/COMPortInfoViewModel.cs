@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace PolarBearGUI_WPF.ViewModels
 {
-    public class COMPortInfoListViewModel : DispatcherViewModel
+    public class COMPortInfoViewModel : DispatcherViewModel
     {
-        private List<COMPortInfoModel> comPortInfoList;
+        private List<COMPortInfo> comPortInfoList;
 
-        public List<COMPortInfoModel> COMPortInfos
+        public List<COMPortInfo> COMPortInfoList
         {
             get
             {
@@ -21,9 +21,9 @@ namespace PolarBearGUI_WPF.ViewModels
             }
         }
 
-        private COMPortInfoModel comPortInfo;
+        private COMPortInfo comPortInfo;
 
-        public COMPortInfoModel COMPortInfoModel
+        public COMPortInfo COMPortInfoModel
         {
             get
             {
@@ -36,17 +36,17 @@ namespace PolarBearGUI_WPF.ViewModels
             }
         }
 
-        public COMPortInfoListViewModel() : base()
+        public COMPortInfoViewModel() : base()
         {
-            comPortInfoList = new List<COMPortInfoModel>();
+            comPortInfoList = new List<COMPortInfo>();
         }
 
         protected override void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            List<COMPortInfoModel> newCOMPortInfoList = COMPortInfoModel.GetCOMPortInfoList();
+            List<COMPortInfo> newCOMPortInfoList = COMPortInfo.GetCOMPortInfoList();
             if (!EqualsModelLists(comPortInfoList, newCOMPortInfoList))
             {
-                COMPortInfos = newCOMPortInfoList;
+                COMPortInfoList = newCOMPortInfoList;
             }
         }
     }

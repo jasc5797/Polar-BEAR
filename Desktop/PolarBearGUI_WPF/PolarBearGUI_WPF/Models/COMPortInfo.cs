@@ -3,7 +3,7 @@ using System.Management;
 
 namespace PolarBearGUI_WPF.Models
 {
-    public class COMPortInfoModel : Model
+    public class COMPortInfo : Model
     {
         // Keys for use with ManagementObject to get hardware information
         private const string KeyFullName = "Name";
@@ -69,29 +69,29 @@ namespace PolarBearGUI_WPF.Models
             }
         }
 
-        public COMPortInfoModel(ManagementObject managementObject)
+        public COMPortInfo(ManagementObject managementObject)
         {
             FullName = managementObject[KeyFullName].ToString();
             DeviceName = managementObject[KeyDeviceName].ToString();
             COMPort = managementObject[KeyCOMPort].ToString();
         }
 
-        public COMPortInfoModel(string fullName, string deviceName, string COMPort)
+        public COMPortInfo(string fullName, string deviceName, string COMPort)
         {
             FullName = fullName;
             DeviceName = deviceName;
             this.COMPort = COMPort;
         }
 
-        public static List<COMPortInfoModel> GetCOMPortInfoList()
+        public static List<COMPortInfo> GetCOMPortInfoList()
         {
-            List<COMPortInfoModel> comPortInfoList = new List<COMPortInfoModel>();
+            List<COMPortInfo> comPortInfoList = new List<COMPortInfo>();
 
             ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher(Query);
             ManagementObjectCollection managementObjectCollection = managementObjectSearcher.Get();
             foreach (ManagementObject managementObject in managementObjectCollection)
             {
-                COMPortInfoModel portInfo = new COMPortInfoModel(managementObject);
+                COMPortInfo portInfo = new COMPortInfo(managementObject);
                 comPortInfoList.Add(portInfo);
             }
             return comPortInfoList;
@@ -108,9 +108,9 @@ namespace PolarBearGUI_WPF.Models
 
         public override bool Equals(Model model)
         {
-            if (model is COMPortInfoModel)
+            if (model is COMPortInfo)
             {
-                COMPortInfoModel comPortInfoModel = model as COMPortInfoModel;
+                COMPortInfo comPortInfoModel = model as COMPortInfo;
                 return FullName == comPortInfoModel.FullName &&
                     DeviceName == comPortInfoModel.DeviceName &&
                     COMPort == comPortInfoModel.COMPort;

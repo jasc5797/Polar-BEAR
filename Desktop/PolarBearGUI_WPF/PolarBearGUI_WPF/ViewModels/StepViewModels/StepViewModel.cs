@@ -5,7 +5,7 @@ using System;
 
 namespace PolarBearGUI_WPF.ViewModels.StepViewModels
 {
-    public abstract class StepViewModel : NotifyPropertyChangedObject
+    public abstract class StepViewModel : CustomViewModel
     {
         private Step step;
 

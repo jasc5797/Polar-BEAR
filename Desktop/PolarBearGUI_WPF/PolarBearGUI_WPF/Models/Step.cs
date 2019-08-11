@@ -8,8 +8,6 @@ namespace PolarBearGUI_WPF.Models
     public abstract class Step : Model
     {
 
-        private static JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-
         [Browsable(false)]
         public abstract string Type
         {

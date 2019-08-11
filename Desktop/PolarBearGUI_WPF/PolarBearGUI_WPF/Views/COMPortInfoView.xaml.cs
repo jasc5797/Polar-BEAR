@@ -10,23 +10,23 @@ namespace PolarBearGUI_WPF.Views
     /// <summary>
     /// Interaction logic for COMPortInfoListView.xaml
     /// </summary>
-    public partial class COMPortInfoListView : UserControl
+    public partial class COMPortInfoView : UserControl
     {
 
 
         public static readonly DependencyProperty SelectedCOMProperty =
             DependencyProperty.Register("SelectedCOMPorperty",
-            typeof(COMPortInfoModel),
-            typeof(COMPortInfoListView),
+            typeof(COMPortInfo),
+            typeof(COMPortInfoView),
             new PropertyMetadata(null));
 
 
 
-        public COMPortInfoModel SelectedCOMItem
+        public COMPortInfo SelectedCOMItem
         {
             get
             {
-               return (COMPortInfoModel)GetValue(SelectedCOMProperty);
+               return (COMPortInfo)GetValue(SelectedCOMProperty);
             }
 
             set
@@ -44,15 +44,15 @@ namespace PolarBearGUI_WPF.Views
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public COMPortInfoListView()
+        public COMPortInfoView()
         {
             InitializeComponent();
-            DataContext = new COMPortInfoListViewModel();
+            DataContext = new COMPortInfoViewModel();
         }
 
         private void PortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedCOMItem = PortComboBox.SelectedItem as COMPortInfoModel;
+            SelectedCOMItem = PortComboBox.SelectedItem as COMPortInfo;
             // COMPortInfoModel comPortInfo = (COMPortInfoModel)(PortComboBox.SelectedItem);
             //RunToolBarButton.IsEnabled = comPortInfo != null && comPortInfo.DeviceName.Contains("Arduino");
         }
